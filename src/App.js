@@ -1,22 +1,18 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+
+// import {Alert} from 'reactstrap';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <p>This is a paragraph.</p>
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          This paragraph has a <a className="App-link"
+            href="https://google.com" 
+            target="_blank">link</a>.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
     </div>
   );
