@@ -1,21 +1,42 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './App.css';
 
-// import {Alert} from 'reactstrap';
+import {Container} from 'reactstrap';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>This is a paragraph.</p>
-        <p>
-          This paragraph has a <a className="App-link"
-            href="https://google.com" 
-            target="_blank">link</a>.
-        </p>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+  rooms = [
+    "Storage",
+    "Engineering",
+    "Airlock",
+    "Lab",
+    "Hydroponics",
+    "ShuttleBay"
+  ];
+
+  constructor(props){
+    super(props);
+
+    this.state={
+      inventory: [],
+      roomsVisited: [],
+      currentRoom: "Engineering",
+    }
+
+  }
+
+  render(){
+    return (
+      <div className="App">
+        <header className="App-header">
+          <p>This is a paragraph.</p>        
+        </header>
+        <Container>
+          
+        </Container>
+      </div>
+    );
+  }
 }
 
 export default App;
