@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {animateScroll as scroll} from 'react-scroll'
 import './App.css';
 
 import {Container, Row, Col, Button} from 'reactstrap';
@@ -35,7 +36,7 @@ class App extends Component {
     tempContent.push(newContent);
     this.setState({
       mainContent: tempContent,
-    });
+    }, scroll.scrollToBottom());
   }
 
   intro(){
@@ -55,13 +56,19 @@ class App extends Component {
   render(){
     return (
       <div className="App">
-        <Container>
+        <Container className="Main-Content">
           {this.state.mainContent}
         </Container>
-        <Container className="Actions fixed-bottom m-5">
+        <Container className="Actions fixed-bottom">
           <Row>
             <Col>
               <Button outline color="primary" onClick={() => this.intro()}>primary</Button>{' '}
+            </Col>
+            <Col>
+              <Button outline color="secondary" onClick={() => this.nextPart()}>secondary</Button>{' '}
+            </Col>
+            <Col>
+              <Button outline color="secondary" onClick={() => this.nextPart()}>secondary</Button>{' '}
             </Col>
             <Col>
               <Button outline color="secondary" onClick={() => this.nextPart()}>secondary</Button>{' '}
