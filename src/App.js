@@ -23,11 +23,18 @@ class App extends Component {
       currentRoom: "Engineering",
       mainContent: [],
     }
-
   }
 
   componentDidMount(){
     // this.intro();
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom(){
+    // this.contentEnd.scrollIntoView({ behavior: "smooth" });
   }
 
   append(newContent){
@@ -52,6 +59,10 @@ class App extends Component {
     )
   }
 
+  
+
+  // Some things adapted from
+  // https://stackoverflow.com/questions/37620694/how-to-scroll-to-bottom-in-react
   render(){
     return (
       <div className="App">
