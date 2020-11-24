@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {animateScroll as scroll} from 'react-scroll'
 import './App.css';
 
 import {Container, Row, Col, Button} from 'reactstrap';
@@ -36,7 +35,7 @@ class App extends Component {
     tempContent.push(newContent);
     this.setState({
       mainContent: tempContent,
-    }, scroll.scrollToBottom());
+    });
   }
 
   intro(){

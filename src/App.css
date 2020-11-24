@@ -9,12 +9,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(5px + 2vmin);
+  font-size: 3vmin;/*calc(5px + 5vmin);*/
   color: #eee;
 
   overflow-y: hidden;
   white-space: nowrap;
-
+  padding: 25px;
 
 }
 
@@ -33,8 +33,11 @@
   background: inherit;
   opacity: 1;
   z-index: 10;
+  margin-bottom: 25px;
 }
 
 .Main-Content{
   border: 1px solid #eee;
+  height: 75vh;
+  overflow-y: scroll;
 }
