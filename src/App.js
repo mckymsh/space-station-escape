@@ -23,6 +23,8 @@ class App extends Component {
       currentRoom: "Engineering",
       mainContent: [],
     }
+
+    this.nextPart = this.nextPart.bind(this);
   }
 
   componentDidMount(){
@@ -47,15 +49,19 @@ class App extends Component {
 
   intro(){
     this.append( 
-      <Col sm={{size: 'auto', order: 1, offset: 0}}>This is the intro.</Col>
+      <Col sm={{size: 4, order: 1, offset: 0}}>This is the intro.</Col>
     );
   }
 
   nextPart(){
     this.append(
-      <Col sm={{size: 'auto', order: 1, offset: 8}}>This is the second part.</Col>
+      <Col sm={{size: 4, order: 1, offset: 7}}>This is the second part.</Col>
     );
-
+    setTimeout(
+      this.append(
+        <Col sm={{size: 4, order: 1, offset: 3}}>This is the third part.</Col>
+      ), 5000
+    );
   }
 
   
@@ -66,9 +72,17 @@ class App extends Component {
     return (
       <div className="App">
         <Container className="Main-Content">
-          {this.state.mainContent.map((item) => (
-            <Row>{item}</Row>
-            ))}
+          {
+            this.state.mainContent.slice(0, 
+                      this.state.mainContent.length-1).map(
+                        (item) => ( <Row>{item}</Row> )
+                      )
+            }
+          {
+            <Row>
+              {this.state.mainContent[this.state.mainContent.length-1]}
+            </Row>
+          }
         </Container>
         <Container className="Actions fixed-bottom">
           <Row>
