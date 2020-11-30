@@ -46,17 +46,16 @@ class App extends Component {
   }
 
   intro(){
-    this.append(this.columnGenerator("This is the intro."));
+    this.append( 
+      <Col sm={{size: 'auto', order: 1, offset: 0}}>This is the intro.</Col>
+    );
   }
 
   nextPart(){
-    this.append(this.columnGenerator("This is the next part."));
-  }
+    this.append(
+      <Col sm={{size: 'auto', order: 1, offset: 8}}>This is the second part.</Col>
+    );
 
-  columnGenerator(text){
-    return(
-      <Col>{text}</Col>
-    )
   }
 
   
@@ -67,7 +66,9 @@ class App extends Component {
     return (
       <div className="App">
         <Container className="Main-Content">
-          {this.state.mainContent}
+          {this.state.mainContent.map((item) => (
+            <Row>{item}</Row>
+            ))}
         </Container>
         <Container className="Actions fixed-bottom">
           <Row>

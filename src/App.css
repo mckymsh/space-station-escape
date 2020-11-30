@@ -12,7 +12,8 @@
   font-size: 3vmin;/*calc(5px + 5vmin);*/
   color: #eee;
 
-  overflow-y: hidden;
+  /*overflow-y: hidden;*/
+  overflow: hidden;
   white-space: nowrap;
   padding: 25px;
 
@@ -30,8 +31,7 @@
 
 .Actions{
   background-color: #351f37;
-  border: 1px solid #eee;
-  /*background: inherit;*/
+  /*border: 1px solid #eee;*/
   opacity: 1;
   z-index: 10;
   margin-bottom: 25px;
@@ -39,8 +39,33 @@
 
 .Main-Content{
   background-color: #351f37;
-  border: 1px solid #eee;
+  /*border: 1px solid #eee;*/
   height: 75vh;
   overflow-y: scroll;
+  overflow-x: hidden;
 
 }
+
+/*https://www.geeksforgeeks.org/how-to-create-fade-in-effect-on-page-load-using-css/*/
+.transparent{
+  opacity: 0;
+  /*transition: opacity 3s;*/
+  /*animation: fadeInAnimation linear 3s; 
+  animation-iteration-count: infinite; 
+  animation-fill-mode: forwards; */
+}
+
+.opaque{
+  opacity: 1;
+  transition: opacity ease-in 3s;
+
+}
+
+/*@keyframes fadeInAnimation { 
+  0% { 
+      opacity: 0;
+  } 
+  100% { 
+      opacity: 1; 
+  } 
+} */
