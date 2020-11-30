@@ -40,9 +40,11 @@
 .Main-Content{
   background-color: #351f37;
   /*border: 1px solid #eee;*/
+  /*width: 75vw;*/
+  min-width: 500px;
   height: 75vh;
   overflow-y: scroll;
-  overflow-x: hidden;
+  overflow-x: wrap;
 
 }
 

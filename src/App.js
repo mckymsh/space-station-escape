@@ -25,16 +25,13 @@ class App extends Component {
       mainContent: [],
       open: false,
     }
-
-    this.nextPart = this.nextPart.bind(this);
   }
 
   componentDidMount(){
-    // this.intro();
   }
 
   componentDidUpdate() {
-    this.scrollToBottom();
+    // this.scrollToBottom();
   }
 
   scrollToBottom(){
@@ -47,27 +44,26 @@ class App extends Component {
     this.setState({
       mainContent: tempContent,
     });
-    setTimeout(this.setState({open: false,}), 1000);
+    // setTimeout(this.setState({open: false,}), 1000);
   }
 
   intro(){
     this.append( 
-      <Col sm={{size: 4, order: 1, offset: 0}}>This is the intro.</Col>
+      <Col sm={{span: 4, order: 0, offset: 0}}>This is the intro.</Col>
     );
   }
 
   nextPart(){
     this.append(
-      <Col sm={{size: 4, order: 1, offset: 7}}>This is the second part.</Col>
-    );
-    setTimeout(
-      this.append(
-        <Col sm={{size: 4, order: 1, offset: 3}}>This is the third part.</Col>
-      ), 5000
+      <Col sm={{span: 4, order: 0, offset: 7}}>This is the second part.</Col>
     );
   }
 
-  
+  otherPart(){
+    this.append(
+      <Col sm={{span: 4, order: 0, offset: 3}}>This is the third part.</Col>
+    );
+  }  
 
   // Some things adapted from
   // https://stackoverflow.com/questions/37620694/how-to-scroll-to-bottom-in-react
@@ -92,16 +88,16 @@ class App extends Component {
         <Container className="Actions fixed-bottom">
           <Row>
             <Col>
-              <Button outline color="primary" onClick={() => this.intro()}>primary</Button>{' '}
+              <Button variant="outline-primary" onClick={() => this.intro()}>primary</Button>{' '}
             </Col>
             <Col>
-              <Button outline color="secondary" onClick={() => this.nextPart()}>secondary</Button>{' '}
+              <Button variant="outline-primary" onClick={() => this.nextPart()}>secondary</Button>{' '}
             </Col>
             <Col>
-              <Button outline color="secondary" onClick={() => this.nextPart()}>secondary</Button>{' '}
+              <Button variant="outline-primary" onClick={() => this.otherPart()}>secondary</Button>{' '}
             </Col>
             <Col>
-              <Button outline color="secondary" onClick={() => this.setState({open: true,})}>secondary</Button>{' '}
+              <Button variant="outline-primary" onClick={() => this.setState({open: true,})}>secondary</Button>{' '}
             </Col>
           </Row>
         </Container>
