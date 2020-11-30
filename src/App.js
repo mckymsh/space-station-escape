@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
+import {Fade, Container, Row, Col, Button,} from 'react-bootstrap';
 import './App.css';
 
-import {Container, Row, Col, Button} from 'reactstrap';
+// import {Container, Row, Col, Button} from 'reactstrap';
 
 class App extends Component {
 
@@ -11,7 +12,7 @@ class App extends Component {
     "Airlock",
     "Lab",
     "Hydroponics",
-    "ShuttleBay"
+    "ShuttleBay",
   ];
 
   constructor(props){
@@ -22,6 +23,7 @@ class App extends Component {
       roomsVisited: [],
       currentRoom: "Engineering",
       mainContent: [],
+      open: false,
     }
 
     this.nextPart = this.nextPart.bind(this);
@@ -45,6 +47,7 @@ class App extends Component {
     this.setState({
       mainContent: tempContent,
     });
+    setTimeout(this.setState({open: false,}), 1000);
   }
 
   intro(){
@@ -79,9 +82,11 @@ class App extends Component {
                       )
             }
           {
-            <Row>
-              {this.state.mainContent[this.state.mainContent.length-1]}
-            </Row>
+            <Fade in={this.state.open}>
+              <Row>
+                {this.state.mainContent[this.state.mainContent.length-1]}
+              </Row> 
+            </Fade>
           }
         </Container>
         <Container className="Actions fixed-bottom">
@@ -96,7 +101,7 @@ class App extends Component {
               <Button outline color="secondary" onClick={() => this.nextPart()}>secondary</Button>{' '}
             </Col>
             <Col>
-              <Button outline color="secondary" onClick={() => this.nextPart()}>secondary</Button>{' '}
+              <Button outline color="secondary" onClick={() => this.setState({open: true,})}>secondary</Button>{' '}
             </Col>
           </Row>
         </Container>
