@@ -28,14 +28,15 @@ class App extends Component {
   }
 
   componentDidMount(){
+    this.scrollToBottom();
   }
 
   componentDidUpdate() {
-    // this.scrollToBottom();
+    this.scrollToBottom();
   }
 
   scrollToBottom(){
-    // this.contentEnd.scrollIntoView({ behavior: "smooth" });
+    this.contentEnd.scrollIntoView({ behavior: "smooth" });
   }
 
   append(newContent){
@@ -73,9 +74,9 @@ class App extends Component {
         <Container className="Main-Content">
           {
             this.state.mainContent.slice(0, 
-                      this.state.mainContent.length-1).map(
-                        (item) => ( <Row>{item}</Row> )
-                      )
+              this.state.mainContent.length-1).map(
+                (item) => ( <Row>{item}</Row> )
+              )
             }
           {
             <Fade in={this.state.open}>
@@ -84,6 +85,13 @@ class App extends Component {
               </Row> 
             </Fade>
           }
+          <Row>
+            <Col>
+              <div sm={{span: 'auto', order: 0, offset: 0}}
+                ref={(el) => { this.contentEnd = el; }}>
+              </div>
+            </Col>
+          </Row>
         </Container>
         <Container className="Actions fixed-bottom">
           <Row>
