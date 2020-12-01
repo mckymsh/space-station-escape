@@ -50,13 +50,27 @@ class App extends Component {
 
   intro(){
     this.append( 
-      <Col sm={{span: 4, order: 0, offset: 0}}>This is the intro.</Col>
+      <Col sm={{span: 4, order: 0, offset: 0}}>
+        This is the intro.<br/>
+        It has a link to the <a 
+            href="./#" 
+            className="App-link"
+            onClick={() => this.nextPart()}
+          >second part</a>.
+       </Col>
     );
   }
 
   nextPart(){
     this.append(
-      <Col sm={{span: 4, order: 0, offset: 7}}>This is the second part.</Col>
+      <Col sm={{span: 4, order: 0, offset: 6}}>
+        This is the second part.<br/>
+        It has a link to the <a 
+            href="./#" 
+            className="App-link"
+            onClick={() => this.otherPart()}
+          >third part</a>.
+      </Col>
     );
   }
 
