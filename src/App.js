@@ -23,12 +23,12 @@ class App extends Component {
       roomsVisited: [],
       currentRoom: "Engineering",
       mainContent: [],
-      open: false,
+      open: true,
     }
   }
 
   componentDidMount(){
-    this.scrollToBottom();
+    this.intro();
   }
 
   componentDidUpdate() {
