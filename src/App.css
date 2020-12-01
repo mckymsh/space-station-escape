@@ -45,7 +45,6 @@
   height: 75vh;
   overflow-y: scroll;
   overflow-x: wrap;
-
 }
 
 /*https://www.geeksforgeeks.org/how-to-create-fade-in-effect-on-page-load-using-css/*/
@@ -63,11 +62,6 @@
 
 }
 
-/*@keyframes fadeInAnimation { 
-  0% { 
-      opacity: 0;
-  } 
-  100% { 
-      opacity: 1; 
-  } 
-} */
+.contentEnd-filler{
+  padding-bottom: 5vmin;
+}

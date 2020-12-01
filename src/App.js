@@ -67,7 +67,7 @@ class App extends Component {
   }  
 
   // Some things adapted from
-  // https://stackoverflow.com/questions/37620694/how-to-scroll-to-bottom-in-react
+  // https://stackoverflow.com/questions/37620694/how-to-scroll-to-bottom-in-react#41700815
   render(){
     return (
       <div className="App">
@@ -87,7 +87,7 @@ class App extends Component {
           }
           <Row>
             <Col>
-              <div sm={{span: 'auto', order: 0, offset: 0}}
+              <div className="contentEnd-filler" sm={{span: 'auto', order: 0, offset: 0}}
                 ref={(el) => { this.contentEnd = el; }}>
               </div>
             </Col>
