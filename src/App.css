@@ -1,8 +1,6 @@
 .App {
   text-align: center;
-}
 
-.App{
   background-color: #250f27;
   min-height: 100vh;
   display: flex;
@@ -12,7 +10,7 @@
   font-size: 3vmin;/*calc(5px + 5vmin);*/
   color: #eee;
 
-  /*overflow-y: hidden;*/
+  overflow-y: hidden;
   overflow: hidden;
   white-space: nowrap;
   padding: 25px;
@@ -22,7 +20,8 @@
 .App-link {
   color: inherit;
   /*border-bottom: 1px dashed #eee;*/
-  text-shadow: 0 0 10px #f700ff;/*, 0 0 12px #f700ff;*/
+  text-shadow: 0 0 10px #f700ff;
+  transition: all 333ms ease;
 }
 
 .App-link:hover{
@@ -49,21 +48,6 @@
   height: 75vh;
   overflow-y: scroll;
   overflow-x: wrap;
-}
-
-/*https://www.geeksforgeeks.org/how-to-create-fade-in-effect-on-page-load-using-css/*/
-.transparent{
-  opacity: 0;
-  /*transition: opacity 3s;*/
-  /*animation: fadeInAnimation linear 3s; 
-  animation-iteration-count: infinite; 
-  animation-fill-mode: forwards; */
-}
-
-.opaque{
-  opacity: 1;
-  transition: opacity ease-in 3s;
-
 }
 
 .contentEnd-filler{

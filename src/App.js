@@ -1,31 +1,32 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { Container, Row, Col, Button,} from 'react-bootstrap';
 import { Fade } from 'react-awesome-reveal';
 import './App.css';
 
-// import {Container, Row, Col, Button} from 'reactstrap';
-
 class App extends Component {
-
-  rooms = [
-    "Storage",
-    "Engineering",
-    "Airlock",
-    "Lab",
-    "Hydroponics",
-    "ShuttleBay",
-  ];
 
   constructor(props){
     super(props);
 
-    this.state={
+    this.state = {
       inventory: [],
       roomsVisited: [],
       currentRoom: "Engineering",
       mainContent: [],
       open: true,
     }
+
+    this.rooms = [
+      "Storage",
+      "Engineering",
+      "Airlock",
+      "Lab",
+      "Hydroponics",
+      "ShuttleBay",
+    ];
+
+    this.FADE_DURATION = 2000;
+    this.FADE_DELAY = 200;
   }
 
   componentDidMount(){
@@ -36,6 +37,8 @@ class App extends Component {
     this.scrollToBottom();
   }
 
+  // Adapted from
+  // https://stackoverflow.com/questions/37620694/how-to-scroll-to-bottom-in-react#41700815
   scrollToBottom(){
     this.contentEnd.scrollIntoView({ behavior: "smooth" });
   }
@@ -46,7 +49,6 @@ class App extends Component {
     this.setState({
       mainContent: tempContent,
     });
-    // setTimeout(this.setState({open: false,}), 1000);
   }
 
   intro(){
@@ -81,13 +83,15 @@ class App extends Component {
     );
   }  
 
-  // Some things adapted from
-  // https://stackoverflow.com/questions/37620694/how-to-scroll-to-bottom-in-react#41700815
   render(){
     return (
       <div className="App">
         <Container className="Main-Content">
-          <Fade triggerOnce={true} duration={3000} delay={200}>
+          <Fade 
+            triggerOnce={true} 
+            duration={this.FADE_DURATION} 
+            delay={this.FADE_DELAY}
+          >
             {
               this.state.mainContent.map((item) => (
                 <Row>{item}</Row> 
