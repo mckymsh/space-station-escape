@@ -42,12 +42,13 @@
 
 .Main-Content{
   background-color: #351f37;
-  /*border: 1px solid #eee;*/
-  width: 75vw;
-  min-width: 500px;
+  /*border: 1px dashed yellow;*/
+  /*width: 75vw;*/
+  min-width: 600px;
+  max-width: 900px;
   height: 75vh;
   overflow-y: scroll;
-  overflow-x: hidden;
+  overflow-x: wrap;
 }
 
 /*https://www.geeksforgeeks.org/how-to-create-fade-in-effect-on-page-load-using-css/*/
@@ -67,4 +68,18 @@
 
 .contentEnd-filler{
   padding-bottom: 5vmin;
+}
+
+.content-filler{
+  height: 5vh;
+}
+
+.row{
+  padding-top: 5vh;
+}
+
+div.content-piece{
+  overflow: hidden;
+  /*box-shadow: -1px 1px 1px #ffbb44;*/
+  /*border: 1px dashed orange;*/
 }

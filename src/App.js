@@ -50,8 +50,8 @@ class App extends Component {
   }
 
   intro(){
-    this.append( 
-      <Col sm={{span: 4, order: 0, offset: 0}}>
+    this.append(
+      <Col className="content-piece text-left" sm={{span: "auto", offset: 1}}>
       This is the intro.<br/>
         It has a link to the <a 
             href="./#" 
@@ -64,7 +64,7 @@ class App extends Component {
 
   nextPart(){
     this.append(
-      <Col sm={{span: 4, order: 0, offset: 6}}>
+      <Col className="content-piece text-right" sm={{span: "auto", order: "last", offset: 6}}>
         This is the second part.<br/>
         It has a link to the <a 
             href="./#" 
@@ -77,7 +77,7 @@ class App extends Component {
 
   otherPart(){
     this.append(
-      <Col sm={{span: 4, order: 0, offset: 3}}>This is the third part.</Col>
+      <Col className="content-piece text-center" xs={{span: "auto", offset: 4}}>This is the third part.</Col>
     );
   }  
 
@@ -87,14 +87,17 @@ class App extends Component {
     return (
       <div className="App">
         <Container className="Main-Content">
-          {
-            this.state.mainContent.map(
-                (item) => ( <Fade duration={3000}><Row>{item}</Row></Fade> )
-              )
-          }
+          <Fade triggerOnce={true} duration={3000} delay={200}>
+            {
+              this.state.mainContent.map((item) => (
+                <Row>{item}</Row> 
+              ))
+            }
+          </Fade>
           <Row>
             <Col>
-              <div className="contentEnd-filler" sm={{span: 'auto', order: 0, offset: 0}}
+              <div 
+                className="contentEnd-filler" 
                 ref={(el) => { this.contentEnd = el; }}>
               </div>
             </Col>
@@ -103,16 +106,16 @@ class App extends Component {
         <Container className="Actions fixed-bottom">
           <Row>
             <Col>
-              <Button variant="outline-primary" onClick={() => this.intro()}>primary</Button>{' '}
+              <Button variant="outline-primary" 
+                onClick={() => this.intro()}>primary</Button>{' '}
             </Col>
             <Col>
-              <Button variant="outline-primary" onClick={() => this.nextPart()}>secondary</Button>{' '}
+              <Button variant="outline-primary" 
+                onClick={() => this.nextPart()}>secondary</Button>{' '}
             </Col>
             <Col>
-              <Button variant="outline-primary" onClick={() => this.otherPart()}>secondary</Button>{' '}
-            </Col>
-            <Col>
-              <Button variant="outline-primary" onClick={() => this.setState({open: true,})}>secondary</Button>{' '}
+              <Button variant="outline-primary" 
+                onClick={() => this.otherPart()}>secondary</Button>{' '}
             </Col>
           </Row>
         </Container>
