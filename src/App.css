@@ -43,11 +43,11 @@
 .Main-Content{
   background-color: #351f37;
   /*border: 1px solid #eee;*/
-  /*width: 75vw;*/
+  width: 75vw;
   min-width: 500px;
   height: 75vh;
   overflow-y: scroll;
-  overflow-x: wrap;
+  overflow-x: hidden;
 }
 
 /*https://www.geeksforgeeks.org/how-to-create-fade-in-effect-on-page-load-using-css/*/

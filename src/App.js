@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Fade, Container, Row, Col, Button,} from 'react-bootstrap';
+import { Container, Row, Col, Button,} from 'react-bootstrap';
+import { Fade } from 'react-awesome-reveal';
 import './App.css';
 
 // import {Container, Row, Col, Button} from 'reactstrap';
@@ -51,14 +52,7 @@ class App extends Component {
   intro(){
     this.append( 
       <Col sm={{span: 4, order: 0, offset: 0}}>
-      You awake to find yourself floating, weightless.<br/>
-      Starlight spills through a small window,<br/>
-      scattering across the padded white walls.<br/>
-      A bulky monkey wrench slowly drifts by<br/>
-      the shimmery faceplate of a spacesuit.<br/>
-      The door across from you has no features save<br/>
-      a flashing red light by a small label that reads<br/>
-      "Low Pressure Warning"<br/>
+      This is the intro.<br/>
         It has a link to the <a 
             href="./#" 
             className="App-link"
@@ -94,17 +88,9 @@ class App extends Component {
       <div className="App">
         <Container className="Main-Content">
           {
-            this.state.mainContent.slice(0, 
-              this.state.mainContent.length-1).map(
-                (item) => ( <Row>{item}</Row> )
+            this.state.mainContent.map(
+                (item) => ( <Fade duration={3000}><Row>{item}</Row></Fade> )
               )
-            }
-          {
-            <Fade in={this.state.open}>
-              <Row>
-                {this.state.mainContent[this.state.mainContent.length-1]}
-              </Row> 
-            </Fade>
           }
           <Row>
             <Col>
