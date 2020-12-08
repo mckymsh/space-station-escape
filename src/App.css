@@ -21,7 +21,7 @@
   color: inherit;
   /*border-bottom: 1px dashed #eee;*/
   text-shadow: 0 0 10px #f700ff;
-  transition: all 333ms ease;
+  transition: all 2s ease;
 }
 
 .App-link:hover{
@@ -29,6 +29,7 @@
   /*border: none;*/
   color: #fff;
   text-shadow: 0 0 15px white, 0 0 10px #f700ff;
+  transition: all 333ms ease;
 }
 
 .Actions{
@@ -45,9 +46,9 @@
   /*width: 75vw;*/
   min-width: 600px;
   max-width: 900px;
-  /*height: 75vh;*/
+  height: 75vh;
   min-height: 600px;
-  max-height: 900px;
+  /*max-height: 900px;*/
   overflow-y: scroll;
   overflow-x: wrap;
 }
