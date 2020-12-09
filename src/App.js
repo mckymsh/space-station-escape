@@ -3,14 +3,16 @@ import { Container, Row, Col, Button,} from 'react-bootstrap';
 import { Fade } from 'react-awesome-reveal';
 import './App.css';
 
+const SCROLL_FADE_DELAY = 200;
 const FADE_DURATION = 2000;
+
 
 function addFade(content, fadeDelay){
     return(
       <Fade 
         triggerOnce={true} 
         duration={FADE_DURATION} 
-        delay={fadeDelay}
+        delay={fadeDelay + SCROLL_FADE_DELAY}
       >{content}</Fade>
     );
   }
