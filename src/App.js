@@ -40,7 +40,7 @@ class App extends Component {
   // Adapted from
   // https://stackoverflow.com/questions/37620694/how-to-scroll-to-bottom-in-react#41700815
   scrollToBottom(){
-    this.contentEnd.scrollIntoView({ behavior: "smooth" });
+    this.contentEnd.scrollIntoView({behavior: "smooth", block: "start"});
   }
 
   append(newContent){
@@ -55,11 +55,11 @@ class App extends Component {
     this.append(
       <Col className="content-piece text-left" sm={{span: "auto", offset: 1}}>
       This is the intro.<br/>
-        It has a link to the <a 
+        It has a link to the <span 
             href="./#" 
             className="App-link"
             onClick={() => this.nextPart()}
-          >second part</a>.
+          >second part</span>.
        </Col>
     );
   }
@@ -68,11 +68,10 @@ class App extends Component {
     this.append(
       <Col className="content-piece text-right" sm={{span: "auto", order: "last", offset: 6}}>
         This is the second part.<br/>
-        It has a link to the <a 
-            href="./#" 
+        It has a link to the <span 
             className="App-link"
             onClick={() => this.otherPart()}
-          >third part</a>.
+          >third part</span>.
       </Col>
     );
   }

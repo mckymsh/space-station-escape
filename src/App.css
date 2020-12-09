@@ -30,6 +30,7 @@
   color: #fff;
   text-shadow: 0 0 15px white, 0 0 10px #f700ff;
   transition: all 333ms ease;
+  cursor: pointer;
 }
 
 .Actions{
