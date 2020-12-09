@@ -7,15 +7,7 @@ const SCROLL_FADE_DELAY = 200;
 const FADE_DURATION = 2000;
 
 
-function addFade(content, fadeDelay){
-    return(
-      <Fade 
-        triggerOnce={true} 
-        duration={FADE_DURATION} 
-        delay={fadeDelay + SCROLL_FADE_DELAY}
-      >{content}</Fade>
-    );
-  }
+
 
 class App extends Component {
 
@@ -27,7 +19,7 @@ class App extends Component {
       roomsVisited: [],
       currentRoom: "Engineering",
       mainContent: [],
-      open: true,
+      animate: true,
     }
 
     this.rooms = [
@@ -38,7 +30,6 @@ class App extends Component {
       "Hydroponics",
       "ShuttleBay",
     ];
-
   }
 
   componentDidMount(){
@@ -63,7 +54,15 @@ class App extends Component {
     });
   }
 
-  
+  addFade(content, fadeDelay){
+    return(
+      <Fade 
+        triggerOnce={true} 
+        duration={(this.state.animate)? FADE_DURATION : 0} 
+        delay={(this.state.animate)? fadeDelay + SCROLL_FADE_DELAY : 0}
+      >{content}</Fade>
+    );
+  }
 
   createLink(text, clickFunction){
     return(
@@ -78,7 +77,7 @@ class App extends Component {
   intro(){
     let newContent = [];
     newContent.push(
-      addFade(
+      this.addFade(
         <Row>
           <Col className="content-piece text-left">
             This is the intro.
@@ -87,7 +86,7 @@ class App extends Component {
       , 200
     ));
     newContent.push(
-      addFade(
+      this.addFade(
         <Row>
           <Col className="content-piece text-right">
             It has a link to the <span 
@@ -105,7 +104,7 @@ class App extends Component {
   nextPart(){
     let newContent = []
     newContent.push(
-      addFade(
+      this.addFade(
       <Row>
         <Col className="content-piece text-center">
           This is the second part.
@@ -113,7 +112,7 @@ class App extends Component {
       </Row>, 0
     ));
     newContent.push(
-      addFade(
+      this.addFade(
         <Row>
           <Col className="content-piece text-left">
             It has a link to the <span 
@@ -129,12 +128,19 @@ class App extends Component {
 
   otherPart(){
     this.append(
-      addFade(
+      this.addFade(
       <Row>
         <Col className="content-piece text-center">This is the third part.</Col>
       </Row>, 0
     ));
   }  
+
+  toggleAnimation(){
+    let tempBool = this.state.animate;
+    this.setState({
+      animate: !tempBool,
+    });
+  }
 
   render(){
     return (
@@ -161,8 +167,8 @@ class App extends Component {
                 onClick={() => this.nextPart()}>secondary</Button>{' '}
             </Col>
             <Col>
-              <Button variant="outline-primary" 
-                onClick={() => this.otherPart()}>secondary</Button>{' '}
+              <Button type="checkbox" variant="outline-primary"
+                onClick={() => this.toggleAnimation()}>animation {this.state.animate ? "on" : "off"}</Button>
             </Col>
           </Row>
         </Container>
