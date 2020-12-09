@@ -3,6 +3,18 @@ import { Container, Row, Col, Button,} from 'react-bootstrap';
 import { Fade } from 'react-awesome-reveal';
 import './App.css';
 
+const FADE_DURATION = 2000;
+
+function addFade(content, fadeDelay){
+    return(
+      <Fade 
+        triggerOnce={true} 
+        duration={FADE_DURATION} 
+        delay={fadeDelay}
+      >{content}</Fade>
+    );
+  }
+
 class App extends Component {
 
   constructor(props){
@@ -25,8 +37,6 @@ class App extends Component {
       "ShuttleBay",
     ];
 
-    this.FADE_DURATION = 2000;
-    this.FADE_DELAY = 200;
   }
 
   componentDidMount(){
@@ -51,52 +61,84 @@ class App extends Component {
     });
   }
 
-  intro(){
-    this.append(
-      <Col className="content-piece text-left" sm={{span: "auto", offset: 1}}>
-      This is the intro.<br/>
-        It has a link to the <span 
-            href="./#" 
-            className="App-link"
-            onClick={() => this.nextPart()}
-          >second part</span>.
-       </Col>
+  
+
+  createLink(text, clickFunction){
+    return(
+      <span 
+        href="./#" 
+        className="App-link"
+        onClick={clickFunction}
+      >{text}</span>
     );
   }
 
+  intro(){
+    let newContent = [];
+    newContent.push(
+      addFade(
+        <Row>
+          <Col className="content-piece text-left">
+            This is the intro.
+           </Col>
+        </Row>
+      , 200
+    ));
+    newContent.push(
+      addFade(
+        <Row>
+          <Col className="content-piece text-right">
+            It has a link to the <span 
+              href="./#" 
+              className="App-link"
+              onClick={() => this.nextPart()}
+            >second part</span>.
+          </Col>
+        </Row>
+     , FADE_DURATION/2
+    ));
+    this.append(newContent);
+  }
+
   nextPart(){
-    this.append(
-      <Col className="content-piece text-right" sm={{span: "auto", order: "last", offset: 6}}>
-        This is the second part.<br/>
-        It has a link to the <span 
-            className="App-link"
-            onClick={() => this.otherPart()}
-          >third part</span>.
-      </Col>
-    );
+    let newContent = []
+    newContent.push(
+      addFade(
+      <Row>
+        <Col className="content-piece text-center">
+          This is the second part.
+        </Col>
+      </Row>, 0
+    ));
+    newContent.push(
+      addFade(
+        <Row>
+          <Col className="content-piece text-left">
+            It has a link to the <span 
+              href="./#" 
+              className="App-link"
+              onClick={() => this.otherPart()}
+            >third part</span>.
+          </Col>
+        </Row>, FADE_DURATION/2.5
+    ));
+    this.append(newContent);
   }
 
   otherPart(){
     this.append(
-      <Col className="content-piece text-center" xs={{span: "auto", offset: 4}}>This is the third part.</Col>
-    );
+      addFade(
+      <Row>
+        <Col className="content-piece text-center">This is the third part.</Col>
+      </Row>, 0
+    ));
   }  
 
   render(){
     return (
       <div className="App">
         <Container className="Main-Content">
-          <Fade 
-            triggerOnce={true} 
-            duration={this.FADE_DURATION} 
-            delay={this.FADE_DELAY}
-          >
-            {
-              this.state.mainContent.map((item) => (
-                <Row>{item}</Row> 
-              ))
-            }
-          </Fade>
+            {this.state.mainContent.map((item) => (item))}
           <Row>
             <Col>
               <div 
