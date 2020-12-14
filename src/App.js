@@ -3,6 +3,8 @@ import { Container, Row, Col, Button,} from 'react-bootstrap';
 import { Fade } from 'react-awesome-reveal';
 import './App.css';
 
+import rooms from './objectMaps.js';
+
 const SCROLL_FADE_DELAY = 200;
 const FADE_DURATION = 2000;
 
@@ -16,23 +18,15 @@ class App extends Component {
 
     this.state = {
       inventory: [],
-      roomsVisited: [],
-      currentRoom: "Engineering",
+      roomsVisited: new Set(),
+      currentRoom: "bioLab",
       mainContent: [],
       animate: true,
     }
-
-    this.rooms = [
-      "Storage",
-      "Engineering",
-      "Airlock",
-      "Lab",
-      "Hydroponics",
-      "ShuttleBay",
-    ];
   }
 
   componentDidMount(){
+    this.state.roomsVisited.add(this.state.currentRoom);
     this.intro();
   }
 
@@ -80,7 +74,10 @@ class App extends Component {
       this.addFade(
         <Row>
           <Col className="content-piece text-left">
-            This is the intro.
+            This is the intro. You are in <span 
+              className="App-link"
+              onClick={() => this.showDesc("room", this.state.currentRoom)}
+            >{rooms[this.state.currentRoom].name}</span>.
            </Col>
         </Row>
       , 200
@@ -90,7 +87,6 @@ class App extends Component {
         <Row>
           <Col className="content-piece text-right">
             It has a link to the <span 
-              href="./#" 
               className="App-link"
               onClick={() => this.nextPart()}
             >second part</span>.
@@ -99,6 +95,21 @@ class App extends Component {
      , FADE_DURATION/2
     ));
     this.append(newContent);
+  }
+
+  showDesc(itemType, itemName){
+    if(itemType === "room")
+    {
+      this.append(
+        this.addFade(
+          <Row>
+            <Col className="content-piece text-center">
+              {rooms[itemName].desc}
+            </Col>
+          </Row>
+       , 0
+      ));
+    }
   }
 
   nextPart(){
@@ -116,7 +127,6 @@ class App extends Component {
         <Row>
           <Col className="content-piece text-left">
             It has a link to the <span 
-              href="./#" 
               className="App-link"
               onClick={() => this.otherPart()}
             >third part</span>.
