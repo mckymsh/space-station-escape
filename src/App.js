@@ -39,13 +39,19 @@ class App extends Component {
   }
 
   reset(){
-  	let tempCurrentRoom = "southHub";
-    let tempVisited = new Set().add(tempCurrentRoom);
+  	// https://stackoverflow.com/a/49687370/11937109
+    const roomKeys = Object.keys(rooms);
+    const randomIndex = Math.floor(Math.random() * roomKeys.length);
+    const randomKey = roomKeys[randomIndex];
+    // window.alert(randomKey);
+    let tempcurrentRoomKey = randomKey;
+    // window.alert(tempcurrentRoomKey.name);
+    let tempVisited = new Set().add(rooms[tempcurrentRoomKey]);
 
     this.setState({
     	inventory: [],
 
-    	currentRoom: tempCurrentRoom,
+    	currentRoom: tempcurrentRoomKey,
     	roomsVisited: tempVisited,
 
     	mainContent: [],
