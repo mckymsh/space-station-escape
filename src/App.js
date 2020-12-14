@@ -16,18 +16,22 @@ class App extends Component {
   constructor(props){
     super(props);
 
+    let tempCurrentRoom = "southHub";
+    let tempVisited = new Set().add(tempCurrentRoom);
+
     this.state = {
       inventory: [],
-      roomsVisited: new Set(),
-      currentRoom: "bioLab",
+
+      currentRoom: tempCurrentRoom,
+      roomsVisited: tempVisited,
+      
       mainContent: [],
       animate: true,
     }
   }
 
   componentDidMount(){
-    this.state.roomsVisited.add(this.state.currentRoom);
-    this.intro();
+    this.intro();    
   }
 
   componentDidUpdate() {
@@ -73,11 +77,8 @@ class App extends Component {
     newContent.push(
       this.addFade(
         <Row>
-          <Col className="content-piece text-left">
-            This is the intro. You are in <span 
-              className="App-link"
-              onClick={() => this.showDesc("room", this.state.currentRoom)}
-            >{rooms[this.state.currentRoom].name}</span>.
+          <Col className="content-piece text-center">
+            This is the intro.
            </Col>
         </Row>
       , 200
@@ -85,15 +86,16 @@ class App extends Component {
     newContent.push(
       this.addFade(
         <Row>
-          <Col className="content-piece text-right">
-            It has a link to the <span 
+          <Col className="content-piece text-left">
+            You are in <span 
               className="App-link"
-              onClick={() => this.nextPart()}
-            >second part</span>.
-          </Col>
+              onClick={() => this.showDesc("room", this.state.currentRoom)}
+            >{rooms[this.state.currentRoom].name}</span>.
+           </Col>
         </Row>
-     , FADE_DURATION/2
-    ));
+        , FADE_DURATION/2
+      )
+    );
     this.append(newContent);
   }
 
@@ -110,6 +112,37 @@ class App extends Component {
        , 0
       ));
     }
+  }
+
+  changeRoom(newRoom){
+    if(rooms[newRoom] === null){
+      return;
+    }
+
+    let tempVisited = this.state.roomsVisited;
+    tempVisited.add(newRoom);
+
+    let tempContent = this.state.mainContent;
+    tempContent.push(
+      this.addFade(
+        <Row>
+          <Col className="content-piece text-left">
+            You are in <span 
+              className="App-link"
+              onClick={() => this.showDesc("room", this.state.currentRoom)}
+            >{rooms[this.state.currentRoom].name}</span>.
+           </Col>
+        </Row>
+        , 0
+      )
+    );
+
+    this.setState({
+      roomsVisited: tempVisited,
+      currentRoom: newRoom,
+
+      mainContent: tempContent,
+    });
   }
 
   nextPart(){
