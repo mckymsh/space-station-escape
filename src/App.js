@@ -83,7 +83,7 @@ class App extends Component {
             This is the intro.
            </Col>
         </Row>
-      , 200
+      , SCROLL_FADE_DELAY
     ));
     newContent.push(
       this.addFade(
@@ -96,7 +96,7 @@ class App extends Component {
             >second part</span>.
           </Col>
         </Row>
-     , FADE_DURATION/2
+     , SCROLL_FADE_DELAY+(FADE_DURATION/2)
     ));
     this.append(newContent);
   }
@@ -109,7 +109,7 @@ class App extends Component {
         <Col className="content-piece text-center">
           This is the second part.
         </Col>
-      </Row>, 0
+      </Row>, SCROLL_FADE_DELAY
     ));
     newContent.push(
       this.addFade(
@@ -121,7 +121,7 @@ class App extends Component {
               onClick={() => this.otherPart()}
             >third part</span>.
           </Col>
-        </Row>, FADE_DURATION/2.5
+        </Row>, SCROLL_FADE_DELAY+(FADE_DURATION/2.5)
     ));
     this.append(newContent);
   }
