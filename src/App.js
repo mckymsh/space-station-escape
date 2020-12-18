@@ -81,22 +81,12 @@ class App extends Component {
             This is the intro.
            </Col>
         </Row>
-      , 200
+      , SCROLL_FADE_DELAY
     ));
-    newContent.push(
-      this.addFade(
-        <Row>
-          <Col className="content-piece text-left">
-            You are in <span 
-              className="App-link"
-              onClick={() => this.showDesc("room", this.state.currentRoom)}
-            >{rooms[this.state.currentRoom].name}</span>.
-           </Col>
-        </Row>
-        , FADE_DURATION/2
-      )
-    );
-    this.append(newContent);
+    
+    this.setState({
+      mainContent: newContent,
+    }, this.roomWelcome);
   }
 
   showDesc(itemType, itemName){
@@ -109,7 +99,7 @@ class App extends Component {
               {rooms[itemName].desc}
             </Col>
           </Row>
-       , 0
+       , SCROLL_FADE_DELAY
       ));
     }
   }
@@ -122,26 +112,52 @@ class App extends Component {
     let tempVisited = this.state.roomsVisited;
     tempVisited.add(newRoom);
 
-    let tempContent = this.state.mainContent;
-    tempContent.push(
+    this.setState({
+      roomsVisited: tempVisited,
+      currentRoom: newRoom,
+    }, this.roomWelcome);
+  }
+
+  roomWelcome(){
+    let newContent = this.state.mainContent;
+
+    newContent.push(
+    this.addFade(
+      <Row>
+        <Col className="content-piece text-left">
+          You are in <span 
+            className="App-link"
+            onClick={() => this.showDesc("room", this.state.currentRoom)}
+          >{rooms[this.state.currentRoom].name}</span>.
+         </Col>
+      </Row>
+        , SCROLL_FADE_DELAY
+      )
+    );
+
+    let tempNeighbors = rooms[this.state.currentRoom].neighbors;
+
+    newContent.push(
       this.addFade(
         <Row>
           <Col className="content-piece text-left">
-            You are in <span 
-              className="App-link"
-              onClick={() => this.showDesc("room", this.state.currentRoom)}
-            >{rooms[this.state.currentRoom].name}</span>.
+            <ul>
+            {Object.values(tempNeighbors).map((neighbor) => (
+              <li>
+                You can move {neighbor.direction} to <span className="App-link"
+                  onClick={() => this.changeRoom(neighbor.key)}
+                >{rooms[neighbor.key].name}</span>.
+              </li>
+            ))}
+            </ul>
            </Col>
         </Row>
-        , 0
+        , SCROLL_FADE_DELAY+(FADE_DURATION/2)
       )
     );
 
     this.setState({
-      roomsVisited: tempVisited,
-      currentRoom: newRoom,
-
-      mainContent: tempContent,
+      mainContent: newContent,
     });
   }
 
