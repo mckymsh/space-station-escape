@@ -57,6 +57,7 @@ class App extends Component {
     return(
       <Fade 
         triggerOnce={true} 
+        cascade={true}
         duration={(this.state.animate)? FADE_DURATION : 0} 
         delay={(this.state.animate)? fadeDelay + SCROLL_FADE_DELAY : 0}
       >{content}</Fade>
@@ -121,6 +122,7 @@ class App extends Component {
 
   roomWelcome(){
     let tempContent = this.state.mainContent;
+    let tempCurrentRoom = this.state.currentRoom;
 
     tempContent.push(
 	    this.addFade(
@@ -128,7 +130,7 @@ class App extends Component {
 	        <Col className="content-piece text-left">
 	          You are in <span 
 	            className="App-link"
-	            onClick={() => this.showDesc("room", this.state.currentRoom)}
+	            onClick={() => this.showDesc("room", tempCurrentRoom)}
 	          >{rooms[this.state.currentRoom].name}</span>.
 	         </Col>
 	      </Row>
