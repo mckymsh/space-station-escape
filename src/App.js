@@ -7,6 +7,7 @@ import rooms from './objectMaps.js';
 
 const SCROLL_FADE_DELAY = 200;
 const FADE_DURATION = 2000;
+const DELAY_TIME = FADE_DURATION/2;
 
 
 
@@ -81,7 +82,7 @@ class App extends Component {
             This is the intro.
            </Col>
         </Row>
-      , SCROLL_FADE_DELAY
+      , 0
     ));
     
     this.setState({
@@ -99,7 +100,7 @@ class App extends Component {
               {rooms[itemName].desc}
             </Col>
           </Row>
-       , SCROLL_FADE_DELAY
+       , 0
       ));
     }
   }
@@ -122,20 +123,34 @@ class App extends Component {
     let tempContent = this.state.mainContent;
 
     tempContent.push(
-    this.addFade(
-      <Row>
-        <Col className="content-piece text-left">
-          You are in <span 
-            className="App-link"
-            onClick={() => this.showDesc("room", this.state.currentRoom)}
-          >{rooms[this.state.currentRoom].name}</span>.
-         </Col>
-      </Row>
-        , SCROLL_FADE_DELAY
-      )
+	    this.addFade(
+	      <Row>
+	        <Col className="content-piece text-left">
+	          You are in <span 
+	            className="App-link"
+	            onClick={() => this.showDesc("room", this.state.currentRoom)}
+	          >{rooms[this.state.currentRoom].name}</span>.
+	         </Col>
+	      </Row>
+	        , 0
+	    )
+    );
+    tempContent.push(
+	    this.addFade(
+	      <Row>
+	        <Col className="content-piece text-center">
+	          {rooms[this.state.currentRoom].desc}
+	         </Col>
+	      </Row>
+	        , DELAY_TIME
+	    )
     );
 
     let tempNeighbors = rooms[this.state.currentRoom].neighbors;
+
+    // tempNeighbors.forEach((item)=>{
+    // 	window.alert(item.key);
+    // });
 
     tempContent.push(
       this.addFade(
@@ -152,7 +167,7 @@ class App extends Component {
             </ul>
            </Col>
         </Row>
-        , SCROLL_FADE_DELAY+(FADE_DURATION/2)
+        , 2*DELAY_TIME
       )
     );
 

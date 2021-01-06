@@ -1,10 +1,10 @@
 const rooms = {
       "southHub": {name: "the southern hub", desc: "southHub desc", 
       neighbors: [
-          {key: "engineering", direction: "outward-left", },
-          {key: "storage", direction: "outward-front",},
-          {key: "physicsLab", direction: "outward-back",}, 
-          {key: "bioLab", direction: "outward-right",},
+          {key: "engineering", direction: "left", },
+          {key: "storage", direction: "front",},
+          {key: "physicsLab", direction: "back",}, 
+          {key: "bioLab", direction: "right",},
           {key: "northHub", direction: "north",},
           {key: "airlock", direction: "south",},
         ]
@@ -45,10 +45,10 @@ const rooms = {
       },
       "northHub": {name: "the northern hub", desc: "northHub desc", 
         neighbors: [
-          {key: "hydroponics", direction: "outward-left"},
-          {key: "head", direction: "outward-front"},
-          {key: "foodPrep", direction: "outward-back"}, 
-          {key: "habitation", direction: "outwardright"},
+          {key: "hydroponics", direction: "left"},
+          {key: "head", direction: "front"},
+          {key: "foodPrep", direction: "back"}, 
+          {key: "habitation", direction: "right"},
           {key: "southHub", direction: "south"},
           {key: "shuttleBay", direction: "north"},
         ]
@@ -57,6 +57,12 @@ const rooms = {
         neighbors: [
           {key: "space", direction: "north"},
           {key: "northHub", direction: "south"},
+        ]
+      },
+      "space": {name: "space", desc: "You're probably dead. Apparently that doesn't slow you down.", 
+        neighbors: [
+          {key: "northHub", direction: "south"},
+          {key: "southHub", direction: "north"},
         ]
       },
       "hydroponics": {name: "hydroponics", desc: "hydroponics desc", 
