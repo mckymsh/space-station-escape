@@ -3,8 +3,11 @@ import { Container, Row, Col, Button,} from 'react-bootstrap';
 import { Fade } from 'react-awesome-reveal';
 import './App.css';
 
+import rooms from './objectMaps.js';
+
 const SCROLL_FADE_DELAY = 200;
 const FADE_DURATION = 2000;
+const DELAY_TIME = FADE_DURATION/2;
 
 
 
@@ -14,26 +17,22 @@ class App extends Component {
   constructor(props){
     super(props);
 
+    let tempCurrentRoom = "southHub";
+    let tempVisited = new Set().add(tempCurrentRoom);
+
     this.state = {
       inventory: [],
-      roomsVisited: [],
-      currentRoom: "Engineering",
+
+      currentRoom: tempCurrentRoom,
+      roomsVisited: tempVisited,
+      
       mainContent: [],
       animate: true,
     }
-
-    this.rooms = [
-      "Storage",
-      "Engineering",
-      "Airlock",
-      "Lab",
-      "Hydroponics",
-      "ShuttleBay",
-    ];
   }
 
   componentDidMount(){
-    this.intro();
+    this.intro();    
   }
 
   componentDidUpdate() {
@@ -79,26 +78,102 @@ class App extends Component {
     newContent.push(
       this.addFade(
         <Row>
-          <Col className="content-piece text-left">
+          <Col className="content-piece text-center">
             This is the intro.
            </Col>
         </Row>
-      , SCROLL_FADE_DELAY
+      , 0
     ));
-    newContent.push(
+    
+    this.setState({
+      mainContent: newContent,
+    }, this.roomWelcome);
+  }
+
+  showDesc(itemType, itemName){
+    if(itemType === "room")
+    {
+      this.append(
+        this.addFade(
+          <Row>
+            <Col className="content-piece text-center">
+              {rooms[itemName].desc}
+            </Col>
+          </Row>
+       , 0
+      ));
+    }
+  }
+
+  changeRoom(newRoom){
+    if(!(newRoom in rooms)){
+      return;
+    }
+
+    let tempVisited = this.state.roomsVisited;
+    tempVisited.add(newRoom);
+
+    this.setState({
+      roomsVisited: tempVisited,
+      currentRoom: newRoom,
+    }, this.roomWelcome);
+  }
+
+  roomWelcome(){
+    let tempContent = this.state.mainContent;
+
+    tempContent.push(
+	    this.addFade(
+	      <Row>
+	        <Col className="content-piece text-left">
+	          You are in <span 
+	            className="App-link"
+	            onClick={() => this.showDesc("room", this.state.currentRoom)}
+	          >{rooms[this.state.currentRoom].name}</span>.
+	         </Col>
+	      </Row>
+	        , 0
+	    )
+    );
+    tempContent.push(
+	    this.addFade(
+	      <Row>
+	        <Col className="content-piece text-center">
+	          {rooms[this.state.currentRoom].desc}
+	         </Col>
+	      </Row>
+	        , DELAY_TIME
+	    )
+    );
+
+    let tempNeighbors = rooms[this.state.currentRoom].neighbors;
+
+    // tempNeighbors.forEach((item)=>{
+    // 	window.alert(item.key);
+    // });
+
+    tempContent.push(
       this.addFade(
         <Row>
-          <Col className="content-piece text-right">
-            It has a link to the <span 
-              href="./#" 
-              className="App-link"
-              onClick={() => this.nextPart()}
-            >second part</span>.
-          </Col>
+          <Col className="content-piece text-left">
+            <ul>
+            {Object.values(tempNeighbors).map((neighbor) => (
+              <li>
+                You can move {neighbor.direction} to <span className="App-link"
+                  onClick={() => this.changeRoom(neighbor.key)}
+                >{rooms[neighbor.key].name}</span>.
+              </li>
+            ))}
+            </ul>
+           </Col>
         </Row>
-     , SCROLL_FADE_DELAY+(FADE_DURATION/2)
-    ));
-    this.append(newContent);
+        , 2*DELAY_TIME
+      )
+    );
+
+    this.setState({
+      mainContent: tempContent,
+    });
   }
 
   nextPart(){
@@ -116,7 +191,6 @@ class App extends Component {
         <Row>
           <Col className="content-piece text-left">
             It has a link to the <span 
-              href="./#" 
               className="App-link"
               onClick={() => this.otherPart()}
             >third part</span>.

@@ -72,6 +72,10 @@ div.content-piece{
   /*border: 1px dashed orange;*/
 }
 
+li{
+  list-style-type: none;
+}
+
 /*Scrollbars adapted from*/
 /*https://www.digitalocean.com/community/tutorials/css-scrollbars*/
 
