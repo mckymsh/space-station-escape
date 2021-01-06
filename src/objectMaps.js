@@ -46,9 +46,9 @@ const rooms = {
       "northHub": {name: "the northern hub", desc: "northHub desc", 
         neighbors: [
           {key: "hydroponics", direction: "outward-left"},
-          {key: "head", direction: "outward-front-right"},
-          {key: "foodPrep", direction: "outward-back-left"}, 
-          {key: "habitation", direction: "outward-back-right"},
+          {key: "head", direction: "outward-front"},
+          {key: "foodPrep", direction: "outward-back"}, 
+          {key: "habitation", direction: "outwardright"},
           {key: "southHub", direction: "south"},
           {key: "shuttleBay", direction: "north"},
         ]

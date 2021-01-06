@@ -105,7 +105,7 @@ class App extends Component {
   }
 
   changeRoom(newRoom){
-    if(rooms[newRoom] === null){
+    if(!(newRoom in rooms)){
       return;
     }
 
@@ -119,9 +119,9 @@ class App extends Component {
   }
 
   roomWelcome(){
-    let newContent = this.state.mainContent;
+    let tempContent = this.state.mainContent;
 
-    newContent.push(
+    tempContent.push(
     this.addFade(
       <Row>
         <Col className="content-piece text-left">
@@ -137,7 +137,7 @@ class App extends Component {
 
     let tempNeighbors = rooms[this.state.currentRoom].neighbors;
 
-    newContent.push(
+    tempContent.push(
       this.addFade(
         <Row>
           <Col className="content-piece text-left">
@@ -157,7 +157,7 @@ class App extends Component {
     );
 
     this.setState({
-      mainContent: newContent,
+      mainContent: tempContent,
     });
   }
 
