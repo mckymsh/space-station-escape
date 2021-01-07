@@ -69,8 +69,7 @@
 div.content-piece{
   overflow: wrap;
   /*box-shadow: -1px 1px 1px #ffbb44;*/
-  border: 1px dashed orange;
-  flex-direction: inherit;
+  /*border: 1px dashed orange;*/
 }
 
 li{
