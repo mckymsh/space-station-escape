@@ -179,16 +179,21 @@ class App extends Component {
     tempContent.push(
       this.addFade(
         <Row>
-          <Col className="content-piece text-left">
-            <ul>
-            {Object.values(tempNeighbors).map((neighbor) => (
-              <li>
-                You can move {neighbor.direction} to <span className="App-link"
+          <Col className="content-piece text-left">You can move&nbsp;
+            {Object.values(tempNeighbors.slice(0, tempNeighbors.length-1)).map((neighbor) => (
+              <span>
+                {neighbor.direction} to <span className="App-link"
                   onClick={() => this.changeRoom(neighbor.key)}
-                >{rooms[neighbor.key].name}</span>.
-              </li>
+                >{rooms[neighbor.key].name}</span>,&nbsp; 
+              </span>
             ))}
-            </ul>
+            {Object.values(tempNeighbors.slice(tempNeighbors.length-1, tempNeighbors.length)).map((neighbor) => (
+              <span>
+                or {neighbor.direction} to <span className="App-link"
+                  onClick={() => this.changeRoom(neighbor.key)}
+                >{rooms[neighbor.key].name}</span>.&nbsp; 
+              </span>
+            ))}
            </Col>
         </Row>
         , 2*DELAY_TIME
