@@ -12,7 +12,7 @@
 
   overflow-y: hidden;
   overflow: hidden;
-  white-space: nowrap;
+  /*white-space: nowrap;*/
   padding: 25px;
 
 }
@@ -67,9 +67,10 @@
 }
 
 div.content-piece{
-  overflow: hidden;
+  overflow: wrap;
   /*box-shadow: -1px 1px 1px #ffbb44;*/
-  /*border: 1px dashed orange;*/
+  border: 1px dashed orange;
+  flex-direction: inherit;
 }
 
 li{
