@@ -17,18 +17,17 @@ class App extends Component {
   constructor(props){
     super(props);
 
-    let tempCurrentRoom = "southHub";
-    let tempVisited = new Set().add(tempCurrentRoom);
-
     this.state = {
       inventory: [],
 
-      currentRoom: tempCurrentRoom,
-      roomsVisited: tempVisited,
+      currentRoom: null,
+      roomsVisited: null,
       
       mainContent: [],
       animate: true,
     }
+
+    this.reset();
   }
 
   componentDidMount(){
@@ -37,6 +36,20 @@ class App extends Component {
 
   componentDidUpdate() {
     this.scrollToBottom();
+  }
+
+  reset(){
+  	let tempCurrentRoom = "southHub";
+    let tempVisited = new Set().add(tempCurrentRoom);
+
+    this.setState({
+    	inventory: [],
+
+    	currentRoom: tempCurrentRoom,
+    	roomsVisited: tempVisited,
+
+    	mainContent: [],
+    });
   }
 
   // Adapted from
@@ -75,7 +88,10 @@ class App extends Component {
   }
 
   intro(){
+  	this.reset();
+
     let newContent = [];
+
     newContent.push(
       this.addFade(
         <Row>
