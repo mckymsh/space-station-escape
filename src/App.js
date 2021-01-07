@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Button,} from 'react-bootstrap';
+import { Container, Row, Col,} from 'react-bootstrap';
 import { Fade } from 'react-awesome-reveal';
 import './App.css';
 
@@ -260,20 +260,10 @@ class App extends Component {
           </Row>
         </Container>
         <Container className="Actions fixed-bottom">
-          <Row>
-            <Col>
-              <Button variant="outline-primary" 
-                onClick={() => this.intro()}>primary</Button>{' '}
-            </Col>
-            <Col>
-              <Button variant="outline-primary" 
-                onClick={() => this.nextPart()}>secondary</Button>{' '}
-            </Col>
-            <Col>
-              <Button type="checkbox" variant="outline-primary"
-                onClick={() => this.toggleAnimation()}>animation {this.state.animate ? "on" : "off"}</Button>
-            </Col>
-          </Row>
+	        |&nbsp;<span className="App-link" 
+	            onClick={() => this.intro()}>reset</span>&nbsp;|&nbsp;
+	        <span className="App-link" 
+	            onClick={() => this.toggleAnimation()}>animation {this.state.animate ? "on" : "off"}</span>&nbsp;|
         </Container>
       </div>
     );

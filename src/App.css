@@ -10,7 +10,7 @@
   font-size: 3vmin;/*calc(5px + 5vmin);*/
   color: #eeeeee;
 
-  overflow-y: hidden;
+  /*overflow-y: hidden;*/
   overflow: hidden;
   /*white-space: nowrap;*/
   padding: 25px;
@@ -34,11 +34,11 @@
 }
 
 .Actions{
-  background-color: #351f37;
+  background-color: inherit;/*#351f37;*/
   /*border: 1px solid #eeeeee;*/
   opacity: 1;
   z-index: 10;
-  margin-bottom: 25px;
+  margin-bottom: 5vh;
 }
 
 .Main-Content{
