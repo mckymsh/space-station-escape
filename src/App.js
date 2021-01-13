@@ -83,16 +83,6 @@ class App extends Component {
     );
   }
 
-  createLink(text, clickFunction){
-    return(
-      <span 
-        href="./#" 
-        className="App-link"
-        onClick={clickFunction}
-      >{text}</span>
-    );
-  }
-
   intro(){
   	this.reset();
 
@@ -150,10 +140,7 @@ class App extends Component {
 	    this.addFade(
 	      <Row>
 	        <Col className="content-piece text-left">
-	          You are in <span 
-	            className="App-link"
-	            onClick={() => this.showDesc("room", tempCurrentRoom)}
-	          >{rooms[this.state.currentRoom].name}</span>.
+	          You are in {this.appLink(rooms[this.state.currentRoom].name ,() => this.showDesc("room", tempCurrentRoom))}
 	         </Col>
 	      </Row>
 	        , 0
@@ -182,16 +169,18 @@ class App extends Component {
           <Col className="content-piece text-left">You can move&nbsp;
             {Object.values(tempNeighbors.slice(0, tempNeighbors.length-1)).map((neighbor) => (
               <span>
-                {neighbor.direction} to <span className="App-link"
-                  onClick={() => this.changeRoom(neighbor.key)}
-                >{rooms[neighbor.key].name}</span>,&nbsp; 
+                {neighbor.direction} to {this.appLink(
+							            	rooms[neighbor.key].name,
+						                	() => this.changeRoom(neighbor.key))
+							            },&nbsp; 
               </span>
             ))}
             {Object.values(tempNeighbors.slice(tempNeighbors.length-1, tempNeighbors.length)).map((neighbor) => (
               <span>
-                or {neighbor.direction} to <span className="App-link"
-                  onClick={() => this.changeRoom(neighbor.key)}
-                >{rooms[neighbor.key].name}</span>.&nbsp; 
+                or {neighbor.direction} to {this.appLink(
+							            	rooms[neighbor.key].name,
+						                	() => this.changeRoom(neighbor.key))
+							            }.&nbsp; 
               </span>
             ))}
            </Col>
@@ -260,14 +249,22 @@ class App extends Component {
           </Row>
         </Container>
         <Container className="Actions fixed-bottom">
-	        |&nbsp;<span className="App-link" 
-	            onClick={() => this.intro()}>reset</span>&nbsp;|&nbsp;
-	        <span className="App-link" 
-	            onClick={() => this.toggleAnimation()}>animation {this.state.animate ? "on" : "off"}</span>&nbsp;|
+	        |&nbsp;{this.appLink("reset", () => this.intro())}&nbsp;|&nbsp;
+		        {this.appLink(("anim.")+(this.state.animate ? " on" : " off"), () => this.toggleAnimation())}&nbsp;|
         </Container>
       </div>
     );
-  }
+	}
+
+	appLink(text, clickFunction){
+	    return(
+	      <span 
+	        href="./#" 
+	        className="App-link"
+	        onClick={clickFunction}
+	      >{text}</span>
+	    );
+	  }
 }
 
 export default App;
