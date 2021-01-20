@@ -1,79 +1,78 @@
 .App {
-  text-align: center;
+	font-size: 3vmin;
+	color: #eeeeee;	
 
-  background-color: #250f27;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: 3vmin;/*calc(5px + 5vmin);*/
-  color: #eeeeee;
+	background-color: #250f27;
 
-  /*overflow-y: hidden;*/
-  overflow: hidden;
-  /*white-space: nowrap;*/
-  padding: 25px;
+	min-height: 100vh;
+
+	display: flex;
+	flex-direction: column;
+
+	text-align: center;
+	align-items: center;
+	justify-content: center;	
+
+	overflow: hidden;
+	padding: 25px;
 
 }
 
 .App-link {
-  color: inherit;
-  /*border-bottom: 1px dashed #eeeeee;*/
-  text-shadow: 0 0 10px #f700ff;
-  transition: all 2s ease;
+	color: inherit;
+	text-shadow: 0 0 10px #f700ff;
+	transition: all 2s ease;
 }
 
 .App-link:hover{
-  text-decoration: none;
-  /*border: none;*/
-  color: #fff;
-  text-shadow: 0 0 15px white, 0 0 10px #f700ff;
-  transition: all 333ms ease;
-  cursor: pointer;
+	color: #fff;
+	text-shadow: 0 0 15px white, 0 0 10px #f700ff;
+	transition: all 333ms ease;
+
+	cursor: pointer;
 }
 
 .Actions{
-  background-color: inherit;/*#351f37;*/
-  /*border: 1px solid #eeeeee;*/
-  opacity: 1;
-  z-index: 10;
-  margin-bottom: 5vh;
+	background-color: inherit;/*#351f37;*/
+	opacity: 1;
+	z-index: 10;
+	margin-bottom: 5vh;
 }
 
 .Main-Content{
-  background-color: #351f37;
-  /*border: 1px dashed yellow;*/
-  /*width: 75vw;*/
-  min-width: 600px;
-  max-width: 900px;
-  height: 75vh;
-  min-height: 600px;
-  /*max-height: 900px;*/
-  overflow-y: scroll;
-  overflow-x: wrap;
+	background-color: #351f37;
+	/*border: 1px dashed yellow;*/
+
+	/*width: 75vw;*/
+	min-width: 600px;
+	max-width: 900px;
+
+	height: 75vh;
+	min-height: 600px;
+	/*max-height: 900px;*/
+
+	overflow-y: scroll;
+	overflow-x: wrap;
 }
 
 .contentEnd-filler{
-  padding-bottom: 5vmin;
+	padding-bottom: 5vmin;
 }
 
 .content-filler{
-  height: 5vh;
+	height: 5vh;
 }
 
 .row{
-  padding-top: 5vh;
+	padding-top: 5vh;
 }
 
 div.content-piece{
-  overflow: wrap;
-  /*box-shadow: -1px 1px 1px #ffbb44;*/
-  /*border: 1px dashed orange;*/
+	overflow: wrap;
 }
 
 li{
-  list-style-type: none;
+	list-style-type: none;
 }
 
 /*Scrollbars adapted from*/
@@ -81,21 +80,19 @@ li{
 
 /* Works on Firefox */
 * {
-  scrollbar-width: thin;
-  scrollbar-color: #eeeeee #250f27;
+	scrollbar-width: thin;
+	scrollbar-color: #eeeeee #250f27;
 }
 
 /* Works on Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
-  width: 1vmin;
+	width: 1vmin;
 }
 
 *::-webkit-scrollbar-track {
-  background: #250f27;
+	background: #250f27;
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: #eeeeee;
-  /*border-radius: 20px;*/
-  /*border: 3px solid orange;*/
+	background-color: #eeeeee;
 }
