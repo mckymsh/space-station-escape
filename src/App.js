@@ -162,9 +162,11 @@ class App extends Component {
 		    )
 	    );
 
+	    var extraDelay = false;
 	    // If this is the first time we've been here, 
 	    //     display room description.
 	    if (!tempVisited.has(tempCurrentRoom)){
+	    	extraDelay = true;
 	    	tempVisited = tempVisited.add(tempCurrentRoom);
 		    tempContentQueue.push(
 			    this.addFade(
@@ -203,7 +205,7 @@ class App extends Component {
 		            ))}
 		        </Col>
 	        </Row>
-	        , 2*DELAY_TIME
+	        , ((extraDelay) ? 2*DELAY_TIME : DELAY_TIME)
 	    ));
 
 	    this.setState({

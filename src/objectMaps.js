@@ -43,7 +43,10 @@ const rooms = {
 			{key: "southHub", direction: "inward"},
 		]
 	},
-	"northHub": {name: "the northern hub", desc: "northHub desc", 
+	"northHub": {name: "the northern hub", desc: 
+					`This hub, arbitrarily designated as \
+					'north', has passageways leading to \
+					several rooms on the outer ring.`, 
 		neighbors: [
 			{key: "hydroponics", direction: "left"},
 			{key: "head", direction: "front"},
@@ -53,40 +56,64 @@ const rooms = {
 			{key: "shuttleBay", direction: "north"},
 		]
 	},
-	"shuttleBay": {name: "the shuttle bay", desc: "shuttleBay desc", 
+	"shuttleBay": {name: "the shuttle bay", desc: 
+					`The bay is sparse. \
+					through the small porthole in the locked \
+					hatch, you see a distressing lack of shuttle.`, 
 		neighbors: [
 			{key: "space", direction: "north"},
 			{key: "northHub", direction: "south"},
 		]
 	},
-	"space": {name: "space", desc: "You're probably dead. Apparently that doesn't slow you down.", 
+	"space": {name: "space", desc: 
+					`You shouldn't be here. \
+					You're probably dead. \
+					Apparently that doesn't slow you down. \
+					Continue playing; don't mind me.`, 
 		neighbors: [
 			{key: "northHub", direction: "south"},
 			{key: "southHub", direction: "north"},
 		]
 	},
-	"hydroponics": {name: "hydroponics", desc: "hydroponics desc", 
+	"hydroponics": {name: "hydroponics", desc: 
+					`Long rows of what you assume \
+					were once well-tended plants \
+					extend along the curve of \
+					the station. Not pretty, but \
+					maybe the reason you're still \
+					breathing.`, 
 		neighbors: [
 			{key: "head", direction: "spinward"}, 
 			{key: "foodPrep", direction: "antispinward"},
 			{key: "northHub", direction: "inward"},
 		]
 	},
-	"head": {name: "the head", desc: "head desc", 
+	"head": {name: "the head", desc: 
+					`A fancy space bathroom. You suppose. \
+					Not sure what all those hoses and straps \
+					are for...`, 
 		neighbors: [
 			{key: "habitation", direction: "spinward"}, 
 			{key: "hydroponics", direction: "antispinward"},
 			{key: "northHub", direction: "inward"},
 		]
 	},
-	"habitation": {name: "habitation", desc: "habitation desc", 
+	"habitation": {name: "habitation", desc: 
+					`'Cozy' would be a euphemistic \
+					descriptor for these tiny personal \
+					spaces. A storage locker, a bed seemingly \
+					for a toddler, and a curtain for \
+					'privacy'. Lovely.`, 
 		neighbors: [
 			{key: "foodPrep", direction: "spinward"}, 
 			{key: "head", direction: "antispinward"},
 			{key: "northHub", direction: "inward"},
 		]
 	},
-	"foodPrep": {name: "the food prep area", desc: "foodPrep desc", 
+	"foodPrep": {name: "the food prep area", desc: 
+					`You can see why they don't call this \
+					a kitchen. Latched cabinets, a microwave... \
+					not exactly Michelin-rated.`, 
 		neighbors: [
 			{key: "hydroponics", direction: "spinward"}, 
 			{key: "habitation", direction: "antispinward"},
