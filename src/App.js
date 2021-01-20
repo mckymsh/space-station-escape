@@ -136,7 +136,7 @@ class App extends Component {
 		    this.addFade(
 		      <Row>
 		        <Col className="content-piece text-left">
-		          You are in {this.appLink(rooms[tempCurrentRoom].name ,() => this.showDesc("room", tempCurrentRoom))}
+		          You are in {rooms[tempCurrentRoom].name}
 		         </Col>
 		      </Row>
 		        , 0
