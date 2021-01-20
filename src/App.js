@@ -123,46 +123,53 @@ class App extends Component {
       return;
     }
 
-    let tempVisited = this.state.roomsVisited;
-    tempVisited.add(newRoom);
-
     this.setState({
-      roomsVisited: tempVisited,
       currentRoom: newRoom,
     }, this.roomWelcome);
   }
 
   roomWelcome(){
     let tempContent = this.state.mainContent;
-    let tempCurrentRoom = this.state.currentRoom;
+    var tempCurrentRoom = this.state.currentRoom;
+
+    var tempVisited = this.state.roomsVisited;
+
+    // window.alert(tempCurrentRoom);
 
     tempContent.push(
 	    this.addFade(
 	      <Row>
 	        <Col className="content-piece text-left">
-	          You are in {this.appLink(rooms[this.state.currentRoom].name ,() => this.showDesc("room", tempCurrentRoom))}
+	          You are in {this.appLink(rooms[tempCurrentRoom].name ,() => this.showDesc("room", tempCurrentRoom))}
 	         </Col>
 	      </Row>
 	        , 0
 	    )
     );
-    tempContent.push(
-	    this.addFade(
-	      <Row>
-	        <Col className="content-piece text-center">
-	          {rooms[this.state.currentRoom].desc}
-	         </Col>
-	      </Row>
-	        , DELAY_TIME
-	    )
-    );
 
-    let tempNeighbors = rooms[this.state.currentRoom].neighbors;
+    // If this is the first time we've been here, 
+    //     display room description.
+    if (!tempVisited.has(tempCurrentRoom)){
+    	tempVisited = tempVisited.add(tempCurrentRoom);
+	    tempContent.push(
+		    this.addFade(
+		      <Row>
+		        <Col className="content-piece text-center">
+		          {rooms[tempCurrentRoom].desc}
+		         </Col>
+		      </Row>
+		        , DELAY_TIME
+		    )
+	    );
+    }
+
+    let tempNeighbors = rooms[tempCurrentRoom].neighbors;
 
     // tempNeighbors.forEach((item)=>{
     // 	window.alert(item.key);
     // });
 
+    // list movement options
     tempContent.push(
       this.addFade(
         <Row>
