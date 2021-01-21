@@ -1,5 +1,9 @@
 const rooms = {
-	"southHub": {name: "the southern hub", desc: "southHub desc", 
+	"southHub": {name: "the southern hub", desc: 
+					`From this central hub, there are \
+					several passages leading to segments \
+					of the outer ring. Another connects \
+					this ring to the other ring.`, 
 		neighbors: [
 			{key: "engineering", direction: "left", },
 			{key: "storage", direction: "front",},
@@ -9,34 +13,53 @@ const rooms = {
 			{key: "airlock", direction: "south",},
 		]
 	},
-	"airlock": {name: "the airlock", desc: "airlock desc", 
+	"airlock": {name: "the airlock", desc: 
+					`The interior door is locked, and the \
+					exterior is open. But that's only \
+					possible if someone went outside... \
+					and didn't come back.`, 
 		neighbors: [
 			{key: "southHub", direction: "north"},
 			{key: "space", direction: "south"},
 		]
 	},
-	"storage": {name: "storage", desc: "storage desc", 
+	"storage": {name: "storage", desc: 
+					`This storage room, conveniently located \
+					near the airlock, holds all the supplies \
+					for EVA, as well as a few other spares \
+					that wouldn't fit elsewhere.`, 
 		neighbors: [
 			{key: "bioLab", direction: "spinward"},
 			{key: "engineering", direction: "antispinward"},
 			{key: "southHub", direction: "inward"},
 		]
 	},
-	"engineering": {name: "engineering", desc: "engineering desc", 
+	"engineering": {name: "engineering", desc: 
+					`Rodney was never very neat, but even his \
+					disorganized ass would be dismayed at the \
+					disarray here. Tools and parts are strewn \
+					about. Perhaps you aren't the first person \
+					to scavenge here.`, 
 		neighbors: [
 			{key: "storage", direction: "spinward"},
 			{key: "physicsLab", direction: "antispinward"},
 			{key: "southHub", direction: "inward"},
 		]
 	},
-	"physicsLab": {name: "the physics lab", desc: "physicsLab desc", 
+	"physicsLab": {name: "the physics lab", desc: 
+					`The lab is decorated with a vast \
+					array of instruments and equipment. \
+					Some of it might be useful. Eventually.`, 
 		neighbors: [
 			{key: "engineering", direction: "spinward"},
 			{key: "bioLab", direction: "antispinward"},
 			{key: "southHub", direction: "inward"},
 		]
 	},      
-	"bioLab": {name: "the bio lab", desc: "bioLab desc", 
+	"bioLab": {name: "the bio lab", desc: 
+					`There are many small containers with \
+					insects and rodents. Amazingly, they \
+					all seem to still be alive.`, 
 		neighbors: [
 			{key: "physicsLab", direction: "spinward"}, 
 			{key: "storage", direction: "antispinward"},
@@ -46,7 +69,8 @@ const rooms = {
 	"northHub": {name: "the northern hub", desc: 
 					`This hub, arbitrarily designated as \
 					'north', has passageways leading to \
-					several rooms on the outer ring.`, 
+					several rooms on the outer ring, and \
+					one to the other end of the station.`, 
 		neighbors: [
 			{key: "hydroponics", direction: "left"},
 			{key: "head", direction: "front"},
