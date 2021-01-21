@@ -21,13 +21,17 @@
 .App-link {
 	color: inherit;
 	text-shadow: 0 0 10px #f700ff;
-	transition: all 2s ease;
+
+	transition: color 2s ease;
+	transition: text-shadow 2s ease;
 }
 
 .App-link:hover{
 	color: #fff;
 	text-shadow: 0 0 15px white, 0 0 10px #f700ff;
-	transition: all 333ms ease;
+
+	transition: color 333ms ease;
+	transition: text-shadow 333ms ease;
 
 	cursor: pointer;
 }
