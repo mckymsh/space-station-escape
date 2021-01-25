@@ -61,8 +61,8 @@ const rooms = {
       },
       "space": {name: "space", desc: "You're probably dead. Apparently that doesn't slow you down.", 
         neighbors: [
-          {key: "northHub", direction: "south"},
-          {key: "southHub", direction: "north"},
+          {key: "airlock", direction: "south"},
+          {key: "shuttleBay", direction: "north"},
         ]
       },
       "hydroponics": {name: "hydroponics", desc: "hydroponics desc", 
