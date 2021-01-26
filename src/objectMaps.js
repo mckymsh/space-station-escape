@@ -171,7 +171,6 @@ const rooms = {
 };
 
 const intro = [
-<<<<<<< HEAD
 	{ alignment: "left", 
 		time: 1000, 
 		text: `You awake.`

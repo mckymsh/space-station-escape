@@ -165,7 +165,6 @@ class App extends Component {
 	    // If this is the first time we've been here, 
 	    //     display room description.
 	    if (!tempVisited.has(tempCurrentRoom)){
-	    	localDelay = localDelay + DELAY_TIME;
 	    	tempVisited = tempVisited.add(tempCurrentRoom);
 		    tempContentQueue.push(
 			    this.addFade(
@@ -174,12 +173,10 @@ class App extends Component {
 							{rooms[tempCurrentRoom].desc}
 						</Col>
 					</Row>
-					, localDelay
+					, DELAY_TIME
 			    )
 		    );
 	    }
-
-	    localDelay = localDelay + DELAY_TIME;
 
 	    let tempNeighbors = rooms[tempCurrentRoom].neighbors;
 
@@ -206,7 +203,7 @@ class App extends Component {
 		            ))}
 		        </Col>
 	        </Row>
-	        , localDelay
+	        , DELAY_TIME
 	    ));
 
 	    this.setState({
@@ -239,6 +236,16 @@ class App extends Component {
 			        {this.appLink(("anim.")+(this.state.animate ? " on" : " off"), () => this.toggleAnimation())}&nbsp;|
 	        </Container>
 	      </div>
+	    );
+	}
+
+	appLink(text, clickFunction){
+	    return(
+		    <span 
+		        href="./#" 
+		        className="App-link"
+		        onClick={clickFunction}
+		    >{text}</span>
 	    );
 	}
 }
