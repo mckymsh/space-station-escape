@@ -3,7 +3,7 @@ import { Container, Row, Col,} from 'react-bootstrap';
 import { Fade } from 'react-awesome-reveal';
 import './App.css';
 
-import rooms from './objectMaps.js';
+import { rooms, intro } from './objectMaps.js';
 
 const SCROLL_FADE_DELAY = 200;
 const FADE_DURATION = 2000;
@@ -20,16 +20,31 @@ class App extends Component {
 
 		    currentRoom: null,
 		    roomsVisited: null,
-		      
+
+		    contentQueue: [],
 		    mainContent: [],
+
 		    animate: true,
 	    }
-
-	    this.reset();
 	}
 
 	componentDidMount(){
-	    this.intro();    
+	    this.reset();
+    	this.interval = setInterval(() => this.tick(), 2000);
+	}
+
+	tick(){
+		if(this.state.contentQueue.length > 0){
+			let tempContent = this.state.mainContent;
+			let tempContentQueue = this.state.contentQueue
+			tempContent.push(tempContentQueue.shift());
+			this.setState({
+				mainContent: tempContent,
+				contentQueue: tempContentQueue,
+			});
+		}else{
+	    	clearInterval(this.interval);
+	    }
 	}
 
 	componentDidUpdate() {
@@ -52,8 +67,10 @@ class App extends Component {
 	    	currentRoom: tempcurrentRoomKey,
 	    	roomsVisited: tempVisited,
 
+	    	contentQueue: [],
+
 	    	mainContent: [],
-	    });
+	    }, this.intro);
 	}
 
 	// Adapted from
@@ -62,58 +79,38 @@ class App extends Component {
 	    this.contentEnd.scrollIntoView({behavior: "smooth", block: "start"});
 	}
 
-	append(newContent){
-	    var tempContent = this.state.mainContent;
-	    tempContent.push(newContent);
-	    this.setState({
-		    mainContent: tempContent,
-	    });
-	}
-
 	addFade(content, fadeDelay){
 	    return(
 		    <Fade 
 		        triggerOnce={true} 
 		        cascade={true}
 		        duration={(this.state.animate)? FADE_DURATION : 0} 
-		        delay={(this.state.animate)? fadeDelay + SCROLL_FADE_DELAY : 0}
+		        // delay={(this.state.animate)? fadeDelay + SCROLL_FADE_DELAY : 0}
+		        delay={0}
 		    >{content}</Fade>
 	    );
 	}
 
 	intro(){
-	  	this.reset();
+	  	// this.reset();
 
 	    let newContent = [];
 
-	    newContent.push(
-		    this.addFade(
-		        <Row>
-		          <Col className="content-piece text-center">
-		            This is the intro.
-		           </Col>
-		        </Row>
-		    , 0
-	    ));
-	    
-	    this.setState({
-		    mainContent: newContent,
-	    }, this.roomWelcome);
-	}
-
-	showDesc(itemType, itemName){
-	    if(itemType === "room")
-	    {
-		    this.append(
-		        this.addFade(
-		        <Row>
-		            <Col className="content-piece text-center">
-			            {rooms[itemName].desc}
-		            </Col>
-		        </Row>
+	    for(var i = 0; i < intro.length; i++){
+	    	newContent.push(
+			    this.addFade(
+			        <Row>
+				        <Col className={"content-piece text-"+intro[i].alignment}>
+					        {intro[i].text}
+				        </Col>
+			        </Row>
 			    , 0
 		    ));
 	    }
+	    
+	    this.setState({
+		    contentQueue: newContent,
+	    }, this.roomWelcome);
 	}
 
 	changeRoom(newRoom){
@@ -127,12 +124,14 @@ class App extends Component {
 	}
 
 	roomWelcome(){
-	    let tempContent = this.state.mainContent;
+	    let tempContentQueue = this.state.contentQueue;
 	    var tempCurrentRoom = this.state.currentRoom;
+
+	    // window.alert("roomWelcome: "+tempCurrentRoom);
 
 	    var tempVisited = this.state.roomsVisited;
 
-	    tempContent.push(
+	    tempContentQueue.push(
 		    this.addFade(
 		      <Row>
 		        <Col className="content-piece text-left">
@@ -147,7 +146,7 @@ class App extends Component {
 	    //     display room description.
 	    if (!tempVisited.has(tempCurrentRoom)){
 	    	tempVisited = tempVisited.add(tempCurrentRoom);
-		    tempContent.push(
+		    tempContentQueue.push(
 			    this.addFade(
 			      <Row>
 			        <Col className="content-piece text-center">
@@ -162,7 +161,7 @@ class App extends Component {
 	    let tempNeighbors = rooms[tempCurrentRoom].neighbors;
 
 	    // list movement options
-	    tempContent.push(
+	    tempContentQueue.push(
 	      this.addFade(
 	        <Row>
 		        <Col className="content-piece text-left">You can move&nbsp;
@@ -188,15 +187,14 @@ class App extends Component {
 	    ));
 
 	    this.setState({
-		    mainContent: tempContent,
+		    contentQueue: tempContentQueue,
 	    });
 	}
 
 	toggleAnimation(){
-	    let tempBool = this.state.animate;
-	    this.setState({
-		    animate: !tempBool,
-	    });
+	    this.setState(prevState => ({
+		    animate: !prevState.animate,
+	    }));
 	}
 
 	render(){
@@ -214,7 +212,7 @@ class App extends Component {
 		        </Row>
 	        </Container>
 	        <Container className="Actions fixed-bottom">
-		        |&nbsp;{this.appLink("reset", () => this.intro())}&nbsp;|&nbsp;
+		        |&nbsp;{this.appLink("reset", () => this.reset())}&nbsp;|&nbsp;
 			        {this.appLink(("anim.")+(this.state.animate ? " on" : " off"), () => this.toggleAnimation())}&nbsp;|
 	        </Container>
 	      </div>

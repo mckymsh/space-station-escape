@@ -95,6 +95,43 @@ const rooms = {
       },
     };
 
+const intro = [
+	{ alignment: "left", 
+		time: 1000, 
+		text: `You awake.`
+	},
+	{ alignment: "center", 
+		time: 1000,  
+		text: `Like sand in your eye, reality demands your \
+			attention, but resists your desire to return \
+			to sleep.`
+	},
+	{ alignment: "right", 
+		time: 1000,  
+		text: `Your shattered memory is as unhelpful as a \
+			squid on a beach.
+	`},
+	{ alignment: "left",
+		time: 1000, 
+		text: `Last you remember, Rosa was leaving you in the \
+			lab-- another late night, nothing unusual. What \
+			is a day when in space?`
+	},
+	{ alignment: "center", 
+		time: 1000, 
+		text: `Yet here you are.`
+	},
+	{ alignment: "left", 
+		time: 1000, 
+		text: `Flopped in a random part of the station, \
+			apparently recently unconscious. What happened?`
+	},
+	{ alignment: "center", 
+		time: 1000, 
+		text: `You look around.`
+	},
+];
+
 export default rooms;
 
-export {rooms};
+export {rooms, intro};
