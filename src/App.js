@@ -161,17 +161,6 @@ class App extends Component {
 
 	    // window.alert("roomWelcome: "+tempCurrentRoom);
 
-	    tempContentQueue.push(
-		    this.addFade(
-		      <Row>
-		        <Col className="content-piece text-left">
-		          You are in {rooms[tempCurrentRoom].name}
-		         </Col>
-		      </Row>
-		        , 0
-		    )
-	    );
-
 	    // If this is the first time we've been here, 
 	    //     display room description.
 	    if (!tempVisited.has(tempCurrentRoom)){
@@ -184,6 +173,17 @@ class App extends Component {
 						</Col>
 					</Row>
 					, DELAY_TIME
+			    )
+		    );
+	    }else{
+	    	tempContentQueue.push(
+			    this.addFade(
+			      <Row>
+			        <Col className="content-piece text-left">
+			          You are in {rooms[tempCurrentRoom].name}
+			         </Col>
+			      </Row>
+			        , 0
 			    )
 		    );
 	    }
