@@ -79,6 +79,10 @@ li{
 	list-style-type: none;
 }
 
+hr{
+	border: 2px solid #250f27;
+}
+
 /*Scrollbars adapted from*/
 /*https://www.digitalocean.com/community/tutorials/css-scrollbars*/
 

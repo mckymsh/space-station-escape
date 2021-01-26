@@ -124,6 +124,16 @@ class App extends Component {
 	    // Remove navigation when clicked
 	    let tempContent = this.state.mainContent;
 	    tempContent = tempContent.slice(0, tempContent.length-1);
+	    tempContent.push(
+	    	this.addFade(
+		      <Row>
+		        <Col className="content-piece text-center">
+			        <hr/>
+		        </Col>
+		      </Row>
+		        , 0
+		    )
+    	);
 
 	    // Room exit text
 	    let tempContentQueue = this.state.contentQueue;
