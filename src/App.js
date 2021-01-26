@@ -6,9 +6,7 @@ import './App.css';
 import { rooms, intro } from './objectMaps.js';
 
 const SCROLL_FADE_DELAY = 200;
-const FADE_DURATION = 2000;
-const DELAY_TIME = FADE_DURATION/2;
-
+const DELAY_TIME = 2000;
 
 class App extends Component {
 
@@ -30,10 +28,10 @@ class App extends Component {
 
 	componentDidMount(){
 	    this.reset();
-    	this.interval = setInterval(() => this.tick(), 2000);
 	}
 
 	tick(){
+		// window.alert("tick"); // this is maddening but also helpful?
 		if(this.state.contentQueue.length > 0){
 			let tempContent = this.state.mainContent;
 			let tempContentQueue = this.state.contentQueue
@@ -42,9 +40,7 @@ class App extends Component {
 				mainContent: tempContent,
 				contentQueue: tempContentQueue,
 			});
-		}else{
-	    	clearInterval(this.interval);
-	    }
+		}
 	}
 
 	componentDidUpdate() {
@@ -61,6 +57,9 @@ class App extends Component {
 	    // window.alert(tempcurrentRoomKey.name);
 	    let tempVisited = new Set().add(rooms[tempcurrentRoomKey]);
 
+	    this.tickInterval = setInterval(() => 
+	    		this.tick(), 1000);
+
 	    this.setState({
 	    	inventory: [],
 
@@ -76,17 +75,21 @@ class App extends Component {
 	// Adapted from
 	// https://stackoverflow.com/questions/37620694/how-to-scroll-to-bottom-in-react#41700815
 	scrollToBottom(){
-	    this.contentEnd.scrollIntoView({behavior: "smooth", block: "start"});
+	    // if(this.state.animate){
+	    	this.contentEnd.scrollIntoView({
+	    		behavior: "smooth", 
+	    		block: "start"
+	    	});
+	    // }
 	}
 
-	addFade(content, fadeDelay){
+	addFade(content, fadeTime){
 	    return(
 		    <Fade 
 		        triggerOnce={true} 
 		        cascade={true}
-		        duration={(this.state.animate)? FADE_DURATION : 0} 
-		        // delay={(this.state.animate)? fadeDelay + SCROLL_FADE_DELAY : 0}
-		        delay={0}
+		        duration={(this.state.animate)? fadeTime : 0} 
+		        delay={SCROLL_FADE_DELAY}
 		    >{content}</Fade>
 	    );
 	}
@@ -104,7 +107,7 @@ class App extends Component {
 					        {intro[i].text}
 				        </Col>
 			        </Row>
-			    , 0
+			    , intro[i].time
 		    ));
 	    }
 	    
@@ -118,18 +121,35 @@ class App extends Component {
 		    return;
 	    }
 
+	    // Remove navigation when clicked
+	    let tempContent = this.state.mainContent;
+	    tempContent = tempContent.slice(0, tempContent.length-1);
+
+	    // Room exit text
+	    let tempContentQueue = this.state.contentQueue;
+	    tempContentQueue.push(
+	    	this.addFade(
+		      <Row>
+		        <Col className="content-piece text-center">
+			        You leave {rooms[this.state.currentRoom].name} and enter {rooms[newRoom].name}.
+		        </Col>
+		      </Row>
+		        , 0
+		    )
+    	)
+
 	    this.setState({
 		    currentRoom: newRoom,
+		    mainContent: tempContent,
 	    }, this.roomWelcome);
 	}
 
 	roomWelcome(){
-	    let tempContentQueue = this.state.contentQueue;
+	    var tempContentQueue = this.state.contentQueue;
 	    var tempCurrentRoom = this.state.currentRoom;
+	    var tempVisited = this.state.roomsVisited;
 
 	    // window.alert("roomWelcome: "+tempCurrentRoom);
-
-	    var tempVisited = this.state.roomsVisited;
 
 	    tempContentQueue.push(
 		    this.addFade(
