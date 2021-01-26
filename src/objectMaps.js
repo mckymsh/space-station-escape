@@ -113,8 +113,8 @@ const rooms = {
 				Apparently that doesn't slow you down. \
 				Continue playing; don't mind me.`, 
 		neighbors: [
-			{key: "northHub", direction: "south"},
-			{key: "southHub", direction: "north"},
+			{key: "airlock", direction: "south"},
+			{key: "shuttleBay", direction: "north"},
 		]
 	},
 	"hydroponics": {name: "hydroponics", desc: 
