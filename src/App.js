@@ -33,18 +33,28 @@ class App extends Component {
 
 	tick(){
 		// window.alert("tick"); // this is maddening but also helpful?
+		
+		if(this.state.contentQueue.length > 0){	
 
-		// if(!this.state.animate){
-			
-		// }
-		if(this.state.contentQueue.length > 0){
-			let tempContent = this.state.mainContent;
-			let tempContentQueue = this.state.contentQueue
-			tempContent.push(tempContentQueue.shift());
-			this.setState({
-				mainContent: tempContent,
-				contentQueue: tempContentQueue,
-			});
+			var tempContent = this.state.mainContent;
+			var tempContentQueue = this.state.contentQueue
+
+			// Dump whole queue at once
+			if(!this.state.animate){			
+				tempContent = [].concat(tempContent, tempContentQueue);
+				this.setState({
+					mainContent: tempContent,
+					contentQueue: [],
+				});
+			}
+			// One item at a time
+			else{		
+				tempContent.push(tempContentQueue.shift());
+				this.setState({
+					mainContent: tempContent,
+					contentQueue: tempContentQueue,
+				});
+			}
 		}
 	}
 
