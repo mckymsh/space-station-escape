@@ -138,8 +138,9 @@ const rooms = {
 		name: "the head", 
 		desc: 
 				`A fancy space bathroom. You suppose. \
-				Not sure what all those hoses and straps \
-				are for...`, 
+				You've been here for months, and you're \
+				still not sure what all the hoses and \
+				straps are for.`, 
 		neighbors: [
 			{key: "habitation", direction: "spinward"}, 
 			{key: "hydroponics", direction: "antispinward"},
