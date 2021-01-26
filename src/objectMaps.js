@@ -5,7 +5,7 @@ const rooms = {
 				`From this central hub, there are \
 				several passages leading to segments \
 				of the outer ring. Another connects \
-				this ring to the other ring.`, 
+				this ring to the 'northern' ring.`, 
 		neighbors: [
 			{key: "engineering", direction: "left", },
 			{key: "storage", direction: "front",},
@@ -20,8 +20,7 @@ const rooms = {
 		desc: 
 				`The interior door is locked, and the \
 				exterior is open. But that's only \
-				possible if someone went outside... \
-				and didn't come back.`, 
+				possible if someone went outside... `, 
 		neighbors: [
 			{key: "southHub", direction: "north"},
 			{key: "space", direction: "south"},
@@ -43,10 +42,11 @@ const rooms = {
 	"engineering": {
 		name: "engineering", 
 		desc: 
-				`Rodney was never very neat, but even his \
-				disorganized ass would be dismayed at the \
-				disarray here. Tools and parts are strewn \
-				about. Perhaps you aren't the first person \
+				`Rodney, the tech guy, was never very neat, \
+				but even his disorganized ass would be \
+				dismayed at the disarray here. \
+				Tools and parts are strewn about. \
+				Perhaps you aren't the first person \
 				to scavenge here.`, 
 		neighbors: [
 			{key: "storage", direction: "spinward"},
@@ -59,7 +59,8 @@ const rooms = {
 		desc: 
 				`The lab is decorated with a vast \
 				array of instruments and equipment. \
-				Some of it might be useful. Eventually.`, 
+				Some of it might be useful. Eventually. \
+				Watch this space (ba dum tss)`, 
 		neighbors: [
 			{key: "engineering", direction: "spinward"},
 			{key: "bioLab", direction: "antispinward"},
@@ -84,7 +85,8 @@ const rooms = {
 				`This hub, arbitrarily designated as \
 				'north', has passageways leading to \
 				several rooms on the outer ring, and \
-				one to the other end of the station.`, 
+				one to the 'southern' end of the \
+				twin-ringed station.`, 
 		neighbors: [
 			{key: "hydroponics", direction: "left"},
 			{key: "head", direction: "front"},
@@ -99,7 +101,9 @@ const rooms = {
 		desc: 
 				`The bay is sparse. \
 				through the small porthole in the locked \
-				hatch, you see a distressing lack of shuttle.`, 
+				hatch, you see a distressing lack of shuttle. \
+				You're going to need a lot of therapy to deal \
+				with the inevitable abandonment issues.`, 
 		neighbors: [
 			{key: "space", direction: "north"},
 			{key: "northHub", direction: "south"},
@@ -120,10 +124,10 @@ const rooms = {
 	"hydroponics": {name: "hydroponics", desc: 
 					`Long rows of what you assume \
 					were once well-tended plants \
-					extend along the curve of \
-					the station. Not pretty, but \
-					maybe the reason you're still \
-					breathing.`, 
+					extend along the 'upward'-curving \
+					floor of the northern ring. Not \
+					pretty, but	maybe the reason \
+					you're still breathing.`, 
 		neighbors: [
 			{key: "head", direction: "spinward"}, 
 			{key: "foodPrep", direction: "antispinward"},
@@ -148,8 +152,8 @@ const rooms = {
 				`'Cozy' would be a euphemistic \
 				descriptor for these tiny personal \
 				spaces. A storage locker, a bed seemingly \
-				for a toddler, and a curtain for \
-				'privacy'. Lovely.`, 
+				for a toddler, and naught but a curtain \
+				for privacy. Lovely.`, 
 		neighbors: [
 			{key: "foodPrep", direction: "spinward"}, 
 			{key: "head", direction: "antispinward"},
@@ -171,26 +175,24 @@ const rooms = {
 };
 
 const intro = [
-	{ alignment: "left", 
+	{ alignment: "center", 
 		time: 1000, 
 		text: `You awake.`
 	},
-	{ alignment: "center", 
+	{ alignment: "left", 
 		time: 1000,  
-		text: `Like sand in your eye, reality demands your \
-			attention, but resists your desire to return \
-			to sleep.`
+		text: `Like and errant grain of sand, reality digs into \
+			your eye, demanding your attention.`
 	},
 	{ alignment: "right", 
 		time: 1000,  
-		text: `Your shattered memory is as unhelpful as a \
+		text: `Your scattered memory is as helpful as a \
 			squid on a beach.
 	`},
 	{ alignment: "left",
 		time: 1000, 
-		text: `Last you remember, Rosa was leaving you in the \
-			lab-- another late night, nothing unusual. What \
-			is a day when in space?`
+		text: `Last you remember, you were alone in the \
+			lab-- another late night, nothing unusual.`
 	},
 	{ alignment: "center", 
 		time: 1000, 

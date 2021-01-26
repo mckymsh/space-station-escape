@@ -6,7 +6,8 @@ import './App.css';
 import { rooms, intro } from './objectMaps.js';
 
 const SCROLL_FADE_DELAY = 200;
-const DELAY_TIME = 2000;
+const FADE_DURATION = 1500;
+const TICK_TIME = 2000;
 
 class App extends Component {
 
@@ -32,6 +33,10 @@ class App extends Component {
 
 	tick(){
 		// window.alert("tick"); // this is maddening but also helpful?
+
+		// if(!this.state.animate){
+			
+		// }
 		if(this.state.contentQueue.length > 0){
 			let tempContent = this.state.mainContent;
 			let tempContentQueue = this.state.contentQueue
@@ -57,8 +62,9 @@ class App extends Component {
 	    // window.alert(tempcurrentRoomKey.name);
 	    let tempVisited = new Set().add(rooms[tempcurrentRoomKey]);
 
+	    clearInterval(this.tickInterval);
 	    this.tickInterval = setInterval(() => 
-	    		this.tick(), 1000);
+	    		this.tick(), TICK_TIME);
 
 	    this.setState({
 	    	inventory: [],
@@ -83,12 +89,12 @@ class App extends Component {
 	    // }
 	}
 
-	addFade(content, fadeTime){
+	addFade(content, fadeDelay){
 	    return(
 		    <Fade 
 		        triggerOnce={true} 
 		        cascade={true}
-		        duration={(this.state.animate)? fadeTime : 0} 
+		        duration={(this.state.animate)? FADE_DURATION : 0} 
 		        delay={SCROLL_FADE_DELAY}
 		    >{content}</Fade>
 	    );
@@ -107,8 +113,11 @@ class App extends Component {
 					        {intro[i].text}
 				        </Col>
 			        </Row>
-			    , intro[i].time
+			    , 0
 		    ));
+		    clearInterval(this.tickInterval);
+		    this.tickInterval = setInterval(() => 
+	    		this.tick(), intro[i].time);
 	    }
 	    
 	    this.setState({
@@ -172,7 +181,7 @@ class App extends Component {
 							{rooms[tempCurrentRoom].desc}
 						</Col>
 					</Row>
-					, DELAY_TIME
+					, 0
 			    )
 		    );
 	    }else{
@@ -213,7 +222,7 @@ class App extends Component {
 		            ))}
 		        </Col>
 	        </Row>
-	        , DELAY_TIME
+	        , 0
 	    ));
 
 	    this.setState({
