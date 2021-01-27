@@ -125,9 +125,6 @@ class App extends Component {
 			        </Row>
 			    , 0
 		    ));
-		    clearInterval(this.tickInterval);
-		    this.tickInterval = setInterval(() => 
-	    		this.tick(), intro[i].time);
 	    }
 	    
 	    this.setState({
