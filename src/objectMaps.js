@@ -13,7 +13,8 @@ const rooms = {
 			{key: "bioLab", direction: "right",},
 			{key: "northHub", direction: "north",},
 			{key: "airlock", direction: "south",},
-		]
+		],
+		items: [],
 	},
 	"airlock": {
 		name: "the airlock", 
@@ -24,7 +25,8 @@ const rooms = {
 		neighbors: [
 			{key: "southHub", direction: "north"},
 			{key: "space", direction: "south"},
-		]
+		],
+		items: [],
 	},
 	"storage": {
 		name: "storage", 
@@ -37,7 +39,10 @@ const rooms = {
 			{key: "bioLab", direction: "spinward"},
 			{key: "engineering", direction: "antispinward"},
 			{key: "southHub", direction: "inward"},
-		]
+		],
+		items: [
+			{key: "tape", location: "on a shelf"},
+		],
 	},
 	"engineering": {
 		name: "engineering", 
@@ -52,7 +57,10 @@ const rooms = {
 			{key: "storage", direction: "spinward"},
 			{key: "physicsLab", direction: "antispinward"},
 			{key: "southHub", direction: "inward"},
-		]
+		],
+		items: [
+			{key: "hose", location: "under a workbench"},
+		],
 	},
 	"physicsLab": {
 		name: "the physics lab", 
@@ -65,7 +73,8 @@ const rooms = {
 			{key: "engineering", direction: "spinward"},
 			{key: "bioLab", direction: "antispinward"},
 			{key: "southHub", direction: "inward"},
-		]
+		],
+		items: [],
 	},      
 	"bioLab": {
 		name: "the bio lab", 
@@ -77,7 +86,8 @@ const rooms = {
 			{key: "physicsLab", direction: "spinward"}, 
 			{key: "storage", direction: "antispinward"},
 			{key: "southHub", direction: "inward"},
-		]
+		],
+		items: [],
 	},
 	"northHub": {
 		name: "the northern hub", 
@@ -94,7 +104,8 @@ const rooms = {
 			{key: "habitation", direction: "right"},
 			{key: "southHub", direction: "south"},
 			{key: "shuttleBay", direction: "north"},
-		]
+		],
+		items: [],
 	},
 	"shuttleBay": {
 		name: "the shuttle bay", 
@@ -107,7 +118,8 @@ const rooms = {
 		neighbors: [
 			{key: "space", direction: "north"},
 			{key: "northHub", direction: "south"},
-		]
+		],
+		items: [],
 	},
 	"space": {
 		name: "space", 
@@ -119,7 +131,8 @@ const rooms = {
 		neighbors: [
 			{key: "airlock", direction: "south"},
 			{key: "shuttleBay", direction: "north"},
-		]
+		],
+		items: [],
 	},
 	"hydroponics": {name: "hydroponics", desc: 
 					`Long rows of what you assume \
@@ -132,7 +145,8 @@ const rooms = {
 			{key: "head", direction: "spinward"}, 
 			{key: "foodPrep", direction: "antispinward"},
 			{key: "northHub", direction: "inward"},
-		]
+		],
+		items: [],
 	},
 	"head": {
 		name: "the head", 
@@ -145,7 +159,8 @@ const rooms = {
 			{key: "habitation", direction: "spinward"}, 
 			{key: "hydroponics", direction: "antispinward"},
 			{key: "northHub", direction: "inward"},
-		]
+		],
+		items: [],
 	},
 	"habitation": {
 		name: "habitation", 
@@ -159,7 +174,8 @@ const rooms = {
 			{key: "foodPrep", direction: "spinward"}, 
 			{key: "head", direction: "antispinward"},
 			{key: "northHub", direction: "inward"},
-		]
+		],
+		items: [],
 	},
 	"foodPrep": {
 		name: "the food prep area", 
@@ -171,7 +187,49 @@ const rooms = {
 			{key: "hydroponics", direction: "spinward"}, 
 			{key: "habitation", direction: "antispinward"},
 			{key: "northHub", direction: "inward"},
-		]
+		],
+		items: [
+			{key: "mealPack", location: "in the cooler"},
+		],
+	},
+};
+
+const items = {
+	"wrench": {
+		name: "a wrench",
+		desc: `A wrench.`,
+		pickup: `You grab the wrench, \
+			feeling its mass in your hand.`,
+		use: `Sorry folks, can't use things yet.`,
+	},
+	"hose": {
+		name: "a hose",
+		desc: `A long tube, originally from some \
+			(probably important) part of the \
+			life-support system.`,
+		pickup: `Stretchy, bendy, fun fun fun! Even \
+			if this proves useless, you have something \
+			to play with, eh?`,
+		use: `Sorry folks, can't use things yet.`,
+	},
+	"tape": {
+		name: "a roll of duct tape",
+		desc: `You'd think there'd be some sort of \
+			fancy space duct tape. Nope. Turns out, \
+			they it right the first time.`,
+		pickup: `As you put it onto your wrist, you \
+			notice that the end is frayed. Probably \
+			should find something to cut this properly.`,
+		use: `Sorry folks, can't use things yet.`,
+	},
+	"mealPack": {
+		name: "a meal pack",
+		desc: `A foil-covered blob of... yeah. Something.`,
+		pickup: `Having defrosted with the lack of power, \
+			it's a bit squishy. The foil wrapper seems \
+			undamaged, so it's probably safe to eat. Like, \
+			medically, if not psychologically.`,
+		use: `Sorry folks, can't use things yet.`,
 	},
 };
 
@@ -212,4 +270,4 @@ const intro = [
 
 export default rooms;
 
-export {rooms, intro};
+export {rooms, items, intro,};

@@ -3,7 +3,7 @@ import { Container, Row, Col,} from 'react-bootstrap';
 import { Fade } from 'react-awesome-reveal';
 import './App.css';
 
-import { rooms, intro } from './objectMaps.js';
+import { rooms, items, intro, } from './objectMaps.js';
 
 const SCROLL_FADE_DELAY = 200;
 const FADE_DURATION = 1500;
@@ -132,6 +132,16 @@ class App extends Component {
 	    }, this.roomWelcome);
 	}
 
+	pickupItem(itemKey){
+		// add item to inventory & remove from room
+
+		// remove nav, add desc + pickup
+
+		// ???
+
+		// profit
+	}
+
 	changeRoom(newRoom){
 	    if(!(newRoom in rooms)){
 		    return;
@@ -140,6 +150,8 @@ class App extends Component {
 	    // Remove navigation when clicked
 	    let tempContent = this.state.mainContent;
 	    tempContent = tempContent.slice(0, tempContent.length-1);
+
+	    // Replace with HR
 	    tempContent.push(
 	    	this.addFade(
 		      <Row>
@@ -151,7 +163,7 @@ class App extends Component {
 		    )
     	);
 
-	    // Room exit text
+	    // Room exit text-- eventually different for each room?
 	    let tempContentQueue = this.state.contentQueue;
 	    tempContentQueue.push(
 	    	this.addFade(
@@ -204,9 +216,44 @@ class App extends Component {
 		    );
 	    }
 
-	    let tempNeighbors = rooms[tempCurrentRoom].neighbors;
+	    
+
+	    // list objects visible
+	    let tempItems = rooms[tempCurrentRoom].items;
+
+	    if(tempItems && tempItems.length > 0){
+	    	tempContentQueue.push(
+				this.addFade(
+					<Row>
+						<Col className="content-piece text-left">Scanning the room, you see&nbsp;
+							{Object.values(tempItems.slice(0, tempItems.length-1)).map((item) => (
+								<span>
+									{this.appLink(
+											items[item.key].name,
+											() => {}
+										)
+									} {item.location},&nbsp; 
+								</span>
+							))}
+							{Object.values(tempItems.slice(tempItems.length-1, tempItems.length)).map((item) => (
+								<span>
+									{this.appLink(
+											items[item.key].name,
+											() => {}
+										)
+									} {item.location}.&nbsp; 
+								</span>
+							))}
+						</Col>
+					</Row>
+					, 0
+				)
+			);
+		}
 
 	    // list movement options
+	    let tempNeighbors = rooms[tempCurrentRoom].neighbors;
+
 	    tempContentQueue.push(
 	      this.addFade(
 	        <Row>
