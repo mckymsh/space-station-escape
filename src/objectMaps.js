@@ -197,7 +197,7 @@ const rooms = {
 const items = {
 	"wrench": {
 		name: "a wrench",
-		desc: `A wrench.`,
+		desc: `A big, burly pipe wrench.`,
 		pickup: `You grab the wrench, \
 			feeling its mass in your hand.`,
 		use: `Sorry folks, can't use things yet.`,

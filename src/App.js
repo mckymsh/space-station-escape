@@ -214,9 +214,7 @@ class App extends Component {
 			        , 0
 			    )
 		    );
-	    }
-
-	    
+	    }	    
 
 	    // list objects visible
 	    let tempItems = rooms[tempCurrentRoom].items;
