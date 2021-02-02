@@ -10,7 +10,7 @@
 	flex-direction: column;
 
 	/*text-align: center;*/
-	/*align-items: center;*/
+	align-items: center;
 	justify-content: center;	
 
 	overflow: hidden;
@@ -77,6 +77,16 @@ div.content-piece{
 	overflow: wrap;
 }
 
+.text-left{
+	text-align: left;
+}
+.text-center{
+	text-align: center;
+}
+.text-right{
+	text-align: right;
+}
+
 /* Begin animation snippet */
 /* Adapted from: */
 /* https://stackoverflow.com/questions/61827640/react-fade-in-on-add-fade-out-on-remove-item */
@@ -87,8 +97,8 @@ div.content-piece{
 }
 .item-fadeout{
 	/*border: 1px dashed yellow;*/
-	-webkit-animation: fadeout 1500ms ease forwards;
-    animation: fadeout 1500ms ease forwards;
+	-webkit-animation: fadeout 500ms ease forwards;
+    animation: fadeout 500ms ease forwards;
 }
 
 @-webkit-keyframes fadein {
