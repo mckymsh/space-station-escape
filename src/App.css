@@ -77,8 +77,9 @@ div.content-piece{
 	overflow: wrap;
 }
 
-/*Begin animation snippet*/
-/*https://stackoverflow.com/questions/61827640/react-fade-in-on-add-fade-out-on-remove-item*/
+/* Begin animation snippet */
+/* Adapted from: */
+/* https://stackoverflow.com/questions/61827640/react-fade-in-on-add-fade-out-on-remove-item */
 
 .item-fadein {
     -webkit-animation: fadein 1500ms ease forwards;
@@ -110,7 +111,7 @@ div.content-piece{
   100% { opacity: 0; }
 }
 
-/*End animation snippet*/
+/* End animation snippet */
 
 li{
 	list-style-type: none;

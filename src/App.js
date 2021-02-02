@@ -30,8 +30,7 @@ class App extends Component {
 	}
 
 	tick(){
-		// window.alert("tick"); // this is maddening but also helpful?
-		
+
 		if(this.state.contentQueue.length > 0){	
 
 			var tempContent = this.state.mainContent;
@@ -96,19 +95,7 @@ class App extends Component {
 	    // }
 	}
 
-	// addFade(content, fadeDelay){
-	//     return(
-	// 	    <Fade 
-	// 	        triggerOnce={true} 
-	// 	        cascade={true}
-	// 	        duration={(this.state.animate)? FADE_DURATION : 0} 
-	// 	        delay={SCROLL_FADE_DELAY}
-	// 	    >{content}</Fade>
-	//     );
-	// }
-
 	intro(){
-	  	// this.reset();
 
 	    let newContent = [];
 
@@ -128,9 +115,6 @@ class App extends Component {
 	}
 
 	pickupItem(itemKey){
-		// window.alert("pickupItem("+itemKey+")");
-		// window.alert("desc: "+items[itemKey].desc);
-		// window.alert("pickup: "+items[itemKey].pickup);
 
 		// add item to inventory & remove from room
 		let tempCurrentRoom = this.state.currentRoom;
@@ -221,7 +205,6 @@ class App extends Component {
 	    let tempItems = rooms[tempCurrentRoom].items;
 
 	    if(tempItems && tempItems.length > 0){
-	    	// window.alert("tempItems exists and is "+tempItems.length+" items long.");
 	    	tempContentQueue.push(
 					<Row>
 						<Col className={"content-piece text-left "+this.state.animate?"item-fadein":""}>Scanning the room, you see&nbsp;
