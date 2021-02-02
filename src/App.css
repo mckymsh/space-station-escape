@@ -75,6 +75,41 @@ div.content-piece{
 	overflow: wrap;
 }
 
+/*Begin animation snippet*/
+/*https://stackoverflow.com/questions/61827640/react-fade-in-on-add-fade-out-on-remove-item*/
+
+.item {
+    -webkit-animation: fadein 1500ms ease forwards;
+    animation: fadein 1500ms ease forwards;
+}
+.item-fadeout{
+	border: 1px dashed yellow;
+	/*-webkit-animation: fadeout 1500ms ease forwards;
+    animation: fadeout 1500ms ease forwards;*/
+}
+
+@-webkit-keyframes fadein {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes fadein {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@-webkit-keyframes fadeout {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes fadeout {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/*End animation snippet*/
+
 li{
 	list-style-type: none;
 }

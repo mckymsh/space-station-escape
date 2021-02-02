@@ -172,6 +172,16 @@ class App extends Component {
 		        , 0
 		    )
 		);
+		tempContentQueue.push(
+	    	this.addFade(
+		      <Row>
+		        <Col className="content-piece text-left">
+			        {items[itemKey].pickup}
+		        </Col>
+		      </Row>
+		        , 0
+		    )
+		);
 
 		this.setState({
 			inventory: tempInventory,
