@@ -4,7 +4,7 @@ import './App.css';
 
 import { rooms, items, intro, } from './objectMaps.js';
 
-const FADE_DURATION = 1500;
+// const FADE_DURATION = 1500;
 const TICK_TIME = 2000;
 
 class App extends Component {
