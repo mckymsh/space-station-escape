@@ -15,7 +15,7 @@ class App extends Component {
 	    super(props);
 
 	    this.state = {
-		    inventory: [],
+		    inventory: null,
 
 		    currentRoom: null,
 		    roomsVisited: null,
@@ -63,27 +63,26 @@ class App extends Component {
 	}
 
 	reset(){
+		let tempInventory = new Set();
+
 	  	// https://stackoverflow.com/a/49687370/11937109
 	    const roomKeys = Object.keys(rooms);
 	    const randomIndex = Math.floor(Math.random() * roomKeys.length);
 	    const randomKey = roomKeys[randomIndex];
-	    // window.alert(randomKey);
-	    let tempcurrentRoomKey = randomKey;
-	    // window.alert(tempcurrentRoomKey.name);
-	    let tempVisited = new Set().add(rooms[tempcurrentRoomKey]);
+	    
+	    let tempVisited = new Set().add(rooms[randomKey]);	    
 
 	    clearInterval(this.tickInterval);
 	    this.tickInterval = setInterval(() => 
 	    		this.tick(), TICK_TIME);
 
 	    this.setState({
-	    	inventory: [],
+	    	inventory: tempInventory,
 
-	    	currentRoom: tempcurrentRoomKey,
+	    	currentRoom: randomKey,
 	    	roomsVisited: tempVisited,
 
 	    	contentQueue: [],
-
 	    	mainContent: [],
 	    }, this.intro);
 	}
@@ -133,13 +132,66 @@ class App extends Component {
 	}
 
 	pickupItem(itemKey){
-		// add item to inventory & remove from room
+		// window.alert("pickupItem("+itemKey+")");
+		// window.alert("desc: "+items[itemKey].desc);
+		// window.alert("pickup: "+items[itemKey].pickup);
 
-		// remove nav, add desc + pickup
+		// add item to inventory & remove from room
+		let tempCurrentRoom = this.state.currentRoom;
+		let tempInventory = this.state.inventory;
+
+		const index = rooms[tempCurrentRoom].items.indexOf(itemKey);
+		rooms[tempCurrentRoom].items.splice(index, 1);
+
+		tempInventory.add(itemKey);
+
+		// Remove navigation when clicked
+	    let tempContent = this.state.mainContent;
+	    tempContent = tempContent.slice(0, tempContent.length-1);
+
+	    // Replace with HR
+	    tempContent.push(
+	    	this.addFade(
+		      <Row>
+		        <Col className="content-piece text-center">
+			        <hr/>
+		        </Col>
+		      </Row>
+		        , 0
+		    )
+    	);
+
+    	let tempContentQueue = this.state.contentQueue;
+		tempContentQueue.push(
+	    	this.addFade(
+		      <Row>
+		        <Col className="content-piece text-left">
+			        You look closer at {items[itemKey].name}. {items[itemKey].desc}
+		        </Col>
+		      </Row>
+		        , 0
+		    )
+		);
+		tempContentQueue.push(
+	    	this.addFade(
+		      <Row>
+		        <Col className="content-piece text-center">
+			        {items[itemKey].pickup}
+		        </Col>
+		      </Row>
+		        , 0
+		    )
+		);
 
 		// ???
 
 		// profit
+		this.setState({
+			inventory: tempInventory,
+
+			contentQueue: tempContentQueue,
+			mainContent: tempContent,
+		}, this.roomWelcome);
 	}
 
 	changeRoom(newRoom){
@@ -178,6 +230,8 @@ class App extends Component {
 
 	    this.setState({
 		    currentRoom: newRoom,
+
+		    contentQueue: tempContentQueue,
 		    mainContent: tempContent,
 	    }, this.roomWelcome);
 	}
@@ -220,26 +274,28 @@ class App extends Component {
 	    let tempItems = rooms[tempCurrentRoom].items;
 
 	    if(tempItems && tempItems.length > 0){
+	    	// window.alert("tempItems exists and is "+tempItems.length+" items long.");
 	    	tempContentQueue.push(
 				this.addFade(
 					<Row>
 						<Col className="content-piece text-left">Scanning the room, you see&nbsp;
-							{Object.values(tempItems.slice(0, tempItems.length-1)).map((item) => (
+							{Object.values(tempItems.slice(0, tempItems.length-1)).map((itemKey) => (
 								<span>
 									{this.appLink(
-											items[item.key].name,
-											() => {}
+											items[itemKey].name,
+											() => this.pickupItem(itemKey)
 										)
-									} {item.location},&nbsp; 
+									} {items[itemKey].location},&nbsp; 
 								</span>
 							))}
-							{Object.values(tempItems.slice(tempItems.length-1, tempItems.length)).map((item) => (
+							{Object.values(tempItems.slice(tempItems.length-1, 
+															tempItems.length)).map((itemKey) => (
 								<span>
 									{this.appLink(
-											items[item.key].name,
-											() => {}
+											items[itemKey].name,
+											() => this.pickupItem(itemKey)
 										)
-									} {item.location}.&nbsp; 
+									} {items[itemKey].location}.&nbsp; 
 								</span>
 							))}
 						</Col>
@@ -264,7 +320,8 @@ class App extends Component {
 									            },&nbsp; 
 			            </span>
 		            ))}
-		            {Object.values(tempNeighbors.slice(tempNeighbors.length-1, tempNeighbors.length)).map((neighbor) => (
+		            {Object.values(tempNeighbors.slice(tempNeighbors.length-1, 
+										            	tempNeighbors.length)).map((neighbor) => (
 			            <span>
 			                or {neighbor.direction} to {this.appLink(
 									            	rooms[neighbor.key].name,
@@ -304,7 +361,8 @@ class App extends Component {
 	        </Container>
 	        <Container className="Actions fixed-bottom">
 		        |&nbsp;{this.appLink("reset", () => this.reset())}&nbsp;|&nbsp;
-			        {this.appLink(("anim.")+(this.state.animate ? " on" : " off"), () => this.toggleAnimation())}&nbsp;|
+			        {this.appLink(("anim.")+(this.state.animate ? " on" : " off"),
+									         () => this.toggleAnimation())}&nbsp;|
 	        </Container>
 	      </div>
 	    );

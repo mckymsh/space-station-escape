@@ -40,9 +40,7 @@ const rooms = {
 			{key: "engineering", direction: "antispinward"},
 			{key: "southHub", direction: "inward"},
 		],
-		items: [
-			{key: "tape", location: "on a shelf"},
-		],
+		items: ["tape"],
 	},
 	"engineering": {
 		name: "engineering", 
@@ -58,9 +56,7 @@ const rooms = {
 			{key: "physicsLab", direction: "antispinward"},
 			{key: "southHub", direction: "inward"},
 		],
-		items: [
-			{key: "hose", location: "under a workbench"},
-		],
+		items: ["hose"],
 	},
 	"physicsLab": {
 		name: "the physics lab", 
@@ -188,14 +184,13 @@ const rooms = {
 			{key: "habitation", direction: "antispinward"},
 			{key: "northHub", direction: "inward"},
 		],
-		items: [
-			{key: "mealPack", location: "in the cooler"},
-		],
+		items: ["mealPack",],
 	},
 };
 
 const items = {
 	"wrench": {
+		location: "in another dimension",
 		name: "a wrench",
 		desc: `A big, burly pipe wrench.`,
 		pickup: `You grab the wrench, \
@@ -203,6 +198,7 @@ const items = {
 		use: `Sorry folks, can't use things yet.`,
 	},
 	"hose": {
+		location: "under a workbench",
 		name: "a hose",
 		desc: `A long tube, originally from some \
 			(probably important) part of the \
@@ -213,16 +209,18 @@ const items = {
 		use: `Sorry folks, can't use things yet.`,
 	},
 	"tape": {
+		location: "on a shelf",
 		name: "a roll of duct tape",
 		desc: `You'd think there'd be some sort of \
 			fancy space duct tape. Nope. Turns out, \
-			they it right the first time.`,
+			they had it right the first time.`,
 		pickup: `As you put it onto your wrist, you \
 			notice that the end is frayed. Probably \
 			should find something to cut this properly.`,
 		use: `Sorry folks, can't use things yet.`,
 	},
 	"mealPack": {
+		location: "in the cooler",
 		name: "a meal pack",
 		desc: `A foil-covered blob of... yeah. Something.`,
 		pickup: `Having defrosted with the lack of power, \
