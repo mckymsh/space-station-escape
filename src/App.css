@@ -9,9 +9,9 @@
 	display: flex;
 	flex-direction: column;
 
-	text-align: center;
-	align-items: center;
-	justify-content: center;	
+	/*text-align: center;*/
+	/*align-items: center;*/
+	/*justify-content: center;	*/
 
 	overflow: hidden;
 	padding: 25px;
@@ -68,7 +68,9 @@
 }
 
 .row{
-	padding-top: 5vh;
+	margin: 5vh;
+	/*border: 1px dashed yellow;*/
+	/*box-shadow: 0px 0px 1px yellow;*/
 }
 
 div.content-piece{
@@ -78,14 +80,14 @@ div.content-piece{
 /*Begin animation snippet*/
 /*https://stackoverflow.com/questions/61827640/react-fade-in-on-add-fade-out-on-remove-item*/
 
-.item {
+.item-fadein {
     -webkit-animation: fadein 1500ms ease forwards;
     animation: fadein 1500ms ease forwards;
 }
 .item-fadeout{
-	border: 1px dashed yellow;
-	/*-webkit-animation: fadeout 1500ms ease forwards;
-    animation: fadeout 1500ms ease forwards;*/
+	/*border: 1px dashed yellow;*/
+	-webkit-animation: fadeout 1500ms ease forwards;
+    animation: fadeout 1500ms ease forwards;
 }
 
 @-webkit-keyframes fadein {
