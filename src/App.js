@@ -128,7 +128,7 @@ class App extends Component {
 	    
 	    this.setState({
 		    contentQueue: newContent,
-	    }, this.roomWelcome);
+	    }, this.prompt);
 	}
 
 	pickupItem(itemKey){
@@ -172,26 +172,13 @@ class App extends Component {
 		        , 0
 		    )
 		);
-		tempContentQueue.push(
-	    	this.addFade(
-		      <Row>
-		        <Col className="content-piece text-center">
-			        {items[itemKey].pickup}
-		        </Col>
-		      </Row>
-		        , 0
-		    )
-		);
 
-		// ???
-
-		// profit
 		this.setState({
 			inventory: tempInventory,
 
 			contentQueue: tempContentQueue,
 			mainContent: tempContent,
-		}, this.roomWelcome);
+		}, this.prompt);
 	}
 
 	changeRoom(newRoom){
@@ -202,18 +189,6 @@ class App extends Component {
 	    // Remove navigation when clicked
 	    let tempContent = this.state.mainContent;
 	    tempContent = tempContent.slice(0, tempContent.length-1);
-
-	    // Replace with HR
-	    tempContent.push(
-	    	this.addFade(
-		      <Row>
-		        <Col className="content-piece text-center">
-			        <hr/>
-		        </Col>
-		      </Row>
-		        , 0
-		    )
-    	);
 
 	    // Room exit text-- eventually different for each room?
 	    let tempContentQueue = this.state.contentQueue;
@@ -233,15 +208,27 @@ class App extends Component {
 
 		    contentQueue: tempContentQueue,
 		    mainContent: tempContent,
-	    }, this.roomWelcome);
+	    }, this.prompt);
 	}
 
-	roomWelcome(){
+	prompt(){
 	    var tempContentQueue = this.state.contentQueue;
 	    var tempCurrentRoom = this.state.currentRoom;
 	    var tempVisited = this.state.roomsVisited;
 
-	    // window.alert("roomWelcome: "+tempCurrentRoom);
+	    // window.alert("prompt: "+tempCurrentRoom);
+
+	    // Replace with HR
+	    tempContentQueue.push(
+	    	this.addFade(
+		      <Row>
+		        <Col className="content-piece text-center">
+			        <hr/>
+		        </Col>
+		      </Row>
+		        , 0
+		    )
+    	);
 
 	    // If this is the first time we've been here, 
 	    //     display room description.
