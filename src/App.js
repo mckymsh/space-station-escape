@@ -22,6 +22,7 @@ class App extends Component {
 		    mainContent: [],
 
 		    animate: true,
+		    isFading: false,
 	    }
 	}
 
@@ -135,7 +136,7 @@ class App extends Component {
 		);
 		tempContentQueue.push(
 		      <Row>
-		        <Col className={"content-piece text-left "+this.state.animate?"item-fadein":""}>
+		        <Col className={"content-piece text-right "+this.state.animate?"item-fadein":""}>
 			        {items[itemKey].pickup}
 		        </Col>
 		      </Row>
@@ -148,12 +149,80 @@ class App extends Component {
 		}, this.prompt);
 	}
 
+	navigation(fadeOut){
+
+		let tempCurrentRoom = this.state.currentRoom;
+
+	    let tempNeighbors = rooms[tempCurrentRoom].neighbors;
+
+		return(
+			<Row>
+		        <Col className={"content-piece text-left"
+						        +(this.state.animate?" item-fadein":"")
+						        +(fadeOut&&this.state.animate?" item-fadeout":"")}>You can move&nbsp;
+		            {Object.values(tempNeighbors.slice(0, tempNeighbors.length-1)).map((neighbor) => (
+			            <span>
+			                {neighbor.direction} to {this.appLink(
+									            	rooms[neighbor.key].name,
+								                	() => this.onNavigate(neighbor.key))
+									            },&nbsp; 
+			            </span>
+		            ))}
+		            {Object.values(tempNeighbors.slice(tempNeighbors.length-1, 
+										            	tempNeighbors.length)).map((neighbor) => (
+			            <span>
+			                or {neighbor.direction} to {this.appLink(
+									            	rooms[neighbor.key].name,
+								                	() => this.onNavigate(neighbor.key))
+									            }.&nbsp; 
+			            </span>
+		            ))}
+		        </Col>
+	        </Row>
+        );
+	}
+
+	onNavigate(newRoomKey){
+		// Remove navigation when clicked.
+		// I replace it here with an idential version, except
+		// the className is different. React wouldn't add the
+		// class and re-render otherwise. Very dumb.
+	    let tempContent = this.state.mainContent;
+	    tempContent = tempContent.slice(0, tempContent.length-1);
+
+	    tempContent.push(
+	        this.navigation(true)
+	    );
+
+	    this.setState({
+	    	isFading: true,
+		    mainContent: tempContent,
+	    });
+
+	    // This version 'should have' worked.
+		// this.setState({
+		// 	isFading: true,
+		// }, ()=>{
+		// 	this.forceUpdate(); // but no of course not
+			setTimeout(()=>{
+				this.changeRoom(newRoomKey);
+				this.setState({
+					isFading: false,
+				}, this.prompt);
+			}, FADE_DURATION);
+		// });
+	}
+
 	changeRoom(newRoom){
 	    if(!(newRoom in rooms)){
 		    return;
 	    }
 
-	    // Remove navigation when clicked
+	    // set fading to true
+	    // do the following edits while it fades
+	    // push edits & set fading to false
+
+	    // Remove navigation when clicked... again
 	    let tempContent = this.state.mainContent;
 	    tempContent = tempContent.slice(0, tempContent.length-1);
 
@@ -161,7 +230,7 @@ class App extends Component {
 	    let tempContentQueue = this.state.contentQueue;
 	    tempContentQueue.push(
 		      <Row>
-		        <Col className={"content-piece text-center "+this.state.animate?"item-fadein":""}>
+		        <Col className={"content-piece text-center"+this.state.animate?" item-fadein":""}>
 			        You leave {rooms[this.state.currentRoom].name} and enter {rooms[newRoom].name}.
 		        </Col>
 		      </Row>
@@ -172,7 +241,9 @@ class App extends Component {
 
 		    contentQueue: tempContentQueue,
 		    mainContent: tempContent,
-	    }, this.prompt);
+
+		    
+	    });
 	}
 
 	prompt(){
@@ -232,31 +303,8 @@ class App extends Component {
 			);
 		}
 
-	    // list movement options
-	    let tempNeighbors = rooms[tempCurrentRoom].neighbors;
-
 	    tempContentQueue.push(
-	        <Row>
-		        <Col className={"content-piece text-left "+this.state.animate?"item-fadein":""}>You can move&nbsp;
-		            {Object.values(tempNeighbors.slice(0, tempNeighbors.length-1)).map((neighbor) => (
-			            <span>
-			                {neighbor.direction} to {this.appLink(
-									            	rooms[neighbor.key].name,
-								                	() => this.changeRoom(neighbor.key))
-									            },&nbsp; 
-			            </span>
-		            ))}
-		            {Object.values(tempNeighbors.slice(tempNeighbors.length-1, 
-										            	tempNeighbors.length)).map((neighbor) => (
-			            <span>
-			                or {neighbor.direction} to {this.appLink(
-									            	rooms[neighbor.key].name,
-								                	() => this.changeRoom(neighbor.key))
-									            }.&nbsp; 
-			            </span>
-		            ))}
-		        </Col>
-	        </Row>
+	       this.navigation(false)
 	    );
 
 	    this.setState({
