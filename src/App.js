@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Container, Row, Col,} from 'react-bootstrap';
+import { cloneDeep } from 'lodash';
 import './App.css';
 
-import { rooms, items, intro, } from './objectMaps.js';
+import { defaultRooms, defaultItems, intro, } from './objectMaps.js';
 
 // const FADE_DURATION = 1500;
 const TICK_TIME = 2000;
@@ -62,12 +63,17 @@ class App extends Component {
 	reset(){
 		let tempInventory = new Set();
 
+		// https://medium.com/javascript-in-plain-english/how-to-deep-copy-objects-and-arrays-in-javascript-7c911359b089
+
+		this.rooms = cloneDeep(defaultRooms);
+		this.items = cloneDeep(defaultItems);
+
 	  	// https://stackoverflow.com/a/49687370/11937109
-	    const roomKeys = Object.keys(rooms);
+	    const roomKeys = Object.keys(this.rooms);
 	    const randomIndex = Math.floor(Math.random() * roomKeys.length);
 	    const randomKey = roomKeys[randomIndex];
 	    
-	    let tempVisited = new Set().add(rooms[randomKey]);	    
+	    let tempVisited = new Set().add(this.rooms[randomKey]);	    
 
 	    clearInterval(this.tickInterval);
 	    this.tickInterval = setInterval(() => 
@@ -120,8 +126,8 @@ class App extends Component {
 		let tempCurrentRoom = this.state.currentRoom;
 		let tempInventory = this.state.inventory;
 
-		const index = rooms[tempCurrentRoom].items.indexOf(itemKey);
-		rooms[tempCurrentRoom].items.splice(index, 1);
+		const index = this.rooms[tempCurrentRoom].items.indexOf(itemKey);
+		this.rooms[tempCurrentRoom].items.splice(index, 1);
 
 		tempInventory.add(itemKey);
 
@@ -129,14 +135,14 @@ class App extends Component {
 		tempContentQueue.push(
 		      <Row>
 		        <Col className={"content-piece text-left "+this.state.animate?"item-fadein":""}>
-			        You look closer at {items[itemKey].name}. {items[itemKey].desc}
+			        You look closer at {this.items[itemKey].name}. {this.items[itemKey].desc}
 		        </Col>
 		      </Row>
 		);
 		tempContentQueue.push(
 		      <Row>
 		        <Col className={"content-piece text-left "+this.state.animate?"item-fadein":""}>
-			        {items[itemKey].pickup}
+			        {this.items[itemKey].pickup}
 		        </Col>
 		      </Row>
 		);
@@ -149,7 +155,7 @@ class App extends Component {
 	}
 
 	changeRoom(newRoom){
-	    if(!(newRoom in rooms)){
+	    if(!(newRoom in this.rooms)){
 		    return;
 	    }
 
@@ -162,7 +168,7 @@ class App extends Component {
 	    tempContentQueue.push(
 		      <Row>
 		        <Col className={"content-piece text-center "+this.state.animate?"item-fadein":""}>
-			        You leave {rooms[this.state.currentRoom].name} and enter {rooms[newRoom].name}.
+			        You leave {this.rooms[this.state.currentRoom].name} and enter {this.rooms[newRoom].name}.
 		        </Col>
 		      </Row>
     	)
@@ -187,7 +193,7 @@ class App extends Component {
 		    tempContentQueue.push(
 					<Row>
 						<Col className={"content-piece text-left "+this.state.animate?"item-fadein":""}>
-							{rooms[tempCurrentRoom].desc}
+							{this.rooms[tempCurrentRoom].desc}
 						</Col>
 					</Row>
 		    );
@@ -195,14 +201,14 @@ class App extends Component {
 	    	tempContentQueue.push(
 			      <Row>
 			        <Col className={"content-piece text-left "+this.state.animate?"item-fadein":""}>
-			          You are in {rooms[tempCurrentRoom].name}
+			          You are in {this.rooms[tempCurrentRoom].name}
 			         </Col>
 			      </Row>
 		    );
 	    }	    
 
 	    // list objects visible
-	    let tempItems = rooms[tempCurrentRoom].items;
+	    let tempItems = this.rooms[tempCurrentRoom].items;
 
 	    if(tempItems && tempItems.length > 0){
 	    	tempContentQueue.push(
@@ -211,20 +217,20 @@ class App extends Component {
 							{Object.values(tempItems.slice(0, tempItems.length-1)).map((itemKey) => (
 								<span>
 									{this.appLink(
-											items[itemKey].name,
+											this.items[itemKey].name,
 											() => this.pickupItem(itemKey)
 										)
-									} {items[itemKey].location},&nbsp; 
+									} {this.items[itemKey].location},&nbsp; 
 								</span>
 							))}
 							{Object.values(tempItems.slice(tempItems.length-1, 
 															tempItems.length)).map((itemKey) => (
 								<span>
 									{this.appLink(
-											items[itemKey].name,
+											this.items[itemKey].name,
 											() => this.pickupItem(itemKey)
 										)
-									} {items[itemKey].location}.&nbsp; 
+									} {this.items[itemKey].location}.&nbsp; 
 								</span>
 							))}
 						</Col>
@@ -233,7 +239,7 @@ class App extends Component {
 		}
 
 	    // list movement options
-	    let tempNeighbors = rooms[tempCurrentRoom].neighbors;
+	    let tempNeighbors = this.rooms[tempCurrentRoom].neighbors;
 
 	    tempContentQueue.push(
 	        <Row>
@@ -241,7 +247,7 @@ class App extends Component {
 		            {Object.values(tempNeighbors.slice(0, tempNeighbors.length-1)).map((neighbor) => (
 			            <span>
 			                {neighbor.direction} to {this.appLink(
-									            	rooms[neighbor.key].name,
+									            	this.rooms[neighbor.key].name,
 								                	() => this.changeRoom(neighbor.key))
 									            },&nbsp; 
 			            </span>
@@ -250,7 +256,7 @@ class App extends Component {
 										            	tempNeighbors.length)).map((neighbor) => (
 			            <span>
 			                or {neighbor.direction} to {this.appLink(
-									            	rooms[neighbor.key].name,
+									            	this.rooms[neighbor.key].name,
 								                	() => this.changeRoom(neighbor.key))
 									            }.&nbsp; 
 			            </span>

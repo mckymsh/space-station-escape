@@ -1,4 +1,4 @@
-const rooms = {
+const defaultRooms = {
 	"southHub": {
 		name: "the southern hub", 
 		desc: 
@@ -188,7 +188,7 @@ const rooms = {
 	},
 };
 
-const items = {
+const defaultItems = {
 	"wrench": {
 		location: "in another dimension",
 		name: "a wrench",
@@ -266,6 +266,6 @@ const intro = [
 	},
 ];
 
-export default rooms;
+export default defaultRooms;
 
-export {rooms, items, intro,};
+export {defaultRooms, defaultItems, intro,};
