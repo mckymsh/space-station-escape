@@ -276,13 +276,14 @@ class App extends Component {
 					</Row>
 		    );
 	    }else{
-	    	tempContentQueue.push(
-			      <Row>
-			        <Col className={"content-piece text-left "+this.state.animate?"item-fadein":""}>
-			          You are in {this.rooms[tempCurrentRoom].name}
-			         </Col>
-			      </Row>
-		    );
+	    	// This is probably unecessary since I tell you when you're changing rooms...
+	    	// tempContentQueue.push(
+			   //    <Row>
+			   //      <Col className={"content-piece text-left "+this.state.animate?"item-fadein":""}>
+			   //        You are in {this.rooms[tempCurrentRoom].name}
+			   //       </Col>
+			   //    </Row>
+		    // );
 	    }	    
 
 	    // list objects visible
