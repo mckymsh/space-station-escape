@@ -108,9 +108,7 @@ class App extends Component {
 	    for(var i = 0; i < intro.length; i++){
 	    	newContent.push(
 		        <Row>
-			        <Col className={"content-piece "+(this.state.animate?"item-fadein ":" ")+"text-"+intro[i].alignment}>
-				        {intro[i].text}
-			        </Col>
+			        {this.contentPiece(intro[i].text, intro[i].alignment)}
 		        </Row>
 		    );
 	    }
@@ -138,16 +136,18 @@ class App extends Component {
     	let tempContentQueue = this.state.contentQueue;
 		tempContentQueue.push(
 		      <Row>
-		        <Col className={"content-piece text-left "+this.state.animate?"item-fadein":""}>
-			        You look closer at {this.items[itemKey].name}. {this.items[itemKey].desc}
-		        </Col>
+		        {this.contentPiece(
+		        	"You look closer at "+this.items[itemKey].name+". "+this.items[itemKey].desc,
+		        	"left"
+			    )}
 		      </Row>
 		);
 		tempContentQueue.push(
 		      <Row>
-		        <Col className={"content-piece text-left "+this.state.animate?"item-fadein":""}>
-			        {this.items[itemKey].pickup}
-		        </Col>
+		        {this.contentPiece(
+			        this.items[itemKey].pickup,
+			        "left"
+			    )}
 		      </Row>
 		);
 
@@ -172,9 +172,10 @@ class App extends Component {
 	    let tempContentQueue = this.state.contentQueue;
 	    tempContentQueue.push(
 		      <Row>
-		        <Col className={"content-piece text-center "+this.state.animate?"item-fadein":""}>
-			        You leave {this.rooms[this.state.currentRoom].name} and enter {this.rooms[newRoom].name}.
-		        </Col>
+		        {this.contentPiece(
+			        "You leave "+this.rooms[this.state.currentRoom].name+" and enter "+this.rooms[newRoom].name+".",
+			        "center"
+		        )}
 		      </Row>
     	)
 
@@ -197,17 +198,19 @@ class App extends Component {
 	    	tempVisited = tempVisited.add(tempCurrentRoom);
 		    tempContentQueue.push(
 					<Row>
-						<Col className={"content-piece text-left "+this.state.animate?"item-fadein":""}>
-							{this.rooms[tempCurrentRoom].desc}
-						</Col>
+						{this.contentPiece(
+							this.rooms[tempCurrentRoom].desc,
+							"left"
+						)}
 					</Row>
 		    );
 	    }else{
 	    	tempContentQueue.push(
-			      <Row>
-			        <Col className={"content-piece text-left "+this.state.animate?"item-fadein":""}>
-			          You are in {this.rooms[tempCurrentRoom].name}
-			         </Col>
+		    		<Row>
+			    		{this.contentPiece(
+			    			"You are in "+this.rooms[tempCurrentRoom].name+".",
+			    			"left"
+		    			)}
 			      </Row>
 		    );
 	    }	    
@@ -224,8 +227,8 @@ class App extends Component {
 									{this.appLink(
 											this.items[itemKey].name,
 											() => this.pickupItem(itemKey)
-										)
-									} {this.items[itemKey].location},&nbsp; 
+									)}&nbsp;
+									{this.items[itemKey].location},&nbsp; 
 								</span>
 							))}
 							{Object.values(tempItems.slice(tempItems.length-1, 
@@ -234,8 +237,8 @@ class App extends Component {
 									{this.appLink(
 											this.items[itemKey].name,
 											() => this.pickupItem(itemKey)
-										)
-									} {this.items[itemKey].location}.&nbsp; 
+									)}&nbsp;
+									{this.items[itemKey].location}.&nbsp; 
 								</span>
 							))}
 						</Col>
@@ -248,7 +251,7 @@ class App extends Component {
 
 	    tempContentQueue.push(
 	        <Row>
-		        <Col className={"content-piece text-left "+this.state.animate?"item-fadein":""}>You can move&nbsp;
+				<Col className={"content-piece text-left "+this.state.animate?"item-fadein":""}>You can move&nbsp;
 		            {Object.values(tempNeighbors.slice(0, tempNeighbors.length-1)).map((neighbor) => (
 			            <span>
 			                {neighbor.direction} to {this.appLink(
@@ -266,7 +269,7 @@ class App extends Component {
 									            }.&nbsp; 
 			            </span>
 		            ))}
-		        </Col>
+            	</Col>
 	        </Row>
 	    );
 
@@ -302,6 +305,14 @@ class App extends Component {
 	        </Container>
 	      </div>
 	    );
+	}
+
+	contentPiece(content, alignment){
+		return(
+			<Col className={"content-piece text-"+alignment+(this.state.animate?" item-fadein":"")}>
+				{content}
+			</Col>
+		);
 	}
 
 	appLink(text, clickFunction){
