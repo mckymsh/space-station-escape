@@ -194,6 +194,12 @@ class App extends Component {
 	}
 
 	onNavigate(newRoomKey){
+		if(!this.state.animate){
+			this.changeRoom(newRoomKey);
+			this.prompt();
+			return;
+		}
+
 		// Remove navigation when clicked.
 		// I replace it here with an idential version, except
 		// the className is different. React wouldn't add the
@@ -215,12 +221,12 @@ class App extends Component {
 		// 	isFading: true,
 		// }, ()=>{
 		// 	this.forceUpdate(); // but no of course not
-			setTimeout(()=>{
-				this.changeRoom(newRoomKey);
-				this.setState({
-					isFading: false,
-				}, this.prompt);
-			}, TICK_TIME/2);
+		setTimeout(()=>{
+			this.changeRoom(newRoomKey);
+			this.setState({
+				isFading: false,
+			}, this.prompt);
+		}, TICK_TIME/2);
 		// });
 	}
 
@@ -251,9 +257,7 @@ class App extends Component {
 		    currentRoom: newRoom,
 
 		    contentQueue: tempContentQueue,
-		    mainContent: tempContent,
-
-		    
+		    mainContent: tempContent,		    
 	    });
 	}
 
