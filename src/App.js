@@ -147,7 +147,7 @@ class App extends Component {
 		tempContentQueue.push(
 		      <Row>
 		        <Col className={"content-piece text-right "+this.state.animate?"item-fadein":""}>
-			        {items[itemKey].pickup}
+			        {this.items[itemKey].pickup}
 		        </Col>
 		      </Row>
 		);
@@ -164,7 +164,7 @@ class App extends Component {
 
 		let tempCurrentRoom = this.state.currentRoom;
 
-	    let tempNeighbors = rooms[tempCurrentRoom].neighbors;
+	    let tempNeighbors = this.rooms[tempCurrentRoom].neighbors;
 
 		return(
 			<Row>
@@ -174,7 +174,7 @@ class App extends Component {
 		            {Object.values(tempNeighbors.slice(0, tempNeighbors.length-1)).map((neighbor) => (
 			            <span>
 			                {neighbor.direction} to {this.appLink(
-									            	rooms[neighbor.key].name,
+									            	this.rooms[neighbor.key].name,
 								                	() => this.onNavigate(neighbor.key))
 									            },&nbsp; 
 			            </span>
@@ -183,7 +183,7 @@ class App extends Component {
 										            	tempNeighbors.length)).map((neighbor) => (
 			            <span>
 			                or {neighbor.direction} to {this.appLink(
-									            	rooms[neighbor.key].name,
+									            	this.rooms[neighbor.key].name,
 								                	() => this.onNavigate(neighbor.key))
 									            }.&nbsp; 
 			            </span>
@@ -220,7 +220,7 @@ class App extends Component {
 				this.setState({
 					isFading: false,
 				}, this.prompt);
-			}, FADE_DURATION);
+			}, TICK_TIME/2);
 		// });
 	}
 
@@ -242,7 +242,7 @@ class App extends Component {
 	    tempContentQueue.push(
 		      <Row>
 		        <Col className={"content-piece text-center"+this.state.animate?" item-fadein":""}>
-			        You leave {rooms[this.state.currentRoom].name} and enter {rooms[newRoom].name}.
+			        You leave {this.rooms[this.state.currentRoom].name} and enter {this.rooms[newRoom].name}.
 		        </Col>
 		      </Row>
     	)
