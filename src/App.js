@@ -131,6 +131,10 @@ class App extends Component {
 
 		tempInventory.add(itemKey);
 
+		// Remove navigation when clicked
+	    let tempContent = this.state.mainContent;
+	    tempContent = tempContent.slice(0, tempContent.length-1);
+
     	let tempContentQueue = this.state.contentQueue;
 		tempContentQueue.push(
 		      <Row>
@@ -151,6 +155,7 @@ class App extends Component {
 			inventory: tempInventory,
 
 			contentQueue: tempContentQueue,
+			mainContent: tempContent,
 		}, this.prompt);
 	}
 
