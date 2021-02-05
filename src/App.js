@@ -196,7 +196,6 @@ class App extends Component {
 	onNavigate(newRoomKey){
 		if(!this.state.animate){
 			this.changeRoom(newRoomKey);
-			this.prompt();
 			return;
 		}
 
@@ -223,9 +222,6 @@ class App extends Component {
 		// 	this.forceUpdate(); // but no of course not
 		setTimeout(()=>{
 			this.changeRoom(newRoomKey);
-			this.setState({
-				isFading: false,
-			}, this.prompt);
 		}, TICK_TIME/2);
 		// });
 	}
@@ -257,8 +253,10 @@ class App extends Component {
 		    currentRoom: newRoom,
 
 		    contentQueue: tempContentQueue,
-		    mainContent: tempContent,		    
-	    });
+		    mainContent: tempContent,	
+
+		    isFading: false,	    
+	    }, this.prompt);
 	}
 
 	prompt(){
