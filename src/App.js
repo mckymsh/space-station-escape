@@ -202,7 +202,8 @@ class App extends Component {
 		// Remove navigation when clicked.
 		// I replace it here with an idential version, except
 		// the className is different. React wouldn't add the
-		// class and re-render otherwise. Very dumb.
+		// class and re-render otherwise. Very dumb. Or maybe
+		// I am. Time will tell.
 	    let tempContent = this.state.mainContent;
 	    tempContent = tempContent.slice(0, tempContent.length-1);
 
@@ -230,10 +231,6 @@ class App extends Component {
 	    if(!(newRoom in this.rooms)){
 		    return;
 	    }
-
-	    // set fading to true
-	    // do the following edits while it fades
-	    // push edits & set fading to false
 
 	    // Remove navigation when clicked... again
 	    let tempContent = this.state.mainContent;
