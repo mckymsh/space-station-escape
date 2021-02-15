@@ -14,7 +14,7 @@
 	justify-content: center;	
 
 	overflow: hidden;
-	padding: 25px;
+	/*padding: 25px;*/
 
 }
 
@@ -24,6 +24,10 @@
 
 	transition: color 2s ease;
 	transition: text-shadow 2s ease;
+}
+
+.strikethrough{
+	text-decoration: line-through;
 }
 
 .App-link:hover{
@@ -36,11 +40,21 @@
 	cursor: pointer;
 }
 
+.title{
+	/*background-color: #351f37;*/
+
+	letter-spacing: 0.5em;
+
+	max-width: 900px;
+
+	text-shadow: 0 0 10px #cccccc;/*#f700ff;*/
+}
+
 .Actions{
 	background-color: inherit;/*#351f37;*/
 	opacity: 1;
 	z-index: 10;
-	margin-bottom: 5vh;
+	margin-top: 5vh;
 }
 
 .Main-Content{

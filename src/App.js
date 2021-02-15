@@ -332,6 +332,21 @@ class App extends Component {
 	render(){
 	    return(
 		    <div className="App">
+			    <Container className="title fixed-top text-center">
+				    &nbsp;SPACE&nbsp;STATION&nbsp;ESCAPE&nbsp;
+			    </Container>
+			    <Container className="Actions fixed-top text-center">
+			        |&nbsp;{
+					        	<span 
+							        className={"App-link"+(this.state.animate ? "" : " strikethrough")}
+							        onClick={() => this.toggleAnimation()}
+							    >animation</span>
+							}&nbsp;|&nbsp;{
+								this.appLink(
+									"reset",
+									 () => this.reset())
+							}&nbsp;|
+		        </Container>
 		        <Container className="Main-Content">
 		            {this.state.mainContent.map((item) => (item))}
 		        <Row>
@@ -343,11 +358,6 @@ class App extends Component {
 		            </Col>
 		        </Row>
 	        </Container>
-	        <Container className="Actions fixed-bottom text-center">
-		        |&nbsp;{this.appLink("reset", () => this.reset())}&nbsp;|&nbsp;
-			        {this.appLink(("anim.")+(this.state.animate ? " on" : " off"),
-									         () => this.toggleAnimation())}&nbsp;|
-	        </Container>
 	      </div>
 	    );
 	}
@@ -355,7 +365,6 @@ class App extends Component {
 	appLink(text, clickFunction){
 	    return(
 		    <span 
-		        href="./#" 
 		        className="App-link"
 		        onClick={clickFunction}
 		    >{text}</span>
