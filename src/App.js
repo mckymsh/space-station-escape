@@ -94,12 +94,12 @@ class App extends Component {
 	// Adapted from
 	// https://stackoverflow.com/questions/37620694/how-to-scroll-to-bottom-in-react#41700815
 	scrollToBottom(){
-	    // if(this.state.animate){
+	    if(this.state.animate && !this.state.isFading){
 	    	this.contentEnd.scrollIntoView({
 	    		behavior: "smooth", 
 	    		block: "start"
 	    	});
-	    // }
+	    }
 	}
 
 	intro(){
