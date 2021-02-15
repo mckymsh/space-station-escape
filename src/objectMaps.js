@@ -191,7 +191,7 @@ const defaultRooms = {
 const defaultItems = {
 	"wrench": {
 		location: "in another dimension",
-		name: "a wrench",
+		name: "wrench",
 		desc: `A big, burly pipe wrench.`,
 		pickup: `You grab the wrench, \
 			feeling its mass in your hand.`,
@@ -199,7 +199,7 @@ const defaultItems = {
 	},
 	"hose": {
 		location: "under a workbench",
-		name: "a hose",
+		name: "hose",
 		desc: `A long tube, originally from some \
 			(probably important) part of the \
 			life-support system.`,
@@ -210,7 +210,7 @@ const defaultItems = {
 	},
 	"tape": {
 		location: "on a shelf",
-		name: "a roll of duct tape",
+		name: "roll of duct tape",
 		desc: `You'd think there'd be some sort of \
 			fancy space duct tape. Nope. Turns out, \
 			they had it right the first time.`,
@@ -221,7 +221,7 @@ const defaultItems = {
 	},
 	"mealPack": {
 		location: "in the cooler",
-		name: "a meal pack",
+		name: "meal pack",
 		desc: `A foil-covered blob of... yeah. Something.`,
 		pickup: `Having defrosted with the lack of power, \
 			it's a bit squishy. The foil wrapper seems \

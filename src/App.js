@@ -140,7 +140,7 @@ class App extends Component {
 		tempContentQueue.push(
 		      <Row>
 		        <Col className={"content-piece text-left "+this.state.animate?"item-fadein":""}>
-			        You look closer at {this.items[itemKey].name}. {this.items[itemKey].desc}
+			        You look closer at the {this.items[itemKey].name}. {this.items[itemKey].desc}
 		        </Col>
 		      </Row>
 		);
@@ -289,7 +289,7 @@ class App extends Component {
 	    if(tempItems && tempItems.length > 0){
 	    	tempContentQueue.push(
 					<Row>
-						<Col className={"content-piece text-left "+this.state.animate?"item-fadein":""}>Scanning the room, you see&nbsp;
+						<Col className={"content-piece text-left "+this.state.animate?"item-fadein":""}>Scanning the room, you see a&nbsp;
 							{Object.values(tempItems.slice(0, tempItems.length-1)).map((itemKey) => (
 								<span>
 									{this.appLink(
