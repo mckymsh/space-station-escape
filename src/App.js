@@ -163,33 +163,60 @@ class App extends Component {
 	navigation(fadeOut){
 
 		let tempCurrentRoom = this.state.currentRoom;
-
+		let tempItems = this.rooms[tempCurrentRoom].items;
 	    let tempNeighbors = this.rooms[tempCurrentRoom].neighbors;
 
 		return(
-			<Row>
-		        <Col className={"content-piece text-left"
-						        +(this.state.animate?" item-fadein":"")
-						        +(fadeOut&&this.state.animate?" item-fadeout":"")}>You can move&nbsp;
-		            {Object.values(tempNeighbors.slice(0, tempNeighbors.length-1)).map((neighbor) => (
-			            <span>
-			                {neighbor.direction} to {this.appLink(
-									            	this.rooms[neighbor.key].name,
-								                	() => this.onNavigate(neighbor.key))
-									            },&nbsp; 
-			            </span>
-		            ))}
-		            {Object.values(tempNeighbors.slice(tempNeighbors.length-1, 
-										            	tempNeighbors.length)).map((neighbor) => (
-			            <span>
-			                or {neighbor.direction} to {this.appLink(
-									            	this.rooms[neighbor.key].name,
-								                	() => this.onNavigate(neighbor.key))
-									            }.&nbsp; 
-			            </span>
-		            ))}
-		        </Col>
-	        </Row>
+			<React.Fragment>
+				{(tempItems.length > 0)? <Row>
+					<Col className={"content-piece text-left"
+							        +(this.state.animate?" item-fadein":"")
+							        +(fadeOut&&this.state.animate?" item-fadeout":"")}>Scanning the room, you see a&nbsp;
+						{Object.values(tempItems.slice(0, tempItems.length-1)).map((itemKey) => (
+							<span>
+								{this.appLink(
+										this.items[itemKey].name,
+										() => this.pickupItem(itemKey)
+									)
+								} {this.items[itemKey].location},&nbsp; 
+							</span>
+						))}
+						{Object.values(tempItems.slice(tempItems.length-1, 
+														tempItems.length)).map((itemKey) => (
+							<span>
+								{this.appLink(
+										this.items[itemKey].name,
+										() => this.pickupItem(itemKey)
+									)
+								} {this.items[itemKey].location}.&nbsp; 
+							</span>
+						))}
+					</Col>
+				</Row> : null}
+				<Row>		
+			        <Col className={"content-piece text-left"
+							        +(this.state.animate?" item-fadein":"")
+							        +(fadeOut&&this.state.animate?" item-fadeout":"")}>You can move&nbsp;
+			            {Object.values(tempNeighbors.slice(0, tempNeighbors.length-1)).map((neighbor) => (
+				            <span>
+				                {neighbor.direction} to {this.appLink(
+										            	this.rooms[neighbor.key].name,
+									                	() => this.onNavigate(neighbor.key))
+										            },&nbsp; 
+				            </span>
+			            ))}
+			            {Object.values(tempNeighbors.slice(tempNeighbors.length-1, 
+											            	tempNeighbors.length)).map((neighbor) => (
+				            <span>
+				                or {neighbor.direction} to {this.appLink(
+										            	this.rooms[neighbor.key].name,
+									                	() => this.onNavigate(neighbor.key))
+										            }.&nbsp; 
+				            </span>
+			            ))}
+			        </Col>
+		        </Row>
+	        </React.Fragment>
         );
 	}
 
@@ -282,37 +309,6 @@ class App extends Component {
 			   //    </Row>
 		    // );
 	    }	    
-
-	    // list objects visible
-	    let tempItems = this.rooms[tempCurrentRoom].items;
-
-	    if(tempItems && tempItems.length > 0){
-	    	tempContentQueue.push(
-					<Row>
-						<Col className={"content-piece text-left "+this.state.animate?"item-fadein":""}>Scanning the room, you see a&nbsp;
-							{Object.values(tempItems.slice(0, tempItems.length-1)).map((itemKey) => (
-								<span>
-									{this.appLink(
-											this.items[itemKey].name,
-											() => this.pickupItem(itemKey)
-										)
-									} {this.items[itemKey].location},&nbsp; 
-								</span>
-							))}
-							{Object.values(tempItems.slice(tempItems.length-1, 
-															tempItems.length)).map((itemKey) => (
-								<span>
-									{this.appLink(
-											this.items[itemKey].name,
-											() => this.pickupItem(itemKey)
-										)
-									} {this.items[itemKey].location}.&nbsp; 
-								</span>
-							))}
-						</Col>
-					</Row>
-			);
-		}
 
 	    tempContentQueue.push(
 	       this.navigation(false)
