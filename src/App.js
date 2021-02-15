@@ -58,6 +58,7 @@ class App extends Component {
 	}
 
 	componentDidUpdate() {
+		console.log("componentDidUpdate");
 	    this.scrollToBottom();
 	}
 
@@ -132,18 +133,19 @@ class App extends Component {
 
 		tempInventory.add(itemKey);
 
-		// Remove navigation when clicked
+		// Remove navigation when clicked... again
 	    let tempContent = this.state.mainContent;
 	    tempContent = tempContent.slice(0, tempContent.length-1);
-
-    	let tempContentQueue = this.state.contentQueue;
-		tempContentQueue.push(
+    	
+		tempContent.push(
 		      <Row>
 		        <Col className={"content-piece text-left "+this.state.animate?"item-fadein":""}>
 			        You look closer at the {this.items[itemKey].name}. {this.items[itemKey].desc}
 		        </Col>
 		      </Row>
 		);
+
+		let tempContentQueue = this.state.contentQueue;
 		tempContentQueue.push(
 		      <Row>
 		        <Col className={"content-piece text-right "+this.state.animate?"item-fadein":""}>
@@ -157,6 +159,8 @@ class App extends Component {
 
 			contentQueue: tempContentQueue,
 			mainContent: tempContent,
+
+			isFading: false,
 		}, this.prompt);
 	}
 
@@ -173,22 +177,20 @@ class App extends Component {
 							        +(this.state.animate?" item-fadein":"")
 							        +(fadeOut&&this.state.animate?" item-fadeout":"")}>Scanning the room, you see a&nbsp;
 						{Object.values(tempItems.slice(0, tempItems.length-1)).map((itemKey) => (
-							<span>
+							<span key={itemKey}>
 								{this.appLink(
 										this.items[itemKey].name,
-										() => this.pickupItem(itemKey)
-									)
-								} {this.items[itemKey].location},&nbsp; 
+										() => this.handleNav(() => {this.pickupItem(itemKey)})
+								)} {this.items[itemKey].location},&nbsp; 
 							</span>
 						))}
 						{Object.values(tempItems.slice(tempItems.length-1, 
 														tempItems.length)).map((itemKey) => (
-							<span>
+							<span key={itemKey}>
 								{this.appLink(
 										this.items[itemKey].name,
-										() => this.pickupItem(itemKey)
-									)
-								} {this.items[itemKey].location}.&nbsp; 
+										() => this.handleNav(() => {this.pickupItem(itemKey)})
+								)} {this.items[itemKey].location}.&nbsp; 
 							</span>
 						))}
 					</Col>
@@ -198,20 +200,20 @@ class App extends Component {
 							        +(this.state.animate?" item-fadein":"")
 							        +(fadeOut&&this.state.animate?" item-fadeout":"")}>You can move&nbsp;
 			            {Object.values(tempNeighbors.slice(0, tempNeighbors.length-1)).map((neighbor) => (
-				            <span>
+				            <span key={neighbor.key}>
 				                {neighbor.direction} to {this.appLink(
 										            	this.rooms[neighbor.key].name,
-									                	() => this.onNavigate(neighbor.key))
-										            },&nbsp; 
+									                	() => this.handleNav(() => {this.changeRoom(neighbor.key)})
+										            )},&nbsp; 
 				            </span>
 			            ))}
 			            {Object.values(tempNeighbors.slice(tempNeighbors.length-1, 
 											            	tempNeighbors.length)).map((neighbor) => (
-				            <span>
+				            <span key={neighbor.key}>
 				                or {neighbor.direction} to {this.appLink(
 										            	this.rooms[neighbor.key].name,
-									                	() => this.onNavigate(neighbor.key))
-										            }.&nbsp; 
+									                	() => this.handleNav(() => {this.changeRoom(neighbor.key)})
+										            )}.&nbsp; 
 				            </span>
 			            ))}
 			        </Col>
@@ -220,9 +222,9 @@ class App extends Component {
         );
 	}
 
-	onNavigate(newRoomKey){
+	handleNav(navFunction){
 		if(!this.state.animate){
-			this.changeRoom(newRoomKey);
+			navFunction();
 			return;
 		}
 
@@ -249,7 +251,7 @@ class App extends Component {
 		// }, ()=>{
 		// 	this.forceUpdate(); // but no of course not
 		setTimeout(()=>{
-			this.changeRoom(newRoomKey);
+			navFunction();
 		}, TICK_TIME/2);
 		// });
 	}
@@ -344,10 +346,12 @@ class App extends Component {
 							}&nbsp;|
 		        </Container>
 		        <Container className="Main-Content">
-		            {this.state.mainContent.map((item) => (item))}
+		            {this.state.mainContent.map((item, index) => (
+		            	<div key={index}>{item}</div>
+		            ))}
 		        <Row>
 		            <Col>
-			            <div 
+			            <div
 			                className="contentEnd-filler" 
 			                ref={(el) => { this.contentEnd = el; }}>
 			            </div>
