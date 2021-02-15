@@ -330,20 +330,20 @@ class App extends Component {
 	render(){
 	    return(
 		    <div className="App">
-			    <Container className="title fixed-top text-center">
-				    &nbsp;SPACE&nbsp;STATION&nbsp;ESCAPE&nbsp;
-			    </Container>
-			    <Container className="Actions fixed-top text-center">
-			        |&nbsp;{
+			    <Container className="title text-center">
+				    <span>SPACE STATION ESCAPE</span>
+ 			    </Container>
+			    <Container className="Actions text-center">
+			        -&nbsp;{
 					        	<span 
-							        className={"App-link"+(this.state.animate ? "" : " strikethrough")}
+							        className={"App-link"+(this.state.animate ? "" : " deactivated")}
 							        onClick={() => this.toggleAnimation()}
-							    >animation</span>
-							}&nbsp;|&nbsp;{
+							    >animate</span>
+							}&nbsp;-&nbsp;{
 								this.appLink(
 									"reset",
 									 () => this.reset())
-							}&nbsp;|
+							}&nbsp;-
 		        </Container>
 		        <Container className="Main-Content">
 		            {this.state.mainContent.map((item, index) => (

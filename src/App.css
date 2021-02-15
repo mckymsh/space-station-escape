@@ -1,5 +1,5 @@
 .App {
-	font-size: 3vmin;
+	font-size: 1.25em;
 	color: #eeeeee;	
 
 	background-color: #250f27;
@@ -13,9 +13,23 @@
 	align-items: center;
 	justify-content: center;	
 
-	overflow: hidden;
+	/*overflow: hidden;*/
 	/*padding: 25px;*/
 
+}
+
+li{
+	list-style-type: none;
+}
+
+hr{
+	border: 1px solid #cccccc;/*#250f27;*/
+	box-shadow: 0 0 10px #cccccc;/*#f700ff;*/
+}
+
+.container{
+	min-width: 320px;
+	max-width: 640px;
 }
 
 .App-link {
@@ -24,10 +38,6 @@
 
 	transition: color 2s ease;
 	transition: text-shadow 2s ease;
-}
-
-.strikethrough{
-	text-decoration: line-through;
 }
 
 .App-link:hover{
@@ -40,51 +50,68 @@
 	cursor: pointer;
 }
 
+.deactivated{
+	color: #888888;
+	transition: color 333ms ease;
+	/*text-decoration: line-through;*/
+}
+
 .title{
 	/*background-color: #351f37;*/
+	/*border: 1px dashed yellow;*/
+
+	font-size: 1.5em;
+
+	text-shadow: 0 0 10px #cccccc;/*#f700ff;*/
 
 	letter-spacing: 0.5em;
 
-	max-width: 900px;
+	/*margin-top: 1vh;*/
 
-	text-shadow: 0 0 10px #cccccc;/*#f700ff;*/
+	padding: 0;
+	/*height: 5vh;*/
+
+	overflow: wrap;
 }
 
 .Actions{
 	background-color: inherit;/*#351f37;*/
-	opacity: 1;
-	z-index: 10;
-	margin-top: 5vh;
+
+	/*border: 1px dashed yellow;*/
+
+	text-shadow: 0 0 10px #ff0000;/*#f700ff;*/
+
+	font-size: 1em;
+	/*letter-spacing: 0.em;*/
+	margin: 2vh;
 }
 
 .Main-Content{
-	scroll-behavior: smooth;
+	/*scroll-behavior: smooth;*/
 
 	background-color: #351f37;
 	/*border: 1px dashed yellow;*/
 
-	/*width: 75vw;*/
-	min-width: 600px;
-	max-width: 900px;
-
 	height: 75vh;
-	min-height: 600px;
+	min-height: 300px;
 	/*max-height: 900px;*/
 
 	overflow-y: scroll;
 	overflow-x: wrap;
+
+	padding: 0px;
 }
 
 .contentEnd-filler{
-	padding-bottom: 5vmin;
+	padding-bottom: 3vmin;
 }
 
 .content-filler{
-	height: 5vh;
+	height: 3vh;
 }
 
 .row{
-	margin: 5vh;
+	margin: 3vh;
 	/*border: 1px dashed yellow;*/
 	/*box-shadow: 0px 0px 1px yellow;*/
 }
@@ -138,14 +165,6 @@ div.content-piece{
 }
 
 /* End animation snippet */
-
-li{
-	list-style-type: none;
-}
-
-hr{
-	border: 2px solid #250f27;
-}
 
 /*Scrollbars adapted from*/
 /*https://www.digitalocean.com/community/tutorials/css-scrollbars*/
