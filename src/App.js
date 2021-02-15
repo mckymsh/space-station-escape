@@ -237,8 +237,8 @@ class App extends Component {
 	    tempContent = tempContent.slice(0, tempContent.length-1);
 
 	    // Room exit text-- eventually different for each room?
-	    let tempContentQueue = this.state.contentQueue;
-	    tempContentQueue.push(
+	    // let tempContentQueue = this.state.contentQueue;
+	    tempContent.push(
 		      <Row>
 		        <Col className={"content-piece text-center"+this.state.animate?" item-fadein":""}>
 			        You leave {this.rooms[this.state.currentRoom].name} and enter {this.rooms[newRoom].name}.
@@ -249,7 +249,7 @@ class App extends Component {
 	    this.setState({
 		    currentRoom: newRoom,
 
-		    contentQueue: tempContentQueue,
+		    // contentQueue: tempContentQueue,
 		    mainContent: tempContent,	
 
 		    isFading: false,	    
