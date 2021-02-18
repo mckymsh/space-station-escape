@@ -1,5 +1,5 @@
 .App {
-	font-size: 1.25em;
+	font-size: calc(10px + 1.5vmin);
 	color: #eeeeee;	
 
 	background-color: #250f27;
@@ -60,7 +60,7 @@ hr{
 	/*background-color: #351f37;*/
 	/*border: 1px dashed yellow;*/
 
-	font-size: 1.5em;
+	font-size: calc(10px + 2.5vmin);
 
 	text-shadow: 0 0 10px #cccccc;/*#f700ff;*/
 

@@ -3,7 +3,7 @@ import { Container, Row, Col,} from 'react-bootstrap';
 import { cloneDeep } from 'lodash';
 import './App.css';
 
-import { defaultRooms, defaultItems, intro, } from './objectMaps.js';
+import { defaultRooms, defaultItems, intro, deaths,} from './objectMaps.js';
 
 // const FADE_DURATION = 1500;
 const TICK_TIME = 2000;
@@ -266,23 +266,31 @@ class App extends Component {
 	    tempContent = tempContent.slice(0, tempContent.length-1);
 
 	    // Room exit text-- eventually different for each room?
-	    // let tempContentQueue = this.state.contentQueue;
 	    tempContent.push(
 		      <Row>
-		        <Col className={"content-piece text-center"+this.state.animate?" item-fadein":""}>
+		        <Col className={"content-piece text-center"+(this.state.animate?" item-fadein":"")}>
 			        You leave {this.rooms[this.state.currentRoom].name} and enter {this.rooms[newRoom].name}.
 		        </Col>
 		      </Row>
     	)
 
-	    this.setState({
-		    currentRoom: newRoom,
+    	if(newRoom === 'space' /*...and no spacesuit*/){
+	    	this.setState({
+			    currentRoom: newRoom,
 
-		    // contentQueue: tempContentQueue,
-		    mainContent: tempContent,	
+			    mainContent: tempContent,	
 
-		    isFading: false,	    
-	    }, this.prompt);
+			    isFading: false,	    
+		    }, () => {this.deathSequence("space_noSuit")});
+	    }else{
+		    this.setState({
+			    currentRoom: newRoom,
+
+			    mainContent: tempContent,	
+
+			    isFading: false,	    
+		    }, this.prompt);
+	    }
 	}
 
 	prompt(){
@@ -321,6 +329,39 @@ class App extends Component {
 	    });
 	}
 
+	deathSequence(deathType){
+		var tempContentQueue = this.state.contentQueue;
+
+		if(!(deathType in deaths)){
+			// Something has gone terribly wrong.
+			return;
+		}
+	    
+		deaths[deathType].map((item) => (
+	        tempContentQueue.push(
+	        	<Row>
+					<Col className={"content-piece text-"+item.alignment
+									+(this.state.animate?" item-fadein":"")}>
+						{item.text}
+					</Col>
+				</Row>
+			)
+		));
+
+		tempContentQueue.push(
+			<Row>
+				<Col className={"content-piece text-center"
+								+(this.state.animate?" item-fadein":"")}>
+					{this.appLink("restart", () => this.reset())}
+				</Col>
+			</Row>
+		)
+
+	    this.setState({
+	    	contentQueue: tempContentQueue,
+	    });
+	}
+
 	toggleAnimation(){
 	    this.setState(prevState => ({
 		    animate: !prevState.animate,
@@ -341,7 +382,7 @@ class App extends Component {
 							    >animate</span>
 							}&nbsp;-&nbsp;{
 								this.appLink(
-									"reset",
+									"restart",
 									 () => this.reset())
 							}&nbsp;-
 		        </Container>

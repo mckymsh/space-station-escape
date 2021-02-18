@@ -19,9 +19,9 @@ const defaultRooms = {
 	"airlock": {
 		name: "the airlock", 
 		desc: 
-				`The interior door is locked, and the \
-				exterior is open. But that's only \
-				possible if someone went outside... `, 
+				`The outer airlock door is sealed. The \
+				control panel on the wall is smashed. \
+				There may be a manual override somewhere.`, 
 		neighbors: [
 			{key: "southHub", direction: "north"},
 			{key: "space", direction: "south"},
@@ -31,10 +31,10 @@ const defaultRooms = {
 	"storage": {
 		name: "storage", 
 		desc: 
-				`This storage room, conveniently located \
-				near the airlock, holds all the supplies \
-				for EVA, as well as a few other spares \
-				that wouldn't fit elsewhere.`, 
+				`This room has rigs to hold spacesuits \
+				as well as other tools and supplies  \
+				for EVA. There are also few other bulky \
+				bits and bobs that wouldn't fit elsewhere.`, 
 		neighbors: [
 			{key: "bioLab", direction: "spinward"},
 			{key: "engineering", direction: "antispinward"},
@@ -45,8 +45,8 @@ const defaultRooms = {
 	"engineering": {
 		name: "engineering", 
 		desc: 
-				`Rodney, the tech guy, was never very neat, \
-				but even his disorganized ass would be \
+				`The tech was never very neat, \
+				but even they would be \
 				dismayed at the disarray here. \
 				Tools and parts are strewn about. \
 				Perhaps you aren't the first person \
@@ -63,8 +63,7 @@ const defaultRooms = {
 		desc: 
 				`The lab is decorated with a vast \
 				array of instruments and equipment. \
-				Some of it might be useful. Eventually. \
-				Watch this space (ba dum tss)`, 
+				Is that a laser or particle accelerator?`, 
 		neighbors: [
 			{key: "engineering", direction: "spinward"},
 			{key: "bioLab", direction: "antispinward"},
@@ -75,7 +74,8 @@ const defaultRooms = {
 	"bioLab": {
 		name: "the bio lab", 
 		desc: 
-				`There are many small containers with \
+				`This is clearly a lab. There are many \
+				small containers with \
 				insects and rodents. Amazingly, they \
 				all seem to still be alive.`, 
 		neighbors: [
@@ -106,7 +106,7 @@ const defaultRooms = {
 	"shuttleBay": {
 		name: "the shuttle bay", 
 		desc: 
-				`The bay is sparse. \
+				`The antechamber to the shuttle bay is sparse. \
 				through the small porthole in the locked \
 				hatch, you see a distressing lack of shuttle. \
 				You're going to need a lot of therapy to deal \
@@ -120,8 +120,7 @@ const defaultRooms = {
 	"space": {
 		name: "space", 
 		desc: 
-				`You shouldn't be here. \
-				You're probably dead. \
+				`You're probably dead. \
 				Apparently that doesn't slow you down. \
 				Continue playing; don't mind me.`, 
 		neighbors: [
@@ -147,7 +146,7 @@ const defaultRooms = {
 	"head": {
 		name: "the head", 
 		desc: 
-				`A fancy space bathroom. You suppose. \
+				`This is a fancy space bathroom. You suppose. \
 				You've been here for months, and you're \
 				still not sure what all the hoses and \
 				straps are for.`, 
@@ -176,7 +175,7 @@ const defaultRooms = {
 	"foodPrep": {
 		name: "the food prep area", 
 		desc: 
-				`You can see why they don't call this \
+				`You can see why they don't call this 'prep area' \
 				a kitchen. Latched cabinets, a microwave... \
 				not exactly Michelin-rated.`, 
 		neighbors: [
@@ -233,39 +232,70 @@ const defaultItems = {
 
 const intro = [
 	{ alignment: "center", 
-		time: 1000, 
 		text: `You awake.`
 	},
 	{ alignment: "left", 
-		time: 1000,  
 		text: `Like and errant grain of sand, reality digs into \
 			your eye, demanding your attention.`
 	},
 	{ alignment: "right", 
-		time: 1000,  
 		text: `Your scattered memory is as helpful as a \
 			squid on a beach.
 	`},
 	{ alignment: "left",
-		time: 1000, 
 		text: `Last you remember, you were alone in the \
-			lab-- another late night, nothing unusual.`
+			lab— another late night, nothing unusual.`
 	},
 	{ alignment: "center", 
-		time: 1000, 
 		text: `Yet here you are.`
 	},
 	{ alignment: "left", 
-		time: 1000, 
 		text: `Flopped in a random part of the station, \
 			apparently recently unconscious. What happened?`
 	},
 	{ alignment: "center", 
-		time: 1000, 
 		text: `You look around.`
 	},
 ];
 
+const deaths = {
+	"space_noSuit": [
+		{ alignment: "left", 
+			text: `Your unprotected body flops in the emptiness.`
+		},
+		{ alignment: "right", 
+			text: `Your lungs implode as as your eyes bulge.`
+		},
+		{ alignment: "right", 
+			text: `Your death isn't pretty.`
+		},
+		{ alignment: "left", 
+			text: `That's okay.`
+		},
+		{ alignment: "center", 
+			text: `No one's there to see it.`
+		},
+	],
+	"space_leakSuit": [
+		{ alignment: "left", 
+			text: `You immediately hear the hiss of moving air.`
+		},
+		{ alignment: "right", 
+			text: `A tiny slit in the arm has ruptured.`
+		},
+		{ alignment: "left", 
+			text: `As your precious air abandons you, its moisture \
+			crystalizes, brilliant in the unfiltered sunlight`
+		},
+		{ alignment: "center", 
+			text: `Yet in moments, that beauty will be pointless.`
+		},
+		{ alignment: "center", 
+			text: `No one's there to see it.`
+		},
+	],
+}
+
 export default defaultRooms;
 
-export {defaultRooms, defaultItems, intro,};
+export {defaultRooms, defaultItems, intro, deaths,};
