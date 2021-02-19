@@ -103,11 +103,11 @@ $shadows-big:    multiple-box-shadow(100);
 
 @keyframes animStar {
     from {
-        transform: translate(0px, 0px);
-        // transform: scale(0.5, 0.5);
+        transform: translate(-500px, -2000px);
+        // transform: rotateZ(-45deg);
     }
     to {
-        transform: translate(-500px, -2000px);
-        // transform: scale(2, 2);
+        transform: translate(0px, 0px);
+        // transform: rotateZ(45deg);
     }
 }
