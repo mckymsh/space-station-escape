@@ -343,15 +343,15 @@ class App extends Component {
 		const prevAnimate = this.state.animate;
 
 		// This is ugly please don't look at it
-		const stars = document.getElementsByClassName("stars");
-		for(var i = 0; i < stars.length; i++){
-			if(prevAnimate)
-			{
-				stars.item(i).classList.add("no-animate");
-			}else{
-				stars.item(i).classList.remove("no-animate");
-			}
-		}
+		// const stars = document.getElementsByClassName("stars");
+		// for(var i = 0; i < stars.length; i++){
+		// 	if(prevAnimate)
+		// 	{
+		// 		stars.item(i).classList.add("no-animate");
+		// 	}else{
+		// 		stars.item(i).classList.remove("no-animate");
+		// 	}
+		// }
 
 	    this.setState({
 		    animate: !prevAnimate,
@@ -369,36 +369,41 @@ class App extends Component {
 
 	render(){
 	    return(
-		    <div className="App">
-			    <Container className="title text-center">
-				    <span>SPACE STATION ESCAPE</span>
- 			    </Container>
-			    <Container className="Actions text-center">
-			        -&nbsp;{
-					        	<span 
-							        className={"App-link"+(this.state.animate ? "" : " deactivated")}
-							        onClick={() => this.toggleAnimation()}
-							    >animate</span>
-							}&nbsp;-&nbsp;{
-								this.appLink(
-									"restart",
-									 () => this.reset())
-							}&nbsp;-
-		        </Container>
-		        <Container className="Main-Content">
-		            {this.state.mainContent.map((item, index) => (
-		            	<div key={index}>{item}</div>
-		            ))}
-		        <Row>
-		            <Col>
-			            <div
-			                className="contentEnd-filler" 
-			                ref={(el) => { this.contentEnd = el; }}>
-			            </div>
-		            </Col>
-		        </Row>
-	        </Container>
-	      </div>
+	    	<React.Fragment>
+		    	<div id="stars" className={"stars"+(this.state.animate?"":" no-animate")}></div>
+				<div id="stars2" className={"stars"+(this.state.animate?"":" no-animate")}></div>
+				<div id="stars3" className={"stars"+(this.state.animate?"":" no-animate")}></div>
+			    <div className="App">
+				    <Container className="title text-center">
+					    <span>SPACE STATION ESCAPE</span>
+	 			    </Container>
+				    <Container className="Actions text-center">
+				        -&nbsp;{
+						        	<span 
+								        className={"App-link"+(this.state.animate ? "" : " deactivated")}
+								        onClick={() => this.toggleAnimation()}
+								    >animate</span>
+								}&nbsp;-&nbsp;{
+									this.appLink(
+										"restart",
+										 () => this.reset())
+								}&nbsp;-
+			        </Container>
+			        <Container className="Main-Content">
+			            {this.state.mainContent.map((item, index) => (
+			            	<div key={index}>{item}</div>
+			            ))}
+				        <Row>
+				            <Col>
+					            <div
+					                className="contentEnd-filler" 
+					                ref={(el) => { this.contentEnd = el; }}>
+					            </div>
+				            </Col>
+				        </Row>
+			        </Container>
+				</div>
+			</React.Fragment>
 	    );
 	}
 }
