@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Container, Row, Col,} from 'react-bootstrap';
 import { cloneDeep } from 'lodash';
-import './App.css';
+import './stars.scss';
+import './App.css'; 
 
 import { defaultRooms, defaultItems, intro, deaths,} from './objectMaps.js';
 
@@ -91,7 +92,7 @@ class App extends Component {
 	    if(this.state.animate && !this.state.isFading){
 	    	this.contentEnd.scrollIntoView({
 	    		behavior: "smooth", 
-	    		block: "start"
+	    		block: "end"
 	    	});
 	    }
 	}
@@ -339,9 +340,22 @@ class App extends Component {
 	}
 
 	toggleAnimation(){
-	    this.setState(prevState => ({
-		    animate: !prevState.animate,
-	    }));
+		const prevAnimate = this.state.animate;
+
+		// This is ugly please don't look at it
+		const stars = document.getElementsByClassName("stars");
+		for(var i = 0; i < stars.length; i++){
+			if(prevAnimate)
+			{
+				stars.item(i).classList.add("no-animate");
+			}else{
+				stars.item(i).classList.remove("no-animate");
+			}
+		}
+
+	    this.setState({
+		    animate: !prevAnimate,
+	    });
 	}
 
 	appLink(text, clickFunction){
