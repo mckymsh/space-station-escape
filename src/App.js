@@ -15,20 +15,21 @@ class App extends Component {
 
 	    this.state = {
 		    inventory: null,
-
 		    currentRoom: null,
 		    roomsVisited: null,
-
 		    contentQueue: [],
 		    mainContent: [],
-
 		    animate: true,
 		    isFading: false,
-	    }
+	    };
 	}
 
 	componentDidMount(){
 	    this.reset();
+	}
+
+	componentDidUpdate() {
+	    this.scrollToBottom();
 	}
 
 	tick(){
@@ -55,18 +56,12 @@ class App extends Component {
 				});
 			}
 		}
-	}
-
-	componentDidUpdate() {
-		console.log("componentDidUpdate");
-	    this.scrollToBottom();
-	}
+	}	
 
 	reset(){
 		let tempInventory = new Set();
 
 		// https://medium.com/javascript-in-plain-english/how-to-deep-copy-objects-and-arrays-in-javascript-7c911359b089
-
 		this.rooms = cloneDeep(defaultRooms);
 		this.items = cloneDeep(defaultItems);
 
@@ -83,10 +78,8 @@ class App extends Component {
 
 	    this.setState({
 	    	inventory: tempInventory,
-
 	    	currentRoom: randomKey,
 	    	roomsVisited: tempVisited,
-
 	    	contentQueue: [],
 	    	mainContent: [],
 	    }, this.intro);
@@ -104,7 +97,6 @@ class App extends Component {
 	}
 
 	intro(){
-
 	    let newContent = [];
 
 	    for(var i = 0; i < intro.length; i++){
@@ -123,7 +115,6 @@ class App extends Component {
 	}
 
 	pickupItem(itemKey){
-
 		// add item to inventory & remove from room
 		let tempCurrentRoom = this.state.currentRoom;
 		let tempInventory = this.state.inventory;
@@ -156,16 +147,13 @@ class App extends Component {
 
 		this.setState({
 			inventory: tempInventory,
-
 			contentQueue: tempContentQueue,
 			mainContent: tempContent,
-
 			isFading: false,
 		}, this.prompt);
 	}
 
 	navigation(fadeOut){
-
 		let tempCurrentRoom = this.state.currentRoom;
 		let tempItems = this.rooms[tempCurrentRoom].items;
 	    let tempNeighbors = this.rooms[tempCurrentRoom].neighbors;
@@ -245,15 +233,9 @@ class App extends Component {
 		    mainContent: tempContent,
 	    });
 
-	    // This version 'should have' worked.
-		// this.setState({
-		// 	isFading: true,
-		// }, ()=>{
-		// 	this.forceUpdate(); // but no of course not
 		setTimeout(()=>{
 			navFunction();
 		}, TICK_TIME/2);
-		// });
 	}
 
 	changeRoom(newRoom){
@@ -310,14 +292,7 @@ class App extends Component {
 					</Row>
 		    );
 	    }else{
-	    	// This is probably unecessary since I tell you when you're changing rooms...
-	    	// tempContentQueue.push(
-			   //    <Row>
-			   //      <Col className={"content-piece text-left "+this.state.animate?"item-fadein":""}>
-			   //        You are in {this.rooms[tempCurrentRoom].name}
-			   //       </Col>
-			   //    </Row>
-		    // );
+	    	// Nothing I guess
 	    }	    
 
 	    tempContentQueue.push(
@@ -359,6 +334,7 @@ class App extends Component {
 
 	    this.setState({
 	    	contentQueue: tempContentQueue,
+	    	isFading: false,
 	    });
 	}
 
@@ -366,6 +342,15 @@ class App extends Component {
 	    this.setState(prevState => ({
 		    animate: !prevState.animate,
 	    }));
+	}
+
+	appLink(text, clickFunction){
+	    return(
+		    <span 
+		        className="App-link"
+		        onClick={clickFunction}
+		    >{text}</span>
+	    );
 	}
 
 	render(){
@@ -400,15 +385,6 @@ class App extends Component {
 		        </Row>
 	        </Container>
 	      </div>
-	    );
-	}
-
-	appLink(text, clickFunction){
-	    return(
-		    <span 
-		        className="App-link"
-		        onClick={clickFunction}
-		    >{text}</span>
 	    );
 	}
 }
