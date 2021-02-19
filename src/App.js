@@ -9,6 +9,9 @@ import { defaultRooms, defaultItems, intro, deaths,} from './objectMaps.js';
 // const FADE_DURATION = 1500;
 const TICK_TIME = 2000;
 
+// var lastTick = 0;
+// var thisTick = 0;
+
 class App extends Component {
 
 	constructor(props){
@@ -22,6 +25,7 @@ class App extends Component {
 		    mainContent: [],
 		    animate: true,
 		    isFading: false,
+		    currentTick: 0,
 	    };
 	}
 
@@ -34,6 +38,10 @@ class App extends Component {
 	}
 
 	tick(){
+
+		// thisTick = new Date().getTime();
+
+		// console.log(thisTick - lastTick);
 
 		if(this.state.contentQueue.length > 0){	
 
@@ -57,6 +65,8 @@ class App extends Component {
 				});
 			}
 		}
+
+		// lastTick = new Date().getTime();
 	}	
 
 	reset(){
@@ -75,7 +85,7 @@ class App extends Component {
 
 	    clearInterval(this.tickInterval);
 	    this.tickInterval = setInterval(() => 
-	    		this.tick(), TICK_TIME);
+	    		{this.tick()}, TICK_TIME);
 
 	    this.setState({
 	    	inventory: tempInventory,
@@ -354,6 +364,16 @@ class App extends Component {
 		// 		stars.item(i).classList.remove("no-animate");
 		// 	}
 		// }
+
+		if(!prevAnimate){
+			clearInterval(this.tickInterval);
+		    this.tickInterval = setInterval(() => 
+		    		{this.tick()}, TICK_TIME);
+		}else{
+			clearInterval(this.tickInterval);
+			this.tickInterval = setInterval(() =>
+					{this.tick()}, TICK_TIME/4);
+		}
 
 	    this.setState({
 		    animate: !prevAnimate,

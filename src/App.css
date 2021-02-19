@@ -199,8 +199,11 @@ div.content-piece{
 }
 
 .stars{
+	animation-play-state: running;
+	-webkit-animation-play-state: running;
 }
 
 .no-animate{
-  transform: none !important;
+	-webkit-animation-play-state: paused !important;
+   animation-play-state: paused !important; 
 }
