@@ -5,6 +5,8 @@
 	background-color: #250f27;
 
 	min-height: 100vh;
+	/*height: 100%;*/
+	/*width: 100%;*/
 
 	display: flex;
 	flex-direction: column;
@@ -13,9 +15,14 @@
 	align-items: center;
 	justify-content: center;	
 
-	/*overflow: hidden;*/
+	overflow: hidden;
 	/*padding: 25px;*/
 
+	margin-top: -6px;
+
+	z-index: 0;
+
+	/*border: 1px solid yellow;*/
 }
 
 li{
@@ -89,7 +96,8 @@ hr{
 .Main-Content{
 	/*scroll-behavior: smooth;*/
 
-	background-color: #351f37;
+	/*background-color: #351f37;*/
+	background-color: rgba(53, 31, 55, 0.75); 
 	/*border: 1px dashed yellow;*/
 
 	height: 75vh;
@@ -100,6 +108,8 @@ hr{
 	overflow-x: wrap;
 
 	padding: 0px;
+
+	z-index: 20;
 }
 
 .contentEnd-filler{
@@ -186,4 +196,8 @@ div.content-piece{
 
 *::-webkit-scrollbar-thumb {
 	background-color: #eeeeee;
+}
+
+.no-animate{
+  transform: none !important;
 }
