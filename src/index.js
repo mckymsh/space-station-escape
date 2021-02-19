@@ -9,9 +9,6 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-	<div id="stars" className="stars"></div>
-	<div id="stars2" className="stars"></div>
-	<div id="stars3" className="stars"></div>
     <App />
   </React.StrictMode>,
   document.getElementById('root')
