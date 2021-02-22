@@ -1,11 +1,19 @@
 const defaultRooms = {
 	"southHub": {
 		name: "the southern hub", 
-		desc: 
-				`From this central hub, there are \
-				several passages leading to segments \
-				of the outer ring. Another connects \
-				this ring to the 'northern' ring.`, 
+		desc: [
+			{ 
+				alignment: "left", 
+				text:
+					`From this central hub (one of two such hubs), \
+					there are several passages leading to segments \
+					of the outer ring. `,
+			},
+			{
+				alignment: "right",
+				text: `Another connects this ring to the 'northern' ring.`, 
+			},
+		],
 		neighbors: [
 			{key: "engineering", direction: "left", },
 			{key: "storage", direction: "front",},
@@ -18,10 +26,20 @@ const defaultRooms = {
 	},
 	"airlock": {
 		name: "the airlock", 
-		desc: 
-				`The outer airlock door is sealed. The \
-				control panel on the wall is smashed. \
-				There may be a manual override somewhere.`, 
+		desc: [
+			{ 
+				alignment: "left", 
+				text: 
+					`The outer door of the airlock bis sealed. The \
+					control panel on the wall is smashed. \
+					There may be a manual override somewhere.`,
+			},
+			{
+				alignment: "right",
+				text: `Though, with no way to seal the inner door, \
+					using it would be an irreversible decision.`,  
+			},
+		],
 		neighbors: [
 			{key: "southHub", direction: "north"},
 			{key: "space", direction: "south"},
@@ -30,11 +48,16 @@ const defaultRooms = {
 	},
 	"storage": {
 		name: "storage", 
-		desc: 
-				`This room has rigs to hold spacesuits \
-				as well as other tools and supplies  \
-				for EVA. There are also few other bulky \
-				bits and bobs that wouldn't fit elsewhere.`, 
+		desc: [
+			{ 
+				alignment: "left", 
+				text: 
+					`This room has rigs to hold spacesuits \
+					as well as other tools and supplies  \
+					for EVA. There are also few other bulky \
+					bits and bobs that wouldn't fit elsewhere.`,  
+			},
+		],
 		neighbors: [
 			{key: "bioLab", direction: "spinward"},
 			{key: "engineering", direction: "antispinward"},
@@ -44,13 +67,25 @@ const defaultRooms = {
 	},
 	"engineering": {
 		name: "engineering", 
-		desc: 
-				`The tech was never very neat, \
-				but even they would be \
-				dismayed at the disarray here. \
-				Tools and parts are strewn about. \
-				Perhaps you aren't the first person \
-				to scavenge here.`, 
+		desc: [
+			{ 
+				alignment: "left", 
+				text: 
+					`As a technician, you take pride in keeping \
+					your work area clear. Given that, you are \
+					dismayed at the state of Engineering.`,
+			},
+			{
+				alignment: "right",
+				text: `Tools and parts are strewn everywhere, \
+					blobs of grease and glue floating about.`,
+			},
+			{
+				alignment: "center",
+				text: `Perhaps you aren't the first person \
+					to scavenge here.`,  
+			},
+		],
 		neighbors: [
 			{key: "storage", direction: "spinward"},
 			{key: "physicsLab", direction: "antispinward"},
@@ -60,10 +95,19 @@ const defaultRooms = {
 	},
 	"physicsLab": {
 		name: "the physics lab", 
-		desc: 
-				`The lab is decorated with a vast \
-				array of instruments and equipment. \
-				Is that a laser or particle accelerator?`, 
+		desc: [
+			{ 
+				alignment: "left", 
+				text: 
+					`This lab is decorated with a vast \
+					array of instruments and equipment.`,
+			},
+			{
+				alignment: "right",
+				text: `Is that a laser or particle accelerator? \
+					Who knows. Not your specialty.`,  
+			},
+		],
 		neighbors: [
 			{key: "engineering", direction: "spinward"},
 			{key: "bioLab", direction: "antispinward"},
@@ -73,11 +117,19 @@ const defaultRooms = {
 	},      
 	"bioLab": {
 		name: "the bio lab", 
-		desc: 
-				`This is clearly a lab. There are many \
-				small containers with \
-				insects and rodents. Amazingly, they \
-				all seem to still be alive.`, 
+		desc: [
+			{ 
+				alignment: "left", 
+				text: 
+					`This is clearly a lab. There are many \
+					small containers with \
+					insects and rodents.`,
+			},
+			{
+				alignment: "center",
+				text: `Amazingly, they all seem to still be alive.`,  
+			},
+		],
 		neighbors: [
 			{key: "physicsLab", direction: "spinward"}, 
 			{key: "storage", direction: "antispinward"},
@@ -87,12 +139,17 @@ const defaultRooms = {
 	},
 	"northHub": {
 		name: "the northern hub", 
-		desc: 
-				`This hub, arbitrarily designated as \
-				'north', has passageways leading to \
-				several rooms on the outer ring, and \
-				one to the 'southern' end of the \
-				twin-ringed station.`, 
+		desc: [
+			{ 
+				alignment: "left", 
+				text: 
+					`This hub, arbitrarily designated as \
+					'north', has passageways leading to \
+					several rooms on the outer ring, and \
+					one to the 'southern' end of the \
+					twin-ringed station.`,  
+			},
+		],
 		neighbors: [
 			{key: "hydroponics", direction: "left"},
 			{key: "head", direction: "front"},
@@ -105,12 +162,20 @@ const defaultRooms = {
 	},
 	"shuttleBay": {
 		name: "the shuttle bay", 
-		desc: 
-				`The antechamber to the shuttle bay is sparse. \
-				through the small porthole in the locked \
-				hatch, you see a distressing lack of shuttle. \
-				You're going to need a lot of therapy to deal \
-				with the inevitable abandonment issues.`, 
+		desc: [
+			{ 
+				alignment: "left", 
+				text: 
+					`The antechamber to the shuttle bay is sparse. \
+					through the small porthole in the locked \
+					hatch, you see a distressing lack of shuttle.`,
+			},
+			{
+				alignment: "right",
+				text: `You're going to need a lot of therapy to deal \
+					with the inevitable abandonment issues.`,  
+			},
+		],
 		neighbors: [
 			{key: "space", direction: "north"},
 			{key: "northHub", direction: "south"},
@@ -119,23 +184,38 @@ const defaultRooms = {
 	},
 	"space": {
 		name: "space", 
-		desc: 
-				`You're probably dead. \
-				Apparently that doesn't slow you down. \
-				Continue playing; don't mind me.`, 
+		desc: [
+			{ 
+				alignment: "left", 
+				text: 
+					`You're probably dead. \
+					Apparently that doesn't slow you down. \
+					Continue playing; don't mind me.`, 
+			},
+		],
 		neighbors: [
 			{key: "airlock", direction: "south"},
 			{key: "shuttleBay", direction: "north"},
 		],
 		items: [],
 	},
-	"hydroponics": {name: "hydroponics", desc: 
+	"hydroponics": {
+		name: "hydroponics", 
+		desc: [
+			{ 
+				alignment: "left", 
+				text:  
 					`Long rows of what you assume \
 					were once well-tended plants \
 					extend along the 'upward'-curving \
-					floor of the northern ring. Not \
-					pretty, but	maybe the reason \
-					you're still breathing.`, 
+					floor of the northern ring.`,
+			},
+			{
+				alignment: "right",
+				text: `Not pretty, but	maybe the reason \
+					you're still breathing.`,  
+			},
+		],
 		neighbors: [
 			{key: "head", direction: "spinward"}, 
 			{key: "foodPrep", direction: "antispinward"},
@@ -145,11 +225,23 @@ const defaultRooms = {
 	},
 	"head": {
 		name: "the head", 
-		desc: 
-				`This is a fancy space bathroom. You suppose. \
-				You've been here for months, and you're \
-				still not sure what all the hoses and \
-				straps are for.`, 
+		desc: [
+			{ 
+				alignment: "left", 
+				text: 
+					`This is a fancy space bathroom.`,
+			},
+			{
+				alignment: "right",
+				text: ` You suppose.`,
+			},
+			{
+				alignment: "center",
+				text: `You've been here for months, and you're \
+					still not sure what all the hoses and \
+					straps are for.`,  
+			},
+		],
 		neighbors: [
 			{key: "habitation", direction: "spinward"}, 
 			{key: "hydroponics", direction: "antispinward"},
@@ -159,12 +251,21 @@ const defaultRooms = {
 	},
 	"habitation": {
 		name: "habitation", 
-		desc: 
-				`'Cozy' would be a euphemistic \
-				descriptor for these tiny personal \
-				spaces. A storage locker, a bed seemingly \
-				for a toddler, and naught but a curtain \
-				for privacy. Lovely.`, 
+		desc: [
+			{ 
+				alignment: "left", 
+				text: 
+					`'Cozy' would be a euphemistic \
+					descriptor for these tiny personal \
+					spaces. A storage locker, a bed seemingly \
+					for a toddler, and naught but a curtain \
+					for privacy.`,
+			},
+			{
+				alignment: "center",
+				text: `Lovely.`,  
+			},
+		],
 		neighbors: [
 			{key: "foodPrep", direction: "spinward"}, 
 			{key: "head", direction: "antispinward"},
@@ -174,10 +275,18 @@ const defaultRooms = {
 	},
 	"foodPrep": {
 		name: "the food prep area", 
-		desc: 
-				`You can see why they don't call this 'prep area' \
-				a kitchen. Latched cabinets, a microwave... \
-				not exactly Michelin-rated.`, 
+		desc: [
+			{ 
+				alignment: "left", 
+				text: 
+					`You can see why they don't call this 'prep area' \
+					a kitchen. Latched cabinets, a microwave...`,
+			},
+			{
+				alignment: "right",
+				text: `not exactly Michelin-rated.`, 
+			},
+		],
 		neighbors: [
 			{key: "hydroponics", direction: "spinward"}, 
 			{key: "habitation", direction: "antispinward"},

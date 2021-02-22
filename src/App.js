@@ -284,13 +284,15 @@ class App extends Component {
 	    //     display room description.
 	    if (!tempVisited.has(tempCurrentRoom)){
 	    	tempVisited = tempVisited.add(tempCurrentRoom);
-		    tempContentQueue.push(
+	    	this.rooms[tempCurrentRoom].desc.map((descPiece) => (
+			    tempContentQueue.push(
 					<Row>
-						<Col className={"content-piece text-left "+this.state.animate?"item-fadein":""}>
-							{this.rooms[tempCurrentRoom].desc}
+						<Col className={"content-piece text-"+descPiece.alignment+(this.state.animate?" item-fadein":"")}>
+							{descPiece.text}
 						</Col>
 					</Row>
-		    );
+			    )
+		    ));
 	    }else{
 	    	// Nothing I guess
 	    }	    
