@@ -52,15 +52,15 @@ hr{
 	text-shadow: 0 0 15px white, 0 0 10px #f700ff;
 
 	transition: color 333ms ease;
-	transition: text-shadow 333ms ease;
+	transition: text-shadow 2000ms ease;
 
 	cursor: pointer;
 }
 
 .deactivated{
-	color: #888888;
-	transition: color 333ms ease;
-	/*text-decoration: line-through;*/
+	/*color: #888888;*/
+	/*transition: color 333ms ease;*/
+	text-decoration: line-through;
 }
 
 .title{
@@ -198,14 +198,4 @@ div.content-piece{
 
 *::-webkit-scrollbar-thumb {
 	background-color: #eeeeee;
-}
-
-.stars{
-	animation-play-state: running;
-	-webkit-animation-play-state: running;
-}
-
-.no-animate{
-	-webkit-animation-play-state: paused !important;
-   animation-play-state: paused !important; 
 }
