@@ -411,7 +411,7 @@ class App extends Component {
 										 () => this.reset())
 								}&nbsp;-
 			        </Container>
-			        <Container className="Main-Content">
+			        <Container className="Main-Content item-fadein">
 			            {this.state.mainContent.map((item, index) => (
 			            	<div key={index}>{item}</div>
 			            ))}
