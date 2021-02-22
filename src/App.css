@@ -5,36 +5,30 @@
 	background-color: #250f27;
 
 	min-height: 100vh;
-	/*height: 100%;*/
-	/*width: 100%;*/
 
 	display: flex;
 	flex-direction: column;
+	overflow: hidden;
 
 	/*text-align: center;*/
 	align-items: center;
 	justify-content: top;	
-
-	overflow: hidden;
-	/*padding: 25px;*/
-
 	margin-top: -6px;
-
 	z-index: 0;
 
 	/*border: 1px solid yellow;*/
 }
 
-li{
+li {
 	list-style-type: none;
 }
 
-hr{
+hr {
 	border: 1px solid #cccccc;/*#250f27;*/
 	box-shadow: 0 0 10px #cccccc;/*#f700ff;*/
 }
 
-.container{
+.container {
 	min-width: 320px;
 	max-width: 640px;
 }
@@ -47,7 +41,7 @@ hr{
 	transition: text-shadow 2s ease;
 }
 
-.App-link:hover{
+.App-link:hover {
 	color: #fff;
 	text-shadow: 0 0 15px white, 0 0 10px #f700ff;
 
@@ -57,48 +51,40 @@ hr{
 	cursor: pointer;
 }
 
-.deactivated{
+.deactivated {
 	/*color: #888888;*/
 	/*transition: color 333ms ease;*/
 	text-decoration: line-through;
 }
 
-.title{
+.title {
 	/*background-color: #351f37;*/
-	/*border: 1px dashed yellow;*/
 
 	font-size: calc(10px + 2.5vmin);
-
-	text-shadow: 0 0 10px #cccccc;/*#f700ff;*/
-
+	text-shadow: 0 0 10px #cccccc;/*, -10px -10px 0 #f700ff, -5px -5px 0 #00f7ff, -15px -15px 0 #f7ff00;*/
 	letter-spacing: 0.3em;
 
 	margin-top: 5vh;
-
 	padding: 0;
-	/*height: 5vh;*/
-
 	overflow: wrap;
+
+	/*border: 1px dashed yellow;*/
 }
 
-.Actions{
+.Actions {
 	background-color: inherit;/*#351f37;*/
 
-	/*border: 1px dashed yellow;*/
-
 	text-shadow: 0 0 10px #ff0000;/*#f700ff;*/
-
 	font-size: 1em;
-	/*letter-spacing: 0.em;*/
+	
 	margin: 2vh;
+
+	/*border: 1px dashed yellow;*/
 }
 
-.Main-Content{
-	/*scroll-behavior: smooth;*/
-
+.Main-Content {
 	/*background-color: #351f37;*/
 	background-color: rgba(53, 31, 55, 0.75); 
-	/*border: 1px dashed yellow;*/
 
 	height: 50vh;
 	min-height: 300px;
@@ -106,52 +92,49 @@ hr{
 
 	overflow-y: scroll;
 	overflow-x: wrap;
-
 	padding: 0px;
-
-	/*margin-bottom: 50vh;*/
-
 	z-index: 20;
+
+	/*border: 1px dashed yellow;*/
 }
 
-.contentEnd-filler{
+.contentEnd-filler {
 	padding-bottom: 3vmin;
 }
 
-.content-filler{
+.content-filler {
 	height: 3vh;
 }
 
-.row{
+.row {
 	margin: 3vh;
 	/*border: 1px dashed yellow;*/
-	/*box-shadow: 0px 0px 1px yellow;*/
 }
 
-div.content-piece{
+div.content-piece {
 	overflow: wrap;
 }
 
-.text-left{
+/* Bootstrap isn't doing its job... */
+.text-left {
 	text-align: left;
 }
-.text-center{
+.text-center {
 	text-align: center;
 }
-.text-right{
+.text-right {
 	text-align: right;
 }
 
 /* Begin animation snippet */
 /* Adapted from: */
 /* https://stackoverflow.com/questions/61827640/react-fade-in-on-add-fade-out-on-remove-item */
-
 .item-fadein {
     -webkit-animation: fadein 1500ms ease forwards;
     animation: fadein 1500ms ease forwards;
 }
-.item-fadeout{
-	/*border: 1px dashed yellow;*/
+
+.item-fadeout {
 	-webkit-animation: fadeout 500ms ease forwards;
     animation: fadeout 500ms ease forwards;
 }
@@ -175,7 +158,6 @@ div.content-piece{
   0% { opacity: 1; }
   100% { opacity: 0; }
 }
-
 /* End animation snippet */
 
 /*Scrollbars adapted from*/
@@ -184,7 +166,7 @@ div.content-piece{
 /* Works on Firefox */
 * {
 	scrollbar-width: thin;
-	scrollbar-color: #eeeeee #250f27;
+	scrollbar-color: #cccccc #250f27;
 }
 
 /* Works on Chrome, Edge, and Safari */
@@ -197,5 +179,5 @@ div.content-piece{
 }
 
 *::-webkit-scrollbar-thumb {
-	background-color: #eeeeee;
+	background-color: #cccccc;
 }
