@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col,} from 'react-bootstrap';
+// import { Container, Row, Col,} from 'react-bootstrap';
 import { cloneDeep } from 'lodash';
 import './stars.scss';
 import './App.css'; 
@@ -112,11 +112,9 @@ class App extends Component {
 
 	    for(var i = 0; i < intro.length; i++){
 	    	newContent.push(
-		        <Row>
-			        <Col className={"content-piece "+(this.state.animate?"item-fadein ":" ")+"text-"+intro[i].alignment}>
-				        {intro[i].text}
-			        </Col>
-		        </Row>
+		        <section className={"content-piece "+(this.state.animate?"item-fadein ":" ")+"text-"+intro[i].alignment}>
+			        {intro[i].text}
+		        </section>
 		    );
 	    }
 	    
@@ -140,20 +138,16 @@ class App extends Component {
 	    tempContent = tempContent.slice(0, tempContent.length-1);
     	
 		tempContent.push(
-		      <Row>
-		        <Col className={"content-piece text-left "+this.state.animate?"item-fadein":""}>
-			        You look closer at the {this.items[itemKey].name}. {this.items[itemKey].desc}
-		        </Col>
-		      </Row>
+			<section className={"content-piece text-left "+this.state.animate?"item-fadein":""}>
+				You look closer at the {this.items[itemKey].name}. {this.items[itemKey].desc}
+			</section>
 		);
 
 		let tempContentQueue = this.state.contentQueue;
 		tempContentQueue.push(
-		      <Row>
-		        <Col className={"content-piece text-right "+this.state.animate?"item-fadein":""}>
-			        {this.items[itemKey].pickup}
-		        </Col>
-		      </Row>
+			<section className={"content-piece text-right "+this.state.animate?"item-fadein":""}>
+				{this.items[itemKey].pickup}
+			</section>
 		);
 
 		this.setState({
@@ -171,52 +165,48 @@ class App extends Component {
 
 		return(
 			<React.Fragment>
-				{(tempItems.length > 0)? <Row>
-					<Col className={"content-piece text-left"
-							        +(this.state.animate?" item-fadein":"")
-							        +(fadeOut&&this.state.animate?" item-fadeout":"")}>Scanning the room, you see a&nbsp;
-						{Object.values(tempItems.slice(0, tempItems.length-1)).map((itemKey) => (
-							<span key={itemKey}>
-								{this.appLink(
-										this.items[itemKey].name,
-										() => this.handleNav(() => {this.pickupItem(itemKey)})
-								)} {this.items[itemKey].location},&nbsp; 
-							</span>
-						))}
-						{Object.values(tempItems.slice(tempItems.length-1, 
-														tempItems.length)).map((itemKey) => (
-							<span key={itemKey}>
-								{this.appLink(
-										this.items[itemKey].name,
-										() => this.handleNav(() => {this.pickupItem(itemKey)})
-								)} {this.items[itemKey].location}.&nbsp; 
-							</span>
-						))}
-					</Col>
-				</Row> : null}
-				<Row>		
-			        <Col className={"content-piece text-left"
-							        +(this.state.animate?" item-fadein":"")
-							        +(fadeOut&&this.state.animate?" item-fadeout":"")}>You can move&nbsp;
-			            {Object.values(tempNeighbors.slice(0, tempNeighbors.length-1)).map((neighbor) => (
-				            <span key={neighbor.key}>
-				                {neighbor.direction} to {this.appLink(
-										            	this.rooms[neighbor.key].name,
-									                	() => this.handleNav(() => {this.changeRoom(neighbor.key)})
-										            )},&nbsp; 
-				            </span>
-			            ))}
-			            {Object.values(tempNeighbors.slice(tempNeighbors.length-1, 
-											            	tempNeighbors.length)).map((neighbor) => (
-				            <span key={neighbor.key}>
-				                or {neighbor.direction} to {this.appLink(
-										            	this.rooms[neighbor.key].name,
-									                	() => this.handleNav(() => {this.changeRoom(neighbor.key)})
-										            )}.&nbsp; 
-				            </span>
-			            ))}
-			        </Col>
-		        </Row>
+				{(tempItems.length > 0)? <section className={"content-piece text-left"
+						        +(this.state.animate?" item-fadein":"")
+						        +(fadeOut&&this.state.animate?" item-fadeout":"")}>Scanning the room, you see a&nbsp;
+					{Object.values(tempItems.slice(0, tempItems.length-1)).map((itemKey) => (
+						<span key={itemKey}>
+							{this.appLink(
+									this.items[itemKey].name,
+									() => this.handleNav(() => {this.pickupItem(itemKey)})
+							)} {this.items[itemKey].location},&nbsp; 
+						</span>
+					))}
+					{Object.values(tempItems.slice(tempItems.length-1, 
+													tempItems.length)).map((itemKey) => (
+						<span key={itemKey}>
+							{this.appLink(
+									this.items[itemKey].name,
+									() => this.handleNav(() => {this.pickupItem(itemKey)})
+							)} {this.items[itemKey].location}.&nbsp; 
+						</span>
+					))}
+				</section> : null}
+				<section className={"content-piece text-left"
+						        +(this.state.animate?" item-fadein":"")
+						        +(fadeOut&&this.state.animate?" item-fadeout":"")}>You can move&nbsp;
+		            {Object.values(tempNeighbors.slice(0, tempNeighbors.length-1)).map((neighbor) => (
+			            <span key={neighbor.key}>
+			                {neighbor.direction} to {this.appLink(
+									            	this.rooms[neighbor.key].name,
+								                	() => this.handleNav(() => {this.changeRoom(neighbor.key)})
+									            )},&nbsp; 
+			            </span>
+		            ))}
+		            {Object.values(tempNeighbors.slice(tempNeighbors.length-1, 
+										            	tempNeighbors.length)).map((neighbor) => (
+			            <span key={neighbor.key}>
+			                or {neighbor.direction} to {this.appLink(
+									            	this.rooms[neighbor.key].name,
+								                	() => this.handleNav(() => {this.changeRoom(neighbor.key)})
+									            )}.&nbsp; 
+			            </span>
+		            ))}
+		        </section>
 	        </React.Fragment>
         );
 	}
@@ -260,11 +250,9 @@ class App extends Component {
 
 	    // Room exit text-- eventually different for each room?
 	    tempContent.push(
-		      <Row>
-		        <Col className={"content-piece text-center"+(this.state.animate?" item-fadein":"")}>
-			        You leave {this.rooms[this.state.currentRoom].name} and enter {this.rooms[newRoom].name}.
-		        </Col>
-		      </Row>
+			<section className={"content-piece text-center"+(this.state.animate?" item-fadein":"")}>
+				You leave {this.rooms[this.state.currentRoom].name} and enter {this.rooms[newRoom].name}.
+			</section>
     	)
 
     	if(newRoom === 'space' /*...and no spacesuit*/){
@@ -297,11 +285,9 @@ class App extends Component {
 	    	tempVisited = tempVisited.add(tempCurrentRoom);
 	    	this.rooms[tempCurrentRoom].desc.map((descPiece) => (
 			    tempContentQueue.push(
-					<Row>
-						<Col className={"content-piece text-"+descPiece.alignment+(this.state.animate?" item-fadein":"")}>
-							{descPiece.text}
-						</Col>
-					</Row>
+					<section className={"content-piece text-"+descPiece.alignment+(this.state.animate?" item-fadein":"")}>
+						{descPiece.text}
+					</section>
 			    )
 		    ));
 	    }else{
@@ -327,22 +313,18 @@ class App extends Component {
 	    
 		deaths[deathType].map((item) => (
 	        tempContentQueue.push(
-	        	<Row>
-					<Col className={"content-piece text-"+item.alignment
-									+(this.state.animate?" item-fadein":"")}>
-						{item.text}
-					</Col>
-				</Row>
+	        	<section className={"content-piece text-"+item.alignment
+								+(this.state.animate?" item-fadein":"")}>
+					{item.text}
+				</section>
 			)
 		));
 
 		tempContentQueue.push(
-			<Row>
-				<Col className={"content-piece text-center"
-								+(this.state.animate?" item-fadein":"")}>
-					{this.appLink("restart", () => this.reset())}
-				</Col>
-			</Row>
+			<section className={"content-piece text-center"
+							+(this.state.animate?" item-fadein":"")}>
+				{this.appLink("restart", () => this.reset())}
+			</section>
 		)
 
 	    this.setState({
@@ -396,10 +378,10 @@ class App extends Component {
 				<div id="stars2" className={"stars"+(this.state.animate?"":" no-animate")}></div>
 				<div id="stars3" className={"stars"+(this.state.animate?"":" no-animate")}></div>
 			    <div className="App">
-				    <Container className="title text-center">
+				    <header className="title text-center">
 					    <span>SPACE STATION ESCAPE</span>
-	 			    </Container>
-				    <Container className="Actions text-center">
+	 			    </header>
+				    <nav className="Actions text-center">
 				        -&nbsp;{
 						        	<span 
 								        className={"App-link"+(this.state.animate ? "" : " deactivated")}
@@ -410,20 +392,18 @@ class App extends Component {
 										"restart",
 										 () => this.reset())
 								}&nbsp;-
-			        </Container>
-			        <Container className="Main-Content item-fadein">
+			        </nav>
+			        <main className="Main-Content item-fadein">
 			            {this.state.mainContent.map((item, index) => (
 			            	<div key={index}>{item}</div>
 			            ))}
-				        <Row>
-				            <Col>
-					            <div
-					                className="contentEnd-filler" 
-					                ref={(el) => { this.contentEnd = el; }}>
-					            </div>
-				            </Col>
-				        </Row>
-			        </Container>
+				        <section>
+				            <div
+				                className="contentEnd-filler" 
+				                ref={(el) => { this.contentEnd = el; }}>
+				            </div>
+			            </section>
+			        </main>
 				</div>
 			</React.Fragment>
 	    );

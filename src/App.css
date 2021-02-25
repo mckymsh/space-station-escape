@@ -92,6 +92,8 @@ hr {
 	min-height: 300px;
 	/*max-height: 900px;*/
 
+	width: 50vw;
+
 	overflow-y: scroll;
 	overflow-x: wrap;
 	padding: 0px;
@@ -113,8 +115,10 @@ hr {
 	/*border: 1px dashed yellow;*/
 }
 
-div.content-piece {
+section.content-piece {
 	overflow: wrap;
+	/*margin-top: 2vh;*/
+	padding: 2vmin;
 }
 
 /* Bootstrap isn't doing its job... */
