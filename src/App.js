@@ -364,10 +364,11 @@ class App extends Component {
 
 	appLink(text, clickFunction){
 	    return(
-		    <span 
+		    <a
+			    href="./#" 
 		        className="App-link"
 		        onClick={clickFunction}
-		    >{text}</span>
+		    >{text}</a>
 	    );
 	}
 
@@ -383,10 +384,11 @@ class App extends Component {
 	 			    </header>
 				    <nav className="Actions text-center">
 				        -&nbsp;{
-						        	<span 
+						        	<a
+							        	href="./#" 
 								        className={"App-link"+(this.state.animate ? "" : " deactivated")}
 								        onClick={() => this.toggleAnimation()}
-								    >animate</span>
+								    >animate</a>
 								}&nbsp;-&nbsp;{
 									this.appLink(
 										"restart",

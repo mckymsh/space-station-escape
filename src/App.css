@@ -88,11 +88,12 @@ hr {
 	/*background-color: #351f37;*/
 	background-color: rgba(53, 31, 55, 0.75); 
 
-	height: 50vh;
+	height: 66vh;
 	min-height: 300px;
 	/*max-height: 900px;*/
 
-	width: 50vw;
+	width: 66vw;
+	min-width: 300px;
 
 	overflow-y: scroll;
 	overflow-x: wrap;
