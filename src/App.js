@@ -94,6 +94,11 @@ class App extends Component {
 	    	contentQueue: [],
 	    	mainContent: [],
 	    }, this.intro);
+
+	    let tempMain = document.getElementById("mainContent");
+	    if(tempMain && this.state.mainContent.length > 0){
+		    tempMain.getElementsByClassName("content-piece")[0].innerHTML = "farts";//focus();
+	    }
 	}
 
 	// Adapted from
@@ -395,9 +400,9 @@ class App extends Component {
 										 () => this.reset())
 								}&nbsp;-
 			        </nav>
-			        <main className="Main-Content item-fadein">
+			        <main id="mainContent" className="Main-Content item-fadein">
 			            {this.state.mainContent.map((item, index) => (
-			            	<div key={index}>{item}</div>
+			            	<div id={index} key={index}>{item}</div>
 			            ))}
 				        <section>
 				            <div
