@@ -10,7 +10,7 @@ const defaultRooms = {
 					of the outer ring. `,
 			},
 			{
-				alignment: "right",
+				alignment: "left",
 				text: `Another connects this ring to the 'northern' ring.`, 
 			},
 		],
@@ -76,7 +76,7 @@ const defaultRooms = {
 					dismayed at the state of Engineering.`,
 			},
 			{
-				alignment: "right",
+				alignment: "left",
 				text: `Tools and parts are strewn everywhere, \
 					blobs of grease and glue floating about.`,
 			},
@@ -103,7 +103,7 @@ const defaultRooms = {
 					array of instruments and equipment.`,
 			},
 			{
-				alignment: "right",
+				alignment: "left",
 				text: `Is that a laser or particle accelerator? \
 					Who knows. Not your specialty.`,  
 			},
@@ -121,7 +121,7 @@ const defaultRooms = {
 			{ 
 				alignment: "left", 
 				text: 
-					`This is clearly a lab. There are many \
+					`This is clearly a biology lab. There are many \
 					small containers with \
 					insects and rodents.`,
 			},
@@ -166,18 +166,23 @@ const defaultRooms = {
 			{ 
 				alignment: "left", 
 				text: 
-					`The antechamber to the shuttle bay is sparse. \
-					through the small porthole in the locked \
-					hatch, you see a distressing lack of shuttle.`,
+					`If memory (and the handy available sign) serve, this \
+					hatch leads to the shuttle via an airlock. You peek \
+					through the porthole.`,
+			},
+			{
+				alignment: "left",
+				text: `Well, the good news is that the shuttle is still here.`,  
 			},
 			{
 				alignment: "right",
-				text: `You're going to need a lot of therapy to deal \
-					with the inevitable abandonment issues.`,  
+				text: `The bad news is that it's no longer clamped to the \
+				station, but floating loosely, only tied to the station by \
+				its power & air umbilical.`,  
 			},
 		],
 		neighbors: [
-			{key: "space", direction: "north"},
+			// {key: "space", direction: "north"},
 			{key: "northHub", direction: "south"},
 		],
 		items: [],
@@ -211,7 +216,7 @@ const defaultRooms = {
 					floor of the northern ring.`,
 			},
 			{
-				alignment: "right",
+				alignment: "center",
 				text: `Not pretty, but	maybe the reason \
 					you're still breathing.`,  
 			},
@@ -320,8 +325,7 @@ const defaultItems = {
 			There is no hose. Then you’ll see that it is not the hose that bends, it is only yourself.`,
 	},
 	"tape": {
-		location: "on a shelf",
-		carry: "on your wrist",
+		location: "on a hook on the wall",
 		name: "roll of duct tape",
 		desc: `You'd think there'd be some sort of \
 			fancy space duct tape. Nope. Turns out, \
@@ -377,7 +381,7 @@ const deaths = {
 		{ alignment: "left", 
 			text: `Your unprotected body flops in the emptiness.`
 		},
-		{ alignment: "right", 
+		{ alignment: "center", 
 			text: `Your lungs implode as as your eyes bulge.`
 		},
 		{ alignment: "right", 
