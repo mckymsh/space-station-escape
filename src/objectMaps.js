@@ -30,7 +30,7 @@ const defaultRooms = {
 			{ 
 				alignment: "left", 
 				text: 
-					`The outer door of the airlock bis sealed. The \
+					`The outer door of the airlock is sealed. The \
 					control panel on the wall is smashed. \
 					There may be a manual override somewhere.`,
 			},
@@ -299,6 +299,7 @@ const defaultRooms = {
 const defaultItems = {
 	"wrench": {
 		location: "in another dimension",
+		carry: "through your belt",
 		name: "wrench",
 		desc: `A big, burly pipe wrench.`,
 		pickup: `You grab the wrench, \
@@ -308,16 +309,19 @@ const defaultItems = {
 	"hose": {
 		location: "under a workbench",
 		name: "hose",
+		carry: "around your body",
 		desc: `A long tube, originally from some \
 			(probably important) part of the \
 			life-support system.`,
 		pickup: `Stretchy, bendy, fun fun fun! Even \
 			if this proves useless, you have something \
 			to play with, eh?`,
-		use: `Sorry folks, can't use things yet.`,
+		use: `Do not try and bend the hose, that’s impossible. Instead, only try to realize the truth... \
+			There is no hose. Then you’ll see that it is not the hose that bends, it is only yourself.`,
 	},
 	"tape": {
 		location: "on a shelf",
+		carry: "on your wrist",
 		name: "roll of duct tape",
 		desc: `You'd think there'd be some sort of \
 			fancy space duct tape. Nope. Turns out, \
@@ -325,17 +329,18 @@ const defaultItems = {
 		pickup: `As you put it onto your wrist, you \
 			notice that the end is frayed. Probably \
 			should find something to cut this properly.`,
-		use: `Sorry folks, can't use things yet.`,
+		use: `It's not very effective.`,
 	},
 	"mealPack": {
 		location: "in the cooler",
+		carry: "in your pocket",
 		name: "meal pack",
 		desc: `A foil-covered blob of... yeah. Something.`,
 		pickup: `Having defrosted with the lack of power, \
 			it's a bit squishy. The foil wrapper seems \
 			undamaged, so it's probably safe to eat. Like, \
 			medically, if not psychologically.`,
-		use: `Sorry folks, can't use things yet.`,
+		use: `You have died of dysentery.`,
 	},
 };
 

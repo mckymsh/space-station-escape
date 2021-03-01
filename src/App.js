@@ -143,14 +143,14 @@ class App extends Component {
 	    tempContent = tempContent.slice(0, tempContent.length-1);
     	
 		tempContent.push(
-			<section className={"content-piece text-left "+this.state.animate?"item-fadein":""}>
+			<section className={"content-piece text-left "+(this.state.animate?"item-fadein":"")}>
 				You look closer at the {this.items[itemKey].name}. {this.items[itemKey].desc}
 			</section>
 		);
 
 		let tempContentQueue = this.state.contentQueue;
 		tempContentQueue.push(
-			<section className={"content-piece text-right "+this.state.animate?"item-fadein":""}>
+			<section className={"content-piece text-right "+(this.state.animate?"item-fadein":"")}>
 				{this.items[itemKey].pickup}
 			</section>
 		);
@@ -163,57 +163,121 @@ class App extends Component {
 		}, this.prompt);
 	}
 
+	useItem(itemKey){
+		// Remove navigation when clicked... again
+	    let tempContent = this.state.mainContent;
+	    tempContent = tempContent.slice(0, tempContent.length-1);
+    	
+		tempContent.push(
+			<section className={"content-piece text-left "+(this.state.animate?"item-fadein":"")}>
+				You use the {this.items[itemKey].name}!
+			</section>
+		);
+
+		let tempContentQueue = this.state.contentQueue;
+		tempContentQueue.push(
+			<section className={"content-piece text-right "+(this.state.animate?"item-fadein":"")}>
+				{this.items[itemKey].use}
+			</section>
+		);
+
+		this.setState({
+			// inventory: tempInventory,
+			contentQueue: tempContentQueue,
+			mainContent: tempContent,
+			isFading: false,
+		}, this.prompt);
+	}
+
 	navigation(fadeOut){
+
+		return(
+			<div className={(this.state.animate?"item-fadein":"")
+										+(fadeOut&&this.state.animate?" item-fadeout":"")}>
+				{(this.rooms[this.state.currentRoom].items.length > 0)? this.itemList() : null}
+				{this.moveList()}
+				{(this.state.inventory.size > 0)? this.inventoryList() : null}
+	        </div>
+        );
+	}
+
+	itemList(){
+		let tempItems = this.rooms[this.state.currentRoom].items;
+
+		return(
+			<section className="content-piece text-left">Scanning the room, you see a&nbsp;
+				{Object.values(tempItems.slice(0, tempItems.length-1)).map((itemKey) => (
+					<span key={itemKey}>
+						{this.appLink(
+								this.items[itemKey].name,
+								() => this.handleNav(() => {this.pickupItem(itemKey)})
+						)} {this.items[itemKey].location},&nbsp; 
+					</span>
+				))}
+				{Object.values(tempItems.slice(tempItems.length-1, 
+												tempItems.length)).map((itemKey) => (
+					<span key={itemKey}>
+						{this.appLink(
+								this.items[itemKey].name,
+								() => this.handleNav(() => {this.pickupItem(itemKey)})
+						)} {this.items[itemKey].location}.&nbsp; 
+					</span>
+				))}
+			</section>
+		);
+	}
+
+	inventoryList(){
+		// Iterators still elude me
+		let tempInventory = Array.from(this.state.inventory.keys());
+		return(
+			<section className="content-piece text-left">You have
+				{Object.values(tempInventory.slice(0, tempInventory.length-1)).map((itemKey) => (
+					<span key={itemKey}>
+						&nbsp;a {this.appLink(
+								this.items[itemKey].name,
+								() => this.handleNav(() => {this.useItem(itemKey);})
+						)} {this.items[itemKey].carry},
+					</span>
+				))}
+				{Object.values(tempInventory.slice(tempInventory.length-1, 
+												tempInventory.length)).map((itemKey) => (
+					<span key={itemKey}>
+						{(tempInventory.length > 1)? " and a " : " a "}{this.appLink(
+								this.items[itemKey].name,
+								() => this.handleNav(() => {this.useItem(itemKey);})
+						)} {this.items[itemKey].carry} 
+					</span>
+				))}.
+			</section>
+		);
+	}
+
+	moveList(){
 		let tempCurrentRoom = this.state.currentRoom;
-		let tempItems = this.rooms[tempCurrentRoom].items;
 	    let tempNeighbors = this.rooms[tempCurrentRoom].neighbors;
 
 		return(
-			<React.Fragment>
-				{(tempItems.length > 0)? <section className={"content-piece text-left"
-						        +(this.state.animate?" item-fadein":"")
-						        +(fadeOut&&this.state.animate?" item-fadeout":"")}>Scanning the room, you see a&nbsp;
-					{Object.values(tempItems.slice(0, tempItems.length-1)).map((itemKey) => (
-						<span key={itemKey}>
-							{this.appLink(
-									this.items[itemKey].name,
-									() => this.handleNav(() => {this.pickupItem(itemKey)})
-							)} {this.items[itemKey].location},&nbsp; 
-						</span>
-					))}
-					{Object.values(tempItems.slice(tempItems.length-1, 
-													tempItems.length)).map((itemKey) => (
-						<span key={itemKey}>
-							{this.appLink(
-									this.items[itemKey].name,
-									() => this.handleNav(() => {this.pickupItem(itemKey)})
-							)} {this.items[itemKey].location}.&nbsp; 
-						</span>
-					))}
-				</section> : null}
-				<section className={"content-piece text-left"
-						        +(this.state.animate?" item-fadein":"")
-						        +(fadeOut&&this.state.animate?" item-fadeout":"")}>You can move&nbsp;
-		            {Object.values(tempNeighbors.slice(0, tempNeighbors.length-1)).map((neighbor) => (
-			            <span key={neighbor.key}>
-			                {neighbor.direction} to {this.appLink(
-									            	this.rooms[neighbor.key].name,
-								                	() => this.handleNav(() => {this.changeRoom(neighbor.key)})
-									            )},&nbsp; 
-			            </span>
-		            ))}
-		            {Object.values(tempNeighbors.slice(tempNeighbors.length-1, 
-										            	tempNeighbors.length)).map((neighbor) => (
-			            <span key={neighbor.key}>
-			                or {neighbor.direction} to {this.appLink(
-									            	this.rooms[neighbor.key].name,
-								                	() => this.handleNav(() => {this.changeRoom(neighbor.key)})
-									            )}.&nbsp; 
-			            </span>
-		            ))}
-		        </section>
-	        </React.Fragment>
-        );
+			<section className="content-piece text-left">You can move
+	            {Object.values(tempNeighbors.slice(0, tempNeighbors.length-1)).map((neighbor) => (
+		            <span key={neighbor.key}>
+		                &nbsp;{neighbor.direction} to {this.appLink(
+								            	this.rooms[neighbor.key].name,
+							                	() => this.handleNav(() => {this.changeRoom(neighbor.key)})
+								            )}, 
+		            </span>
+	            ))}
+	            {Object.values(tempNeighbors.slice(tempNeighbors.length-1, 
+									            	tempNeighbors.length)).map((neighbor) => (
+		            <span key={neighbor.key}>
+		                &nbsp;or {neighbor.direction} to {this.appLink(
+								            	this.rooms[neighbor.key].name,
+							                	() => this.handleNav(() => {this.changeRoom(neighbor.key)})
+								            )}. 
+		            </span>
+	            ))}
+	        </section>
+		);
 	}
 
 	handleNav(navFunction){
@@ -223,10 +287,10 @@ class App extends Component {
 		}
 
 		// Remove navigation when clicked.
-		// I replace it here with an idential version, except
+		// I replace it here with an identical version, except
 		// the className is different. React wouldn't add the
-		// class and re-render otherwise. Very dumb. Or maybe
-		// I am. Time will tell.
+		// class and re-render otherwise. Very dumb. 
+		// Or maybe I am. Time will tell.
 	    let tempContent = this.state.mainContent;
 	    tempContent = tempContent.slice(0, tempContent.length-1);
 
