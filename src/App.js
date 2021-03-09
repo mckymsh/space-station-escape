@@ -453,15 +453,17 @@ class App extends Component {
 	 			    </header>
 				    <nav className="Actions text-center">
 				        -&nbsp;{
-						        	<a
-							        	href="./#" 
+						        	<button
+							        	type="button" 
 								        className={"App-link"+(this.state.animate ? "" : " deactivated")}
 								        onClick={() => this.toggleAnimation()}
-								    >animate</a>
+								    >animate</button>
 								}&nbsp;-&nbsp;{
-									this.appLink(
-										"restart",
-										 () => this.reset())
+									<button
+							        	type="button" 
+								        className={"App-link"}
+								        onClick={() => this.reset()}
+								    >restart</button>
 								}&nbsp;-
 			        </nav>
 			        <main id="mainContent" className="Main-Content item-fadein">

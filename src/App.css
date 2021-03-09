@@ -35,7 +35,13 @@ hr {
 	max-width: 640px;
 }
 
-.App-link {
+.App-link, button {
+	background: transparent;
+	border: none;
+	text-decoration: none;
+	font-size: inherit;
+	display: inline;
+
 	color: inherit;
 	text-shadow: 0 0 10px #f700ff;
 
@@ -43,12 +49,12 @@ hr {
 	transition: text-shadow 2s ease;
 }
 
-.App-link:hover {
+.App-link:hover, button:hover {
 	color: #fff;
 	text-shadow: 0 0 15px white, 0 0 10px #f700ff;
 
 	transition: color 333ms ease;
-	transition: text-shadow 2000ms ease;
+	transition: text-shadow 333ms ease;
 
 	cursor: pointer;
 }
