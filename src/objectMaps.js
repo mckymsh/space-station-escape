@@ -16,7 +16,7 @@ const defaultRooms = {
 		],
 		neighbors: [
 			{key: "engineering", direction: "left", },
-			{key: "storage", direction: "front",},
+			{key: "storage", direction: "forward",},
 			{key: "physicsLab", direction: "back",}, 
 			{key: "bioLab", direction: "right",},
 			{key: "northHub", direction: "north",},
@@ -30,13 +30,15 @@ const defaultRooms = {
 			{ 
 				alignment: "left", 
 				text: 
-					`The outer door of the airlock is sealed. The \
-					control panel on the wall is smashed. \
-					There may be a manual override somewhere.`,
+					`The airlock's inner door is open, but thankfully \
+					the outer door is still sealed. The \
+					control panel on the wall is smashed, so you can't \
+					cycle the airlock. \
+					The outer door itself has an emergency release.`,
 			},
 			{
 				alignment: "right",
-				text: `Though, with no way to seal the inner door, \
+				text: `Though, with no way to seal the heavy inner door, \
 					using it would be an irreversible decision.`,  
 			},
 		],
@@ -78,7 +80,7 @@ const defaultRooms = {
 			{
 				alignment: "left",
 				text: `Tools and parts are strewn everywhere, \
-					blobs of grease and glue floating about.`,
+					and smears of grease and glue on every surface.`,
 			},
 			{
 				alignment: "center",
@@ -122,8 +124,7 @@ const defaultRooms = {
 				alignment: "left", 
 				text: 
 					`This is clearly a biology lab. There are many \
-					small containers with \
-					insects and rodents.`,
+					small containers with insects and rodents.`,
 			},
 			{
 				alignment: "center",
@@ -152,7 +153,7 @@ const defaultRooms = {
 		],
 		neighbors: [
 			{key: "hydroponics", direction: "left"},
-			{key: "head", direction: "front"},
+			{key: "head", direction: "forward"},
 			{key: "foodPrep", direction: "back"}, 
 			{key: "habitation", direction: "right"},
 			{key: "southHub", direction: "south"},
@@ -187,6 +188,25 @@ const defaultRooms = {
 		],
 		items: [],
 	},
+	"shuttle": {
+		name: "the escape shuttle", 
+		desc: [
+			{ 
+				alignment: "left", 
+				text: 
+					`You've made it to the shuttle.`,
+			},
+			{
+				alignment: "left",
+				text: `At this point, that means the game is very broken. \
+					maybe let me know so I can fix it.`,  
+			},
+		],
+		neighbors: [
+			{key: "space", direction: "outside"},
+		],
+		items: [],
+	},
 	"space": {
 		name: "space", 
 		desc: [
@@ -200,7 +220,7 @@ const defaultRooms = {
 		],
 		neighbors: [
 			{key: "airlock", direction: "south"},
-			{key: "shuttleBay", direction: "north"},
+			{key: "shuttle", direction: "north"},
 		],
 		items: [],
 	},
