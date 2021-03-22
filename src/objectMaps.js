@@ -75,7 +75,7 @@ const defaultRooms = {
 				text: 
 					`As a technician, you take pride in keeping \
 					your work area clear. Given that, you are \
-					dismayed at the state of Engineering.`,
+					dismayed at the state of your repair station.`,
 			},
 			{
 				alignment: "left",
@@ -237,7 +237,7 @@ const defaultRooms = {
 			},
 			{
 				alignment: "center",
-				text: `Not pretty, but	maybe the reason \
+				text: `Not pretty, but maybe the reason \
 					you're still breathing.`,  
 			},
 		],
@@ -305,7 +305,8 @@ const defaultRooms = {
 				alignment: "left", 
 				text: 
 					`You can see why they don't call this 'prep area' \
-					a kitchen. Latched cabinets, a microwave...`,
+					a kitchen. Pre-portioned food, latched cabinets, \
+					a microwave...`,
 			},
 			{
 				alignment: "right",
@@ -359,7 +360,7 @@ const defaultItems = {
 		location: "in the cooler",
 		carry: "in your pocket",
 		name: "meal pack",
-		desc: `A foil-covered blob of... yeah. Something.`,
+		desc: `A foil-covered blob of... something.`,
 		pickup: `Having defrosted with the lack of power, \
 			it's a bit squishy. The foil wrapper seems \
 			undamaged, so it's probably safe to eat. Like, \
