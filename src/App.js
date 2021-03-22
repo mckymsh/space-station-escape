@@ -4,7 +4,7 @@ import { cloneDeep } from 'lodash';
 import './stars.scss';
 import './App.css'; 
 
-import { defaultRooms, defaultItems, intro, deaths,} from './objectMaps.js';
+import { defaultRooms, defaultItems, intro, endings,} from './objectMaps.js';
 
 // const FADE_DURATION = 1500;
 const TICK_TIME = 2000;
@@ -144,7 +144,7 @@ class App extends Component {
     	
 		tempContent.push(
 			<section className={"content-piece text-left "+(this.state.animate?"item-fadein":"")}>
-				You look closer at the {this.items[itemKey].name}. {this.items[itemKey].desc}
+				{this.items[itemKey].desc}
 			</section>
 		);
 
@@ -175,11 +175,50 @@ class App extends Component {
 		);
 
 		let tempContentQueue = this.state.contentQueue;
-		tempContentQueue.push(
-			<section className={"content-piece text-right "+(this.state.animate?"item-fadein":"")}>
-				{this.items[itemKey].use}
-			</section>
-		);
+		let tempInventory = this.state.inventory;
+
+		// https://stackoverflow.com/questions/6513585/test-for-multiple-cases-in-a-switch-like-an-or
+		switch(itemKey){
+			case "wrench":
+				window.alert("How did you get the wrench?");
+				break;			
+			case "tube": // "fall-through"
+			case "tape":
+				if(tempInventory.has("spaceSuit")
+				&& tempInventory.has("tube")
+				&& tempInventory.has("tape")){
+					window.alert("adding hose");
+					tempInventory.delete("tube");
+					tempInventory.delete("tape");
+					tempInventory.add("hose");
+					// hose.use for crafting info
+				}else{
+					window.alert("can't make new hose yet");
+					// item.use of whichever item you have for clues
+				}
+				break;
+			case "mealPack":
+			case "bioFoam":
+				if(tempInventory.has("spaceSuit")
+				&& tempInventory.has("mealPack")
+				&& tempInventory.has("bioFoam")){
+					window.alert("make patch here");
+					tempInventory.delete("mealPack");
+					tempInventory.delete("bioFoam");
+					tempInventory.add("patch");
+					// patch.use for crafting info
+				}else{
+					window.alert("can't make patch yet");
+					// item.use of whichever item you have for clues
+				}
+				break;
+			default:
+				tempContentQueue.push(
+					<section className={"content-piece text-right "+(this.state.animate?"item-fadein":"")}>
+						{this.items[itemKey].use}
+					</section>
+				);
+		}
 
 		this.setState({
 			// inventory: tempInventory,
@@ -211,7 +250,7 @@ class App extends Component {
 						{this.appLink(
 								this.items[itemKey].name,
 								() => this.handleNav(() => {this.pickupItem(itemKey)})
-						)} {this.items[itemKey].location},&nbsp; 
+						)} {this.items[itemKey].location}, and a&nbsp; 
 					</span>
 				))}
 				{Object.values(tempItems.slice(tempItems.length-1, 
@@ -324,14 +363,34 @@ class App extends Component {
 			</section>
     	)
 
-    	if(newRoom === 'space' /*...and no spacesuit*/){
-	    	this.setState({
-			    currentRoom: newRoom,
+    	if(newRoom === 'space'){
+    		let tempInventory = this.state.inventory;
+	    	if(!tempInventory.has("spaceSuit")){
+	    		this.setState({
+				    currentRoom: newRoom,
 
-			    mainContent: tempContent,	
+				    mainContent: tempContent,	
 
-			    isFading: false,	    
-		    }, () => {this.deathSequence("space_noSuit")});
+				    isFading: false,	    
+			    }, () => {this.endingSequence("space_noSuit")});
+		    }else if(!tempInventory.has("patch")){
+		    	this.setState({
+				    currentRoom: newRoom,
+
+				    mainContent: tempContent,	
+
+				    isFading: false,	    
+			    }, () => {this.endingSequence("space_leakSuit")});
+		    }else{
+		    	this.setState({
+				    currentRoom: newRoom,
+
+				    mainContent: tempContent,	
+
+				    isFading: false,	    
+			    }, () => {this.endingSequence("space_fixSuit")});
+		    }
+	    // }else if(){
 	    }else{
 		    this.setState({
 			    currentRoom: newRoom,
@@ -372,15 +431,15 @@ class App extends Component {
 	    });
 	}
 
-	deathSequence(deathType){
+	endingSequence(endingType){
 		var tempContentQueue = this.state.contentQueue;
 
-		if(!(deathType in deaths)){
+		if(!(endingType in endings)){
 			// Something has gone terribly wrong.
 			return;
 		}
 	    
-		deaths[deathType].map((item) => (
+		endings[endingType].map((item) => (
 	        tempContentQueue.push(
 	        	<section className={"content-piece text-"+item.alignment
 								+(this.state.animate?" item-fadein":"")}>

@@ -17,8 +17,8 @@ const defaultRooms = {
 		neighbors: [
 			{key: "engineering", direction: "left", },
 			{key: "storage", direction: "forward",},
-			{key: "physicsLab", direction: "back",}, 
-			{key: "bioLab", direction: "right",},
+			{key: "laboratory", direction: "back",}, 
+			{key: "hydroponics", direction: "right",},
 			{key: "northHub", direction: "north",},
 			{key: "airlock", direction: "south",},
 		],
@@ -61,11 +61,11 @@ const defaultRooms = {
 			},
 		],
 		neighbors: [
-			{key: "bioLab", direction: "spinward"},
+			{key: "hydroponics", direction: "spinward"},
 			{key: "engineering", direction: "antispinward"},
 			{key: "southHub", direction: "inward"},
 		],
-		items: ["tape"],
+		items: ["spaceSuit",],
 	},
 	"engineering": {
 		name: "engineering", 
@@ -90,12 +90,12 @@ const defaultRooms = {
 		],
 		neighbors: [
 			{key: "storage", direction: "spinward"},
-			{key: "physicsLab", direction: "antispinward"},
+			{key: "laboratory", direction: "antispinward"},
 			{key: "southHub", direction: "inward"},
 		],
-		items: ["hose"],
+		items: ["tape",],
 	},
-	"physicsLab": {
+	"laboratory": {
 		name: "the physics lab", 
 		desc: [
 			{ 
@@ -112,27 +112,30 @@ const defaultRooms = {
 		],
 		neighbors: [
 			{key: "engineering", direction: "spinward"},
-			{key: "bioLab", direction: "antispinward"},
+			{key: "hydroponics", direction: "antispinward"},
 			{key: "southHub", direction: "inward"},
 		],
 		items: [],
 	},      
-	"bioLab": {
-		name: "the bio lab", 
+	"hydroponics": {
+		name: "hydroponics", 
 		desc: [
 			{ 
 				alignment: "left", 
-				text: 
-					`This is clearly a biology lab. There are many \
-					small containers with insects and rodents.`,
+				text:  
+					`Long rows of what you assume \
+					were once well-tended plants \
+					extend along the 'upward'-curving \
+					floor of the northern ring.`,
 			},
 			{
 				alignment: "center",
-				text: `Amazingly, they all seem to still be alive.`,  
+				text: `Not pretty, but maybe the reason \
+					you're still breathing.`,  
 			},
 		],
 		neighbors: [
-			{key: "physicsLab", direction: "spinward"}, 
+			{key: "laboratory", direction: "spinward"}, 
 			{key: "storage", direction: "antispinward"},
 			{key: "southHub", direction: "inward"},
 		],
@@ -152,7 +155,7 @@ const defaultRooms = {
 			},
 		],
 		neighbors: [
-			{key: "hydroponics", direction: "left"},
+			{key: "medical", direction: "left"},
 			{key: "head", direction: "forward"},
 			{key: "foodPrep", direction: "back"}, 
 			{key: "habitation", direction: "right"},
@@ -167,7 +170,7 @@ const defaultRooms = {
 			{ 
 				alignment: "left", 
 				text: 
-					`If memory (and the handy available sign) serve, this \
+					`If memory — and the handy available sign — serve, this \
 					hatch leads to the shuttle via an airlock. You peek \
 					through the porthole.`,
 			},
@@ -194,10 +197,8 @@ const defaultRooms = {
 			{ 
 				alignment: "left", 
 				text:  
-					`Long rows of what you assume \
-					were once well-tended plants \
-					extend along the 'upward'-curving \
-					floor of the northern ring.`,
+					`This medical bay is small, but sufficient \
+					for this small of a crew.`,
 			},
 			{
 				alignment: "center",
@@ -210,7 +211,7 @@ const defaultRooms = {
 			{key: "foodPrep", direction: "antispinward"},
 			{key: "northHub", direction: "inward"},
 		],
-		items: [],
+		items: ["bioFoam",],
 	},
 	"head": {
 		name: "the head", 
@@ -227,16 +228,16 @@ const defaultRooms = {
 			{
 				alignment: "center",
 				text: `You've been here for months, and you're \
-					still not sure what all the hoses and \
+					still not sure what all the tubes and \
 					straps are for.`,  
 			},
 		],
 		neighbors: [
 			{key: "habitation", direction: "spinward"}, 
-			{key: "hydroponics", direction: "antispinward"},
+			{key: "medical", direction: "antispinward"},
 			{key: "northHub", direction: "inward"},
 		],
-		items: [],
+		items: ["tube",],
 	},
 	"habitation": {
 		name: "habitation", 
@@ -260,7 +261,7 @@ const defaultRooms = {
 			{key: "head", direction: "antispinward"},
 			{key: "northHub", direction: "inward"},
 		],
-		items: [],
+		items: ["knife",],
 	},
 	"foodPrep": {
 		name: "the food prep area", 
@@ -278,7 +279,7 @@ const defaultRooms = {
 			},
 		],
 		neighbors: [
-			{key: "hydroponics", direction: "spinward"}, 
+			{key: "medical", direction: "spinward"}, 
 			{key: "habitation", direction: "antispinward"},
 			{key: "northHub", direction: "inward"},
 		],
@@ -324,48 +325,121 @@ const defaultRooms = {
 
 const defaultItems = {
 	"wrench": {
-		location: "in another dimension",
-		carry: "through your belt",
 		name: "wrench",
 		desc: `A big, burly pipe wrench.`,
-		pickup: `You grab the wrench, \
-			feeling its mass in your hand.`,
-		use: `Sorry folks, can't use things yet.`,
+		location: "in another dimension",
+		pickup: `You should not be able to read this.`,
+		carry: "through your belt",
+		use: `Seriously, how do you have this?.`,
 	},
-	"hose": {
-		location: "under a workbench",
-		name: "hose",
+	"knife": {
+		name: "small pocket knife",
+		desc: `You've had this little knife for years. Snuck it \
+			onto every ship or station you've worked on. It's \
+			saved your butt many times in a figurative sense; \
+			maybe now it'll do so literally.`,
+		location: "on your bed",
+		pickup: `In a well-practiced motion, you flip it open, \
+			close it, and clip it to your belt. It's nice to \
+			have something familiar.`,
+		carry: "on your belt",
+		use: `Still there, still sharp. Looks like it could cut \
+			anything pretty easily, including you.`,
+	},
+	"tube": {
+		name: "loose tube",
+		desc: `A long rubber tube, used to, \
+			presumably, uh... transfer fluids.`,
+		location: "dangling freely from the wall",
+		pickup: `You wrap it around your body. Nice.`,
 		carry: "around your body",
-		desc: `A long tube, originally from some \
-			(probably important) part of the \
-			life-support system.`,
-		pickup: `Stretchy, bendy, fun fun fun! Even \
-			if this proves useless, you have something \
-			to play with, eh?`,
-		use: `Do not try and bend the hose, that’s impossible. Instead, only try to realize the truth... \
-			There is no hose. Then you’ll see that it is not the hose that bends, it is only yourself.`,
+		use: `It's funny, this tube looks about the same \
+			size as the hoses they use for oxygen lines. \
+			You choose not to meditate on the possible \
+			implications of that interoperability`,
 	},
 	"tape": {
-		location: "on a hook on the wall",
 		name: "roll of duct tape",
 		desc: `You'd think there'd be some sort of \
 			fancy space duct tape. Nope. Turns out, \
-			they had it right the first time.`,
-		pickup: `As you put it onto your wrist, you \
-			notice that the end is frayed. Probably \
-			should find something to cut this properly.`,
-		use: `It's not very effective.`,
+			they had it right the first time. Sticky, \
+			holds air, tough to tear.`,
+		location: "on a hook on the wall",
+		pickup: `You contort your hand and slip it through \
+			the roll. Duct tape always comes in handy.`,
+		carry: "on your wrist",
+		use: `You check to make sure there's a free end. \
+			yep, should be easy to peel.`,
+	},
+	"hose": {
+		name: "makeshift tube",
+		desc: `Having patched the old hose, the suit can \
+			now allow you to breathe. What a luxurious \
+			feature.`,
+		location: "on the back of the suit",
+		pickup: `If you put your hand over your eyes, it almost \
+			looks professional. Just like the original!`,
+		carry: "around your body",
+		use: `You use your trusty knife to hack out the damanged \
+			section of hose, slide your tube in its place, \
+			and wrap, like, all the duct tape around the ends. \
+			Good enough for pee, good enough for air. Right?`,
+		// use: `Do not try and bend the hose, that’s impossible. \
+		// 	Instead, only try to realize the truth... \
+		// 	There is no hose. Then you’ll see that it is not \
+		// 	the hose that bends, it is only yourself.`,
+	},
+	"spaceSuit": {
+		name: "damaged space suit",
+		desc: `The suit looks completely functional, but there's \
+			a small cut in the outer layer of the elbows. \
+			Looks like someone was careless putting it back \
+			into the rack.`,
+		location: "in its rack",
+		pickup: `You carefully remove the suit from its rig \
+			and throw it over your shoulder.`,
+		carry: "over your shoulder",
+		use: `You put on the suit`,
 	},
 	"mealPack": {
-		location: "in the cooler",
-		carry: "in your pocket",
 		name: "meal pack",
 		desc: `A foil-covered blob of... something.`,
 		pickup: `Having defrosted with the lack of power, \
 			it's a bit squishy. The foil wrapper seems \
 			undamaged, so it's probably safe to eat. Like, \
 			medically, if not psychologically.`,
-		use: `You have died of dysentery.`,
+		carry: "in your right pocket",
+		use: `With some difficulty, you pull apart the thick \
+			foil and take a bite. Horrible. You'll save the \
+			bit of foil and food for when you're truly \
+			desperate. For now, back in the pocket.`,
+	},
+	"bioFoam": {
+		name: "tube of BioFoam™",
+		desc: `BioFoam™, aka "wound glue" is meant as an \
+			emergency sealant for grievous injuries. Blood loss \
+			is no joke, especially in space. It's sticky, \
+			anti-microbial, and mildly anesthetic. Good stuff \
+			to have around.`,
+		location: "in the first aid cabinet",
+		pickup: `You aren't bleeding (yet), so you put the \
+			BioFoam in one of your pockets.`,
+		carry: "in your left pocket",
+		use: `You don't have any injuries necessitating this \
+			kind of skin glue. Maybe it could stick something \
+			else together?`,
+	},
+	"patch": {
+		name: "patch",
+		desc: `A kludge-y patch of duct tape and rubber.`,
+		location: "on the suit's elbow",
+		pickup: `You double-check the patch. It's still holding.`,
+		carry: "on the suit's elbow",
+		use: `You cut a rectangle out of the meal pack \
+			wrapper, squirt some BioFoam into the crevice, \
+			and slap the wrapper on top, holding it for a \
+			moment. You pull your hand away, and it stays. \
+			Perfect. Just like brand-new!`,
 	},
 };
 
@@ -397,7 +471,7 @@ const intro = [
 	},
 ];
 
-const deaths = {
+const endings = {
 	"space_noSuit": [
 		{ alignment: "left", 
 			text: `Your unprotected body flops in the emptiness.`
@@ -432,9 +506,19 @@ const deaths = {
 		{ alignment: "center", 
 			text: `No one's there to see it.`
 		},
+	],	
+	"psychoticLoneliness": [
+		{ alignment: "center",
+			text: `You didn't die, but you will soon!`
+		},
+	],
+	"space_fixSuit": [
+		{ alignment: "center", 
+			text: `You didn't die! Dramatic text forthcoming.`
+		},
 	],
 }
 
-export default defaultRooms;
+// export default defaultRooms;
 
-export {defaultRooms, defaultItems, intro, deaths,};
+export {defaultRooms, defaultItems, intro, endings,};
