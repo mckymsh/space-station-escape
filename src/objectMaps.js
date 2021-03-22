@@ -402,7 +402,7 @@ const deaths = {
 			text: `Your unprotected body flops in the emptiness.`
 		},
 		{ alignment: "center", 
-			text: `Your lungs implode as as your eyes bulge.`
+			text: `Your lungs implode as your eyes bulge.`
 		},
 		{ alignment: "right", 
 			text: `Your death isn't pretty.`
