@@ -373,7 +373,7 @@ const intro = [
 		text: `You awake.`
 	},
 	{ alignment: "left", 
-		text: `Like and errant grain of sand, reality digs into \
+		text: `Like an errant grain of sand, reality digs into \
 			your eye, demanding your attention.`
 	},
 	{ alignment: "right", 
