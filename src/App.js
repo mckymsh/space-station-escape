@@ -178,38 +178,59 @@ class App extends Component {
 		let tempInventory = this.state.inventory;
 
 		// https://stackoverflow.com/questions/6513585/test-for-multiple-cases-in-a-switch-like-an-or
+		// "fall-through"
+
+		// This is repetitive trash
 		switch(itemKey){
 			case "wrench":
 				window.alert("How did you get the wrench?");
 				break;			
-			case "tube": // "fall-through"
+			case "tube":
 			case "tape":
 				if(tempInventory.has("spaceSuit")
+				&& tempInventory.has("knife")
 				&& tempInventory.has("tube")
 				&& tempInventory.has("tape")){
-					window.alert("adding hose");
+
 					tempInventory.delete("tube");
 					tempInventory.delete("tape");
 					tempInventory.add("hose");
-					// hose.use for crafting info
+
+					tempContentQueue.push(
+						<section className={"content-piece text-center "+(this.state.animate?"item-fadein":"")}>
+							{this.items["hose"].pickup}
+						</section>
+					);
 				}else{
-					window.alert("can't make new hose yet");
-					// item.use of whichever item you have for clues
+					tempContentQueue.push(
+						<section className={"content-piece text-center "+(this.state.animate?"item-fadein":"")}>
+							{this.items[itemKey].use}
+						</section>
+					);
 				}
 				break;
 			case "mealPack":
 			case "bioFoam":
 				if(tempInventory.has("spaceSuit")
+				&& tempInventory.has("knife")
 				&& tempInventory.has("mealPack")
 				&& tempInventory.has("bioFoam")){
-					window.alert("make patch here");
+
 					tempInventory.delete("mealPack");
 					tempInventory.delete("bioFoam");
 					tempInventory.add("patch");
-					// patch.use for crafting info
+
+					tempContentQueue.push(
+						<section className={"content-piece text-center "+(this.state.animate?"item-fadein":"")}>
+							{this.items["patch"].pickup}
+						</section>
+					);
 				}else{
-					window.alert("can't make patch yet");
-					// item.use of whichever item you have for clues
+					tempContentQueue.push(
+						<section className={"content-piece text-center "+(this.state.animate?"item-fadein":"")}>
+							{this.items[itemKey].use}
+						</section>
+					);
 				}
 				break;
 			default:
@@ -365,32 +386,23 @@ class App extends Component {
 
     	if(newRoom === 'space'){
     		let tempInventory = this.state.inventory;
+    		let tempEnding = "";
 	    	if(!tempInventory.has("spaceSuit")){
-	    		this.setState({
-				    currentRoom: newRoom,
-
-				    mainContent: tempContent,	
-
-				    isFading: false,	    
-			    }, () => {this.endingSequence("space_noSuit")});
+	    		tempEnding = "space_noSuit";
+			}else if(!tempInventory.has("hose")){
+				tempEnding = "space_leakSuit"; // temporary
 		    }else if(!tempInventory.has("patch")){
-		    	this.setState({
-				    currentRoom: newRoom,
-
-				    mainContent: tempContent,	
-
-				    isFading: false,	    
-			    }, () => {this.endingSequence("space_leakSuit")});
+		    	tempEnding = "space_leakSuit";
 		    }else{
-		    	this.setState({
-				    currentRoom: newRoom,
-
-				    mainContent: tempContent,	
-
-				    isFading: false,	    
-			    }, () => {this.endingSequence("space_fixSuit")});
+		    	tempEnding = "space_fixSuit";
 		    }
-	    // }else if(){
+		    this.setState({
+			    currentRoom: newRoom,
+
+			    mainContent: tempContent,	
+
+			    isFading: false,	    
+		    }, () => {this.endingSequence(tempEnding)});
 	    }else{
 		    this.setState({
 			    currentRoom: newRoom,
