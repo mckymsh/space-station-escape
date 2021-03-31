@@ -191,19 +191,18 @@ const defaultRooms = {
 		],
 		items: [],
 	},
-	"hydroponics": {
-		name: "hydroponics", 
+	"medical": {
+		name: "medical bay", 
 		desc: [
 			{ 
 				alignment: "left", 
 				text:  
-					`This medical bay is small, but sufficient \
+					`This medical bay is small, even \
 					for this small of a crew.`,
 			},
 			{
 				alignment: "center",
-				text: `Not pretty, but maybe the reason \
-					you're still breathing.`,  
+				text: `Seems like plenty now that you're alone.`,  
 			},
 		],
 		neighbors: [
@@ -404,6 +403,7 @@ const defaultItems = {
 	"mealPack": {
 		name: "meal pack",
 		desc: `A foil-covered blob of... something.`,
+		location: `in the cooler`,
 		pickup: `Having defrosted with the lack of power, \
 			it's a bit squishy. The foil wrapper seems \
 			undamaged, so it's probably safe to eat. Like, \
@@ -494,9 +494,6 @@ const endings = {
 		{ alignment: "left", 
 			text: `You immediately hear the hiss of moving air.`
 		},
-		{ alignment: "right", 
-			text: `A tiny slit in the arm has ruptured.`
-		},
 		{ alignment: "left", 
 			text: `As your precious air abandons you, its moisture \
 			crystalizes, brilliant in the unfiltered sunlight`
@@ -506,11 +503,6 @@ const endings = {
 		},
 		{ alignment: "center", 
 			text: `No one's there to see it.`
-		},
-	],	
-	"psychoticLoneliness": [
-		{ alignment: "center",
-			text: `You didn't die, but you will soon!`
 		},
 	],
 	"space_fixSuit": [

@@ -21,6 +21,8 @@ class App extends Component {
 		    inventory: null,
 		    currentRoom: null,
 		    roomsVisited: null,
+		    suitOn: false,
+
 		    contentQueue: [],
 		    mainContent: [],
 		    animate: true,
@@ -168,11 +170,11 @@ class App extends Component {
 	    let tempContent = this.state.mainContent;
 	    tempContent = tempContent.slice(0, tempContent.length-1);
     	
-		tempContent.push(
-			<section className={"content-piece text-left "+(this.state.animate?"item-fadein":"")}>
-				You use the {this.items[itemKey].name}!
-			</section>
-		);
+		// tempContent.push(
+		// 	<section className={"content-piece text-left "+(this.state.animate?"item-fadein":"")}>
+		// 		You use the {this.items[itemKey].name}!
+		// 	</section>
+		// );
 
 		let tempContentQueue = this.state.contentQueue;
 		let tempInventory = this.state.inventory;
@@ -184,7 +186,17 @@ class App extends Component {
 		switch(itemKey){
 			case "wrench":
 				window.alert("How did you get the wrench?");
-				break;			
+				break;		
+			case "spaceSuit":
+				tempContentQueue.push(
+					<section className={"content-piece text-left "+(this.state.animate?"item-fadein":"")}>
+						{this.items[itemKey].use}
+					</section>
+				);
+				this.setState({
+					suitOn: true,
+				})
+				break;
 			case "tube":
 			case "tape":
 				if(tempInventory.has("spaceSuit")
@@ -221,13 +233,13 @@ class App extends Component {
 					tempInventory.add("patch");
 
 					tempContentQueue.push(
-						<section className={"content-piece text-center "+(this.state.animate?"item-fadein":"")}>
+						<section className={"content-piece text-left "+(this.state.animate?"item-fadein":"")}>
 							{this.items["patch"].pickup}
 						</section>
 					);
 				}else{
 					tempContentQueue.push(
-						<section className={"content-piece text-center "+(this.state.animate?"item-fadein":"")}>
+						<section className={"content-piece text-left "+(this.state.animate?"item-fadein":"")}>
 							{this.items[itemKey].use}
 						</section>
 					);
@@ -255,8 +267,8 @@ class App extends Component {
 			<div className={(this.state.animate?"item-fadein":"")
 										+(fadeOut&&this.state.animate?" item-fadeout":"")}>
 				{(this.rooms[this.state.currentRoom].items.length > 0)? this.itemList() : null}
-				{this.moveList()}
 				{(this.state.inventory.size > 0)? this.inventoryList() : null}
+				{this.moveList()}
 	        </div>
         );
 	}
@@ -265,7 +277,7 @@ class App extends Component {
 		let tempItems = this.rooms[this.state.currentRoom].items;
 
 		return(
-			<section className="content-piece text-left">Scanning the room, you see a&nbsp;
+			<section className="content-piece text-left">There is a&nbsp;
 				{Object.values(tempItems.slice(0, tempItems.length-1)).map((itemKey) => (
 					<span key={itemKey}>
 						{this.appLink(
@@ -386,8 +398,11 @@ class App extends Component {
 
     	if(newRoom === 'space'){
     		let tempInventory = this.state.inventory;
+    		let tempSuitOn = this.state.suitOn;
     		let tempEnding = "";
-	    	if(!tempInventory.has("spaceSuit")){
+
+			// don't matter if you got it if you ain't wearin' it!
+	    	if(!tempInventory.has("spaceSuit") || !tempSuitOn){ 
 	    		tempEnding = "space_noSuit";
 			}else if(!tempInventory.has("hose")){
 				tempEnding = "space_leakSuit"; // temporary
