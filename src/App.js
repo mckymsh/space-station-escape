@@ -21,6 +21,8 @@ class App extends Component {
 		    inventory: null,
 		    currentRoom: null,
 		    roomsVisited: null,
+		    suitOn: false,
+
 		    contentQueue: [],
 		    mainContent: [],
 		    animate: true,
@@ -184,7 +186,17 @@ class App extends Component {
 		switch(itemKey){
 			case "wrench":
 				window.alert("How did you get the wrench?");
-				break;			
+				break;		
+			case "spaceSuit":
+				tempContentQueue.push(
+					<section className={"content-piece text-center "+(this.state.animate?"item-fadein":"")}>
+						{this.items[itemKey].use}
+					</section>
+				);
+				this.setState({
+					suitOn: true,
+				})
+				break;
 			case "tube":
 			case "tape":
 				if(tempInventory.has("spaceSuit")
@@ -386,8 +398,11 @@ class App extends Component {
 
     	if(newRoom === 'space'){
     		let tempInventory = this.state.inventory;
+    		let tempSuitOn = this.state.suitOn;
     		let tempEnding = "";
-	    	if(!tempInventory.has("spaceSuit")){
+
+			// don't matter if you got it if you ain't wearin' it!
+	    	if(!tempInventory.has("spaceSuit") || !tempSuitOn){ 
 	    		tempEnding = "space_noSuit";
 			}else if(!tempInventory.has("hose")){
 				tempEnding = "space_leakSuit"; // temporary
