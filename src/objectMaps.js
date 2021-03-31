@@ -338,6 +338,18 @@ const defaultItems = {
 		carry: "through your belt",
 		use: `Seriously, how do you have this?.`,
 	},
+	"spaceSuit": {
+		name: "space suit",
+		desc: `The suit looks largely complete, but there's \
+			a small puncture in one of the elbows, and the hose \
+			to the oxygen tank looks like it's been sliced \
+			clean through. Almost looks like it was cut with a knife.`,
+		location: "in its rack",
+		pickup: `You carefully remove the suit from its rig \
+			and throw it over your shoulder.`,
+		carry: "over your shoulder",
+		use: `This thing is heavy.`,
+	},
 	"knife": {
 		name: "small pocket knife",
 		desc: `You've had this little knife for years. Snuck it \
@@ -357,12 +369,12 @@ const defaultItems = {
 		desc: `A long rubber tube, used to, \
 			presumably, uh... transfer fluids.`,
 		location: "dangling freely from the wall",
-		pickup: `You wrap it around your body. Nice.`,
+		pickup: `You wrap the tube tightly around your body. Nice.`,
 		carry: "around your body",
 		use: `It's funny, this tube looks about the same \
 			size as the hoses they use for oxygen lines. \
 			You choose not to meditate on the possible \
-			implications of that interoperability`,
+			implications of that interoperability.`,
 	},
 	"tape": {
 		name: "roll of duct tape",
@@ -383,29 +395,17 @@ const defaultItems = {
 			now allow you to breathe. What a luxurious \
 			feature.`,
 		location: "on the back of the suit",
-		pickup: `If you put your hand over your eyes, it almost \
-			looks professional. Just like the original!`,
-		carry: "around your body",
-		use: `You use your trusty knife to hack out the damanged \
+		pickup: `You use your trusty knife to hack out the damanged \
 			section of hose, slide your tube in its place, \
 			and wrap, like, all the duct tape around the ends. \
 			Good enough for pee, good enough for air. Right?`,
+		carry: "on the back of the suit",
+		use: `If you put your hand over your eyes, it almost \
+			looks professional. Just like the original!`,
 		// use: `Do not try and bend the hose, that’s impossible. \
 		// 	Instead, only try to realize the truth... \
 		// 	There is no hose. Then you’ll see that it is not \
 		// 	the hose that bends, it is only yourself.`,
-	},
-	"spaceSuit": {
-		name: "damaged space suit",
-		desc: `The suit looks completely functional, but there's \
-			a small cut in the outer layer of the elbows. \
-			Looks like someone was careless putting it back \
-			into the rack.`,
-		location: "in its rack",
-		pickup: `You carefully remove the suit from its rig \
-			and throw it over your shoulder.`,
-		carry: "over your shoulder",
-		use: `You put on the suit`,
 	},
 	"mealPack": {
 		name: "meal pack",
@@ -423,7 +423,7 @@ const defaultItems = {
 	},
 	"bioFoam": {
 		name: "tube of BioFoam™",
-		desc: `BioFoam™, aka "wound glue" is meant as an \
+		desc: `BioFoam™, AKA "wound glue" is meant as an \
 			emergency sealant for grievous injuries. Blood loss \
 			is no joke, especially in space. It's sticky, \
 			anti-microbial, and mildly anesthetic. Good stuff \
@@ -440,13 +440,14 @@ const defaultItems = {
 		name: "patch",
 		desc: `A kludge-y patch of duct tape and rubber.`,
 		location: "on the suit's elbow",
-		pickup: `You double-check the patch. It's still holding.`,
-		carry: "on the suit's elbow",
-		use: `You cut a rectangle out of the meal pack \
-			wrapper, squirt some BioFoam into the crevice, \
+		pickup: `You use your knife to cut a rectangle out \
+			of the meal pack wrapper, squirt some BioFoam \
+			into the hole in the suit's elbow, \
 			and slap the wrapper on top, holding it for a \
 			moment. You pull your hand away, and it stays. \
-			Perfect. Just like brand-new!`,
+			Perfect! Just like brand-new.`,
+		carry: "on the suit's elbow",
+		use: `You double-check the patch. It's still holding.`,
 	},
 };
 
