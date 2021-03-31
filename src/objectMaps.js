@@ -448,7 +448,7 @@ const defaultItems = {
 			moment. You pull your hand away, and it stays. \
 			Perfect! Just like brand-new.`,
 		carry: "on the suit's elbow",
-		use: `You double-check the patch. It's still holding.`,
+		use: `You poke at the patch. It's holding well.`,
 	},
 };
 

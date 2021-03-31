@@ -22,6 +22,8 @@ class App extends Component {
 		    currentRoom: null,
 		    roomsVisited: null,
 		    suitOn: false,
+		    hoseOn: false,
+		    patchOn: false,
 
 		    contentQueue: [],
 		    mainContent: [],
@@ -93,8 +95,13 @@ class App extends Component {
 	    	inventory: tempInventory,
 	    	currentRoom: randomKey,
 	    	roomsVisited: tempVisited,
+	    	suitOn: false,
+		    hoseOn: false,
+		    patchOn: false,
+
 	    	contentQueue: [],
 	    	mainContent: [],
+		    isFading: false,
 	    }, this.intro);
 
 	    let tempMain = document.getElementById("mainContent");
@@ -244,7 +251,9 @@ class App extends Component {
 
 					tempInventory.delete("tube");
 					tempInventory.delete("tape");
-					tempInventory.add("hose");
+					this.setState({
+						hoseOn: true,
+					})
 
 					tempContentQueue.push(
 						<section className={"content-piece text-center "+(this.state.animate?"item-fadein":"")}>
@@ -268,7 +277,9 @@ class App extends Component {
 
 					tempInventory.delete("mealPack");
 					tempInventory.delete("bioFoam");
-					tempInventory.add("patch");
+					this.setState({
+						patchOn: true,
+					})
 
 					tempContentQueue.push(
 						<section className={"content-piece text-center "+(this.state.animate?"item-fadein":"")}>
@@ -437,14 +448,16 @@ class App extends Component {
     	if(newRoom === 'space'){
     		let tempInventory = this.state.inventory;
     		let tempSuitOn = this.state.suitOn;
+    		let tempHoseOn = this.state.hoseOn;
+    		let tempPatchOn = this.state.patchOn;
     		let tempEnding = "";
 
 			// don't matter if you got it if you ain't wearin' it!
 	    	if(!tempInventory.has("spaceSuit") || !tempSuitOn){ 
 	    		tempEnding = "space_noSuit";
-			}else if(!tempInventory.has("hose")){
+			}else if(!tempHoseOn){
 				tempEnding = "space_leakSuit"; // temporary
-		    }else if(!tempInventory.has("patch")){
+		    }else if(!tempPatchOn){
 		    	tempEnding = "space_leakSuit";
 		    }else{
 		    	tempEnding = "space_fixSuit";
