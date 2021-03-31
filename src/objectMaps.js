@@ -348,7 +348,8 @@ const defaultItems = {
 		pickup: `You carefully remove the suit from its rig \
 			and throw it over your shoulder.`,
 		carry: "over your shoulder",
-		use: `This thing is heavy.`,
+		use: `The suit is bulky and awkward. You aren't able to \
+			carry anything while you're wearing it.`,
 	},
 	"knife": {
 		name: "small pocket knife",

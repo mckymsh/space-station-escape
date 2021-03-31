@@ -143,14 +143,37 @@ class App extends Component {
 		// Remove navigation when clicked... again
 	    let tempContent = this.state.mainContent;
 	    tempContent = tempContent.slice(0, tempContent.length-1);
-    	
-		tempContent.push(
-			<section className={"content-piece text-left "+(this.state.animate?"item-fadein":"")}>
-				{this.items[itemKey].desc}
-			</section>
-		);
 
-		let tempContentQueue = this.state.contentQueue;
+	    let tempContentQueue = this.state.contentQueue;
+
+		// hackish, but hey it works
+		if(this.state.suitOn){
+			tempInventory.delete("spaceSuit");
+			this.rooms[tempCurrentRoom].items.push("spaceSuit");
+			this.items["spaceSuit"].location = "on the floor";
+			this.items["spaceSuit"].pickup = "You lift it from the floor and throw it over your shoulder."
+			this.items["spaceSuit"].carry = "over your shoulder";
+			tempContent.push(
+				<section className={"content-piece text-left "+(this.state.animate?"item-fadein":"")}>
+					{this.items["spaceSuit"].use}
+				</section>
+			);
+			tempContentQueue.push(
+				<section className={"content-piece text-left "+(this.state.animate?"item-fadein":"")}>
+					{this.items[itemKey].desc}
+				</section>
+			);
+			this.setState({
+				suitOn: false,
+			})
+		}else{
+			tempContent.push(
+				<section className={"content-piece text-left "+(this.state.animate?"item-fadein":"")}>
+					{this.items[itemKey].desc}
+				</section>
+			);
+		}
+
 		tempContentQueue.push(
 			<section className={"content-piece text-right "+(this.state.animate?"item-fadein":"")}>
 				{this.items[itemKey].pickup}
@@ -170,14 +193,15 @@ class App extends Component {
 	    let tempContent = this.state.mainContent;
 	    tempContent = tempContent.slice(0, tempContent.length-1);
     	
-		tempContent.push(
-			<section className={"content-piece text-left "+(this.state.animate?"item-fadein":"")}>
-				You use the {this.items[itemKey].name}!
-			</section>
-		);
+		// tempContent.push(
+		// 	<section className={"content-piece text-left "+(this.state.animate?"item-fadein":"")}>
+		// 		You use the {this.items[itemKey].name}!
+		// 	</section>
+		// );
 
 		let tempContentQueue = this.state.contentQueue;
 		let tempInventory = this.state.inventory;
+		let tempCurrentRoom = this.state.currentRoom;
 
 		// https://stackoverflow.com/questions/6513585/test-for-multiple-cases-in-a-switch-like-an-or
 		// "fall-through"
@@ -193,7 +217,21 @@ class App extends Component {
 						{this.items[itemKey].use}
 					</section>
 				);
+				for(let itemKey of tempInventory){
+					this.items[itemKey].location = "on the floor";
+					if(itemKey !== "spaceSuit"){
+						this.rooms[tempCurrentRoom].items.push(itemKey);
+					}
+				}
+				// this.rooms[tempCurrentRoom].items.splice(
+				// 	0,
+				// 	this.rooms[tempCurrentRoom].items.indexOf("spaceSuit")
+				// );
+				tempInventory.clear();
+				tempInventory.add("spaceSuit");
+				this.items["spaceSuit"].carry = "on your body";
 				this.setState({
+					inventory: tempInventory,
 					suitOn: true,
 				})
 				break;
@@ -267,8 +305,8 @@ class App extends Component {
 			<div className={(this.state.animate?"item-fadein":"")
 										+(fadeOut&&this.state.animate?" item-fadeout":"")}>
 				{(this.rooms[this.state.currentRoom].items.length > 0)? this.itemList() : null}
-				{this.moveList()}
 				{(this.state.inventory.size > 0)? this.inventoryList() : null}
+				{this.moveList()}
 	        </div>
         );
 	}
@@ -277,22 +315,22 @@ class App extends Component {
 		let tempItems = this.rooms[this.state.currentRoom].items;
 
 		return(
-			<section className="content-piece text-left">Scanning the room, you see a&nbsp;
+			<section className="content-piece text-left">There is&nbsp;
 				{Object.values(tempItems.slice(0, tempItems.length-1)).map((itemKey) => (
 					<span key={itemKey}>
-						{this.appLink(
+						a {this.appLink(
 								this.items[itemKey].name,
 								() => this.handleNav(() => {this.pickupItem(itemKey)})
-						)} {this.items[itemKey].location}, and a&nbsp; 
+						)} {this.items[itemKey].location},&nbsp;
 					</span>
 				))}
 				{Object.values(tempItems.slice(tempItems.length-1, 
 												tempItems.length)).map((itemKey) => (
 					<span key={itemKey}>
-						{this.appLink(
+						{tempItems.length > 1 ? "and a " : "a "}{this.appLink(
 								this.items[itemKey].name,
 								() => this.handleNav(() => {this.pickupItem(itemKey)})
-						)} {this.items[itemKey].location}.&nbsp; 
+						)} {this.items[itemKey].location}.
 					</span>
 				))}
 			</section>
@@ -303,19 +341,19 @@ class App extends Component {
 		// Iterators still elude me
 		let tempInventory = Array.from(this.state.inventory.keys());
 		return(
-			<section className="content-piece text-left">You have
+			<section className="content-piece text-left">You have&nbsp;
 				{Object.values(tempInventory.slice(0, tempInventory.length-1)).map((itemKey) => (
 					<span key={itemKey}>
-						&nbsp;a {this.appLink(
+						a {this.appLink(
 								this.items[itemKey].name,
 								() => this.handleNav(() => {this.useItem(itemKey);})
-						)} {this.items[itemKey].carry},
+						)} {this.items[itemKey].carry},&nbsp;
 					</span>
 				))}
 				{Object.values(tempInventory.slice(tempInventory.length-1, 
 												tempInventory.length)).map((itemKey) => (
 					<span key={itemKey}>
-						{(tempInventory.length > 1)? " and a " : " a "}{this.appLink(
+						{(tempInventory.length > 1)? "and a " : "a "}{this.appLink(
 								this.items[itemKey].name,
 								() => this.handleNav(() => {this.useItem(itemKey);})
 						)} {this.items[itemKey].carry} 
@@ -330,19 +368,19 @@ class App extends Component {
 	    let tempNeighbors = this.rooms[tempCurrentRoom].neighbors;
 
 		return(
-			<section className="content-piece text-left">You can move
+			<section className="content-piece text-left">You can move&nbsp;
 	            {Object.values(tempNeighbors.slice(0, tempNeighbors.length-1)).map((neighbor) => (
 		            <span key={neighbor.key}>
-		                &nbsp;{neighbor.direction} to {this.appLink(
+		                {neighbor.direction} to {this.appLink(
 								            	this.rooms[neighbor.key].name,
 							                	() => this.handleNav(() => {this.changeRoom(neighbor.key)})
-								            )}, 
+								            )},&nbsp;
 		            </span>
 	            ))}
 	            {Object.values(tempNeighbors.slice(tempNeighbors.length-1, 
 									            	tempNeighbors.length)).map((neighbor) => (
 		            <span key={neighbor.key}>
-		                &nbsp;or {neighbor.direction} to {this.appLink(
+		                {(tempNeighbors.length > 1)? "or " : ""}{neighbor.direction} to {this.appLink(
 								            	this.rooms[neighbor.key].name,
 							                	() => this.handleNav(() => {this.changeRoom(neighbor.key)})
 								            )}. 
