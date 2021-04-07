@@ -188,42 +188,6 @@ const defaultRooms = {
 		],
 		items: [],
 	},
-	"shuttle": {
-		name: "the escape shuttle", 
-		desc: [
-			{ 
-				alignment: "left", 
-				text: 
-					`You've made it to the shuttle.`,
-			},
-			{
-				alignment: "left",
-				text: `At this point, that means the game is very broken. \
-					maybe let me know so I can fix it.`,  
-			},
-		],
-		neighbors: [
-			{key: "space", direction: "outside"},
-		],
-		items: [],
-	},
-	"space": {
-		name: "space", 
-		desc: [
-			{ 
-				alignment: "left", 
-				text: 
-					`You're probably dead. \
-					Apparently that doesn't slow you down. \
-					Continue playing; don't mind me.`, 
-			},
-		],
-		neighbors: [
-			{key: "airlock", direction: "south"},
-			{key: "shuttle", direction: "north"},
-		],
-		items: [],
-	},
 	"hydroponics": {
 		name: "hydroponics", 
 		desc: [
@@ -319,6 +283,42 @@ const defaultRooms = {
 			{key: "northHub", direction: "inward"},
 		],
 		items: ["mealPack",],
+	},
+	"shuttle": {
+		name: "the escape shuttle", 
+		desc: [
+			{ 
+				alignment: "left", 
+				text: 
+					`You've made it to the shuttle.`,
+			},
+			{
+				alignment: "left",
+				text: `At this point, that means the game is very broken. \
+					maybe let me know so I can fix it.`,  
+			},
+		],
+		neighbors: [
+			{key: "space", direction: "outside"},
+		],
+		items: [],
+	},
+	"space": {
+		name: "space", 
+		desc: [
+			{ 
+				alignment: "left", 
+				text: 
+					`You're probably dead. \
+					Apparently that doesn't slow you down. \
+					Continue playing; don't mind me.`, 
+			},
+		],
+		neighbors: [
+			{key: "airlock", direction: "south"},
+			{key: "shuttle", direction: "north"},
+		],
+		items: [],
 	},
 };
 

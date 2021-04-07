@@ -78,15 +78,23 @@ class App extends Component {
 
 	  	// https://stackoverflow.com/a/49687370/11937109
 	    const roomKeys = Object.keys(this.rooms);
-	    const randomIndex = Math.floor(Math.random() * roomKeys.length);
+	    let randomIndex = 0;
+	    do {
+	    	randomIndex = Math.floor(Math.random() * roomKeys.length-2);
+	    } while(this.rooms[randomIndex] === ('space' || 'shuttle'));
+	    // This condition ^^ should never happen since those two are at
+	    // the end of the list in objectMaps, but it's nice to have 
+	    // as a backup.
+
 	    const randomKey = roomKeys[randomIndex];
 	    
-	    let tempVisited = new Set().add(this.rooms[randomKey]);	    
+	    let tempVisited = new Set();	    
 
 	    clearInterval(this.tickInterval);
 	    this.tickInterval = setInterval(() => 
 	    		{this.tick()}, TICK_TIME);
 
+	    // Note that I don't reset 'animate'.
 	    this.setState({
 	    	inventory: tempInventory,
 	    	currentRoom: randomKey,
@@ -94,11 +102,6 @@ class App extends Component {
 	    	contentQueue: [],
 	    	mainContent: [],
 	    }, this.intro);
-
-	    let tempMain = document.getElementById("mainContent");
-	    if(tempMain && this.state.mainContent.length > 0){
-		    tempMain.getElementsByClassName("content-piece")[0].innerHTML = "farts";//focus();
-	    }
 	}
 
 	// Adapted from
