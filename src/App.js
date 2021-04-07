@@ -80,11 +80,8 @@ class App extends Component {
 	    const roomKeys = Object.keys(this.rooms);
 	    let randomIndex = 0;
 	    do {
-	    	randomIndex = Math.floor(Math.random() * roomKeys.length-2);
+	    	randomIndex = Math.floor(Math.random() * roomKeys.length);
 	    } while(this.rooms[randomIndex] === ('space' || 'shuttle'));
-	    // This condition ^^ should never happen since those two are at
-	    // the end of the list in objectMaps, but it's nice to have 
-	    // as a backup.
 
 	    const randomKey = roomKeys[randomIndex];
 	    
