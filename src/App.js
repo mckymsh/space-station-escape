@@ -25,9 +25,12 @@ class App extends Component {
 
 		    contentQueue: [],
 		    mainContent: [],
-		    animate: true,
+		    
 		    isFading: false,
-		    currentTick: 0,
+		    animate: true,
+		    scroll: true,
+		    fade: true,
+		    stars: true,
 	    };
 	}
 
@@ -106,7 +109,7 @@ class App extends Component {
 	// Adapted from
 	// https://stackoverflow.com/questions/37620694/how-to-scroll-to-bottom-in-react#41700815
 	scrollToBottom(){
-	    if(this.state.animate && !this.state.isFading){
+	    if(this.state.scroll && !this.state.isFading){
 	    	this.contentEnd.scrollIntoView({
 	    		behavior: "smooth", 
 	    		block: "end"
@@ -119,7 +122,7 @@ class App extends Component {
 
 	    for(var i = 0; i < intro.length; i++){
 	    	newContent.push(
-		        <section className={"content-piece "+(this.state.animate?"item-fadein ":" ")+"text-"+intro[i].alignment}>
+		        <section className={"content-piece "+(this.state.fade?"item-fadein ":" ")+"text-"+intro[i].alignment}>
 			        {intro[i].text}
 		        </section>
 		    );
@@ -145,14 +148,14 @@ class App extends Component {
 	    tempContent = tempContent.slice(0, tempContent.length-1);
     	
 		tempContent.push(
-			<section className={"content-piece text-left "+(this.state.animate?"item-fadein":"")}>
+			<section className={"content-piece text-left "+(this.state.fade?"item-fadein":"")}>
 				{this.items[itemKey].desc}
 			</section>
 		);
 
 		let tempContentQueue = this.state.contentQueue;
 		tempContentQueue.push(
-			<section className={"content-piece text-right "+(this.state.animate?"item-fadein":"")}>
+			<section className={"content-piece text-right "+(this.state.fade?"item-fadein":"")}>
 				{this.items[itemKey].pickup}
 			</section>
 		);
@@ -171,7 +174,7 @@ class App extends Component {
 	    tempContent = tempContent.slice(0, tempContent.length-1);
     	
 		// tempContent.push(
-		// 	<section className={"content-piece text-left "+(this.state.animate?"item-fadein":"")}>
+		// 	<section className={"content-piece text-left "+(this.state.fade?"item-fadein":"")}>
 		// 		You use the {this.items[itemKey].name}!
 		// 	</section>
 		// );
@@ -189,7 +192,7 @@ class App extends Component {
 				break;		
 			case "spaceSuit":
 				tempContentQueue.push(
-					<section className={"content-piece text-left "+(this.state.animate?"item-fadein":"")}>
+					<section className={"content-piece text-left "+(this.state.fade?"item-fadein":"")}>
 						{this.items[itemKey].use}
 					</section>
 				);
@@ -210,13 +213,13 @@ class App extends Component {
 					tempInventory.add("hose");
 
 					tempContentQueue.push(
-						<section className={"content-piece text-center "+(this.state.animate?"item-fadein":"")}>
+						<section className={"content-piece text-center "+(this.state.fade?"item-fadein":"")}>
 							{this.items["hose"].pickup}
 						</section>
 					);
 				}else{
 					tempContentQueue.push(
-						<section className={"content-piece text-center "+(this.state.animate?"item-fadein":"")}>
+						<section className={"content-piece text-center "+(this.state.fade?"item-fadein":"")}>
 							{this.items[itemKey].use}
 						</section>
 					);
@@ -234,13 +237,13 @@ class App extends Component {
 					tempInventory.add("patch");
 
 					tempContentQueue.push(
-						<section className={"content-piece text-left "+(this.state.animate?"item-fadein":"")}>
+						<section className={"content-piece text-left "+(this.state.fade?"item-fadein":"")}>
 							{this.items["patch"].pickup}
 						</section>
 					);
 				}else{
 					tempContentQueue.push(
-						<section className={"content-piece text-left "+(this.state.animate?"item-fadein":"")}>
+						<section className={"content-piece text-left "+(this.state.fade?"item-fadein":"")}>
 							{this.items[itemKey].use}
 						</section>
 					);
@@ -248,7 +251,7 @@ class App extends Component {
 				break;
 			default:
 				tempContentQueue.push(
-					<section className={"content-piece text-right "+(this.state.animate?"item-fadein":"")}>
+					<section className={"content-piece text-right "+(this.state.fade?"item-fadein":"")}>
 						{this.items[itemKey].use}
 					</section>
 				);
@@ -265,8 +268,8 @@ class App extends Component {
 	navigation(fadeOut){
 
 		return(
-			<div className={(this.state.animate?"item-fadein":"")
-										+(fadeOut&&this.state.animate?" item-fadeout":"")}>
+			<div className={(this.state.fade?"item-fadein":"")
+										+(fadeOut&&this.state.fade?" item-fadeout":"")}>
 				{(this.rooms[this.state.currentRoom].items.length > 0)? this.itemList() : null}
 				{(this.state.inventory.size > 0)? this.inventoryList() : null}
 				{this.moveList()}
@@ -392,7 +395,7 @@ class App extends Component {
 
 	    // Room exit text-- eventually different for each room?
 	    tempContent.push(
-			<section className={"content-piece text-center"+(this.state.animate?" item-fadein":"")}>
+			<section className={"content-piece text-center"+(this.state.fade?" item-fadein":"")}>
 				You leave {this.rooms[this.state.currentRoom].name} and enter {this.rooms[newRoom].name}.
 			</section>
     	)
@@ -441,7 +444,7 @@ class App extends Component {
 	    	tempVisited = tempVisited.add(tempCurrentRoom);
 	    	this.rooms[tempCurrentRoom].desc.map((descPiece) => (
 			    tempContentQueue.push(
-					<section className={"content-piece text-"+descPiece.alignment+(this.state.animate?" item-fadein":"")}>
+					<section className={"content-piece text-"+descPiece.alignment+(this.state.fade?" item-fadein":"")}>
 						{descPiece.text}
 					</section>
 			    )
@@ -470,7 +473,7 @@ class App extends Component {
 		endings[endingType].map((item) => (
 	        tempContentQueue.push(
 	        	<section className={"content-piece text-"+item.alignment
-								+(this.state.animate?" item-fadein":"")}>
+								+(this.state.fade?" item-fadein":"")}>
 					{item.text}
 				</section>
 			)
@@ -478,7 +481,7 @@ class App extends Component {
 
 		tempContentQueue.push(
 			<section className={"content-piece text-center"
-							+(this.state.animate?" item-fadein":"")}>
+							+(this.state.fade?" item-fadein":"")}>
 				{this.appLink("restart", () => this.reset())}
 			</section>
 		)
@@ -489,19 +492,26 @@ class App extends Component {
 	    });
 	}
 
+	toggleScroll(){
+		this.setState(prevState => ({
+			scroll: !prevState.scroll,
+		}));
+	}
+
+	toggleFade(){
+		this.setState(prevState => ({
+			fade: !prevState.fade,
+		}));
+	}
+
+	toggleStars(){
+		this.setState(prevState => ({
+			stars: !prevState.stars,
+		}));
+	}
+
 	toggleAnimation(){
 		const prevAnimate = this.state.animate;
-
-		// This is ugly please don't look at it
-		// const stars = document.getElementsByClassName("stars");
-		// for(var i = 0; i < stars.length; i++){
-		// 	if(prevAnimate)
-		// 	{
-		// 		stars.item(i).classList.add("no-animate");
-		// 	}else{
-		// 		stars.item(i).classList.remove("no-animate");
-		// 	}
-		// }
 
 		if(!prevAnimate){
 			clearInterval(this.tickInterval);
@@ -531,27 +541,45 @@ class App extends Component {
 	render(){
 	    return(
 	    	<React.Fragment>
-		    	<div id="stars" className={"stars"+(this.state.animate?"":" no-animate")}></div>
-				<div id="stars2" className={"stars"+(this.state.animate?"":" no-animate")}></div>
-				<div id="stars3" className={"stars"+(this.state.animate?"":" no-animate")}></div>
+		    	<div id="stars" className={"stars"+(this.state.stars?"":" no-animate")}></div>
+				<div id="stars2" className={"stars"+(this.state.stars?"":" no-animate")}></div>
+				<div id="stars3" className={"stars"+(this.state.stars?"":" no-animate")}></div>
 			    <div className="App">
 				    <header className="title text-center">
 					    <span>SPACE STATION ESCAPE</span>
 	 			    </header>
 				    <nav className="Actions text-center">
-				        -&nbsp;{
-						        	<button
-							        	type="button" 
-								        className={"App-link"+(this.state.animate ? "" : " deactivated")}
-								        onClick={() => this.toggleAnimation()}
-								    >animate</button>
-								}&nbsp;-&nbsp;{
-									<button
-							        	type="button" 
-								        className={"App-link"}
-								        onClick={() => this.reset()}
-								    >restart</button>
-								}&nbsp;-
+				        {
+				        	<button
+					        	type="button" 
+						        className={"App-link"+(this.state.animate ? "" : " deactivated")}
+						        onClick={() => this.toggleAnimation()}
+						    >drama</button>
+						}/{
+				        	<button
+					        	type="button" 
+						        className={"App-link"+(this.state.scroll ? "" : " deactivated")}
+						        onClick={() => this.toggleScroll()}
+						    >scroll</button>
+						}/{
+				        	<button
+					        	type="button" 
+						        className={"App-link"+(this.state.fade ? "" : " deactivated")}
+						        onClick={() => this.toggleFade()}
+						    >fade</button>
+						}/{
+				        	<button
+					        	type="button" 
+						        className={"App-link"+(this.state.stars ? "" : " deactivated")}
+						        onClick={() => this.toggleStars()}
+						    >stars</button>
+						}/{
+							<button
+					        	type="button" 
+						        className={"App-link"}
+						        onClick={() => this.reset()}
+						    >restart</button>
+						}
 			        </nav>
 			        <main id="mainContent" className="Main-Content item-fadein">
 			            {this.state.mainContent.map((item, index) => (
