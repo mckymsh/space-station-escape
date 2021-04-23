@@ -193,6 +193,7 @@ class App extends Component {
 						{this.items[itemKey].use}
 					</section>
 				);
+				this.items["spaceSuit"].carry = "on your body";
 				this.setState({
 					suitOn: true,
 				})

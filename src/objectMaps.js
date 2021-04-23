@@ -284,25 +284,25 @@ const defaultRooms = {
 		],
 		items: ["mealPack",],
 	},
-	"shuttle": {
-		name: "the escape shuttle", 
-		desc: [
-			{ 
-				alignment: "left", 
-				text: 
-					`You've made it to the shuttle.`,
-			},
-			{
-				alignment: "left",
-				text: `At this point, that means the game is very broken. \
-					maybe let me know so I can fix it.`,  
-			},
-		],
-		neighbors: [
-			{key: "space", direction: "outside"},
-		],
-		items: [],
-	},
+	// "shuttle": {
+	// 	name: "the escape shuttle", 
+	// 	desc: [
+	// 		{ 
+	// 			alignment: "left", 
+	// 			text: 
+	// 				`You've made it to the shuttle.`,
+	// 		},
+	// 		{
+	// 			alignment: "left",
+	// 			text: `At this point, that means the game is very broken. \
+	// 				maybe let me know so I can fix it.`,  
+	// 		},
+	// 	],
+	// 	neighbors: [
+	// 		{key: "space", direction: "outside"},
+	// 	],
+	// 	items: [],
+	// },
 	"space": {
 		name: "space", 
 		desc: [
@@ -458,7 +458,7 @@ const intro = [
 	`},
 	{ alignment: "left",
 		text: `Last you remember, you were alone in the \
-			lab— another late night, nothing unusual.`
+			lab — another late night, nothing unusual.`
 	},
 	{ alignment: "center", 
 		text: `Yet here you are.`
@@ -506,8 +506,47 @@ const endings = {
 		},
 	],
 	"space_fixSuit": [
+		{ alignment: "left", 
+			text: `After a moment, you realize you've been holding \
+				your breath. A few ragged breaths, and you get \
+				your bearings.`
+		},
+		{ alignment: "right", 
+			text: `You've never done an EVA, but the station is \
+				built with plenty of handholds that should make \
+				it easy enough.`
+		},
+		{ alignment: "left", 
+			text: `You crawl, hand-over-hand, to the northern \
+				end of the station.`
+		},
+		{ alignment: "left", 
+			text: `You awkwardly pull yourself up the \
+				umbilical to the waiting shuttle.`
+		},
 		{ alignment: "center", 
-			text: `You didn't die! Dramatic text forthcoming.`
+			text: `The shuttle's entry hatch is open.`
+		},
+		{ alignment: "right", 
+			text: `You are unprepared for what you find.`
+		},
+		{ alignment: "left", 
+			text: `All of your coworkers — your friends — `
+		},
+		{ alignment: "right", 
+			text: `dead.`
+		},
+		{ alignment: "left", 
+			text: `They left in such a hurry, they not only \
+				forgot to disconnect the umbilical, but also \
+				to properly lock the entry hatch in place.`
+		},
+		{ alignment: "left", 
+			text: `They suffocated in their seats, held in place \
+				by their safety harnesses.`
+		},
+		{ alignment: "center", 
+			text: `At least they didn't die alone.`
 		},
 	],
 }
