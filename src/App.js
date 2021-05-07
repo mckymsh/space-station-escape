@@ -25,12 +25,13 @@ class App extends Component {
 
 		    contentQueue: [],
 		    mainContent: [],
-		    
+
 		    isFading: false,
 		    animate: true,
 		    scroll: true,
 		    fade: true,
 		    stars: true,
+		    music: false,
 	    };
 	}
 
@@ -492,6 +493,15 @@ class App extends Component {
 	    });
 	}
 
+	toggleMusic(){
+		let tempMusic = this.state.music;
+		const audioElement = document.getElementsByClassName("audio-element")[0]
+		tempMusic ? audioElement.pause() : audioElement.play();
+		this.setState({
+			music: !tempMusic,
+		})
+	}
+
 	toggleScroll(){
 		this.setState(prevState => ({
 			scroll: !prevState.scroll,
@@ -540,7 +550,12 @@ class App extends Component {
 
 	render(){
 	    return(
-	    	<React.Fragment>
+		    	<React.Fragment>
+		    	<div>
+					<audio loop className="audio-element">
+						<source src="./MCKY_SSE.ogg"></source>
+					</audio>
+				</div>
 		    	<div id="stars" className={"stars"+(this.state.stars?"":" no-animate")}></div>
 				<div id="stars2" className={"stars"+(this.state.stars?"":" no-animate")}></div>
 				<div id="stars3" className={"stars"+(this.state.stars?"":" no-animate")}></div>
@@ -550,6 +565,12 @@ class App extends Component {
 	 			    </header>
 				    <nav className="Actions text-center">
 				        {
+				        	<button
+					        	type="button" 
+						        className={"App-link"+(this.state.music ? "" : " deactivated")}
+						        onClick={() => this.toggleMusic()}
+						    >music</button>
+						}/{
 				        	<button
 					        	type="button" 
 						        className={"App-link"+(this.state.animate ? "" : " deactivated")}
