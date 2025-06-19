@@ -101,13 +101,13 @@ const defaultRooms = {
 			{ 
 				alignment: "left", 
 				text: 
-					`This lab is decorated with a vast \
+					`This lab is packed with a vast \
 					array of instruments and equipment.`,
 			},
 			{
 				alignment: "left",
 				text: `Is that a laser or particle accelerator? \
-					Who knows. Not your specialty.`,  
+					None of your business.`,  
 			},
 		],
 		neighbors: [
@@ -123,7 +123,7 @@ const defaultRooms = {
 			{ 
 				alignment: "left", 
 				text:  
-					`Long rows of what you assume \
+					`Long rows of what \
 					were once well-tended plants \
 					extend along the 'upward'-curving \
 					floor of the northern ring.`,
@@ -389,7 +389,7 @@ const defaultItems = {
 			now allow you to breathe. What a luxurious \
 			feature.`,
 		location: "on the back of the suit",
-		pickup: `You use your trusty knife to hack out the damanged \
+		pickup: `You use your trusty knife to hack out the damaged \
 			section of hose, slide your tube in its place, \
 			and wrap, like, all the duct tape around the ends. \
 			Good enough for pee, good enough for air. Right?`,
@@ -551,7 +551,5 @@ const endings = {
 		},
 	],
 }
-
-// export default defaultRooms;
 
 export {defaultRooms, defaultItems, intro, endings,};
