@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
-// import { Container, Row, Col,} from 'react-bootstrap';
 import { cloneDeep } from 'lodash';
 import './stars.scss';
 import './App.css'; 
 
 import { defaultRooms, defaultItems, intro, endings,} from './objectMaps.js';
 
-// const FADE_DURATION = 1500;
 const TICK_TIME = 2000;
-
-// var lastTick = 0;
-// var thisTick = 0;
 
 class App extends Component {
 
@@ -44,11 +39,6 @@ class App extends Component {
 	}
 
 	tick(){
-
-		// thisTick = new Date().getTime();
-
-		// console.log(thisTick - lastTick);
-
 		if(this.state.contentQueue.length > 0){	
 
 			var tempContent = this.state.mainContent;
@@ -71,8 +61,6 @@ class App extends Component {
 				});
 			}
 		}
-
-		// lastTick = new Date().getTime();
 	}	
 
 	reset(){
@@ -173,12 +161,6 @@ class App extends Component {
 		// Remove navigation when clicked... again
 	    let tempContent = this.state.mainContent;
 	    tempContent = tempContent.slice(0, tempContent.length-1);
-    	
-		// tempContent.push(
-		// 	<section className={"content-piece text-left "+(this.state.fade?"item-fadein":"")}>
-		// 		You use the {this.items[itemKey].name}!
-		// 	</section>
-		// );
 
 		let tempContentQueue = this.state.contentQueue;
 		let tempInventory = this.state.inventory;
@@ -332,28 +314,28 @@ class App extends Component {
 
 	moveList(){
 		let tempCurrentRoom = this.state.currentRoom;
-	    let tempNeighbors = this.rooms[tempCurrentRoom].neighbors;
+		let tempNeighbors = this.rooms[tempCurrentRoom].neighbors;
+
+		const lastItem = tempNeighbors.pop();
+		const theRestOfThem = tempNeighbors;
 
 		return(
 			<section className="content-piece text-left">You can move
-	            {Object.values(tempNeighbors.slice(0, tempNeighbors.length-1)).map((neighbor) => (
-		            <span key={neighbor.key}>
-		                &nbsp;{neighbor.direction} to {this.appLink(
-								            	this.rooms[neighbor.key].name,
-							                	() => this.handleNav(() => {this.changeRoom(neighbor.key)})
-								            )}, 
-		            </span>
-	            ))}
-	            {Object.values(tempNeighbors.slice(tempNeighbors.length-1, 
-									            	tempNeighbors.length)).map((neighbor) => (
-		            <span key={neighbor.key}>
-		                &nbsp;or {neighbor.direction} to {this.appLink(
-								            	this.rooms[neighbor.key].name,
-							                	() => this.handleNav(() => {this.changeRoom(neighbor.key)})
-								            )}. 
-		            </span>
-	            ))}
-	        </section>
+				{theRestOfThem.map((neighbor) => (
+					<span key={neighbor.key}>
+						&nbsp;{neighbor.direction} to {this.appLink(
+							this.rooms[neighbor.key].name,
+							() => this.handleNav(() => {this.changeRoom(neighbor.key)})
+						)},{/* literal comma, btw */}
+					</span>
+				))}
+				<span key={lastItem.key}>
+					{theRestOfThem.length ? ' or' : ''} {lastItem.direction} to {this.appLink(
+						this.rooms[lastItem.key].name,
+						() => this.handleNav(() => {this.changeRoom(lastItem.key)})
+					)}. 
+				</span>
+			</section>
 		);
 	}
 
