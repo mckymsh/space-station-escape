@@ -503,7 +503,7 @@ const endings = {
 			text: `Yet in moments, that beauty will be pointless.`
 		},
 		{ alignment: "center", 
-			text: `No one's there to see it.`
+			text: `You won't be here to see it.`
 		},
 	],
 	"space_fixSuit": [

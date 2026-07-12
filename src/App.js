@@ -317,9 +317,7 @@ class App extends Component {
 		let tempNeighbors = this.rooms[tempCurrentRoom].neighbors;
 
 		const lastItem = tempNeighbors.slice(tempNeighbors.length - 1, tempNeighbors.length)[0];
-		console.log('### lastItem', lastItem);
 		const theRestOfThem = tempNeighbors.slice(0, tempNeighbors.length - 1);
-		console.log('### theRestOfThem', theRestOfThem);
 
 		return(
 			<section className="content-piece text-left">You can move
