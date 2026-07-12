@@ -75,7 +75,7 @@ class App extends Component {
 	    let randomIndex = 0;
 	    do {
 	    	randomIndex = Math.floor(Math.random() * roomKeys.length);
-	    } while(this.rooms[randomIndex] === ('space' || 'shuttle'));
+	    } while(roomKeys[randomIndex] === ('space' || 'shuttle'));
 
 	    const randomKey = roomKeys[randomIndex];
 	    
@@ -316,8 +316,10 @@ class App extends Component {
 		let tempCurrentRoom = this.state.currentRoom;
 		let tempNeighbors = this.rooms[tempCurrentRoom].neighbors;
 
-		const lastItem = tempNeighbors.pop();
-		const theRestOfThem = tempNeighbors;
+		const lastItem = tempNeighbors.slice(tempNeighbors.length - 1, tempNeighbors.length)[0];
+		console.log('### lastItem', lastItem);
+		const theRestOfThem = tempNeighbors.slice(0, tempNeighbors.length - 1);
+		console.log('### theRestOfThem', theRestOfThem);
 
 		return(
 			<section className="content-piece text-left">You can move
